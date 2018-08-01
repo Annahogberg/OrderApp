@@ -18,7 +18,7 @@ const users = [
     name: 'Anna',
     phone: 111111111,
     isRestaurant: false,
-    gender: 'Female',
+    isClient: true,
     age: 27,
   },
   {
@@ -28,8 +28,8 @@ const users = [
     name: 'Casa José',
     phone: 111111111,
     isRestaurant: true,
+    isClient: false,
     address: 'Calle Santiago Bernabeu 7',
-    tables: 10,
     type: 'Spanish',
   },
 ];

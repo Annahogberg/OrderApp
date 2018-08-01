@@ -8,19 +8,19 @@ const userSchema = new Schema ({
   name: {type: String, trim: true},
   phone: {type: Number, match: /^[0-9\-]+$/i, trim: true},
   isRestaurant: {type: Boolean, default: false},
-  reservations: [{ reservationId: { type: Schema.Types.ObjectId, ref: 'Reservation' }, quantity: Number, _id: false}],
+  isClient: {type: Boolean, default: false},
+  // reservations: [{ reservationId: { type: Schema.Types.ObjectId, ref: 'Reservation' }, quantity: Number, _id: false, default: 0}],
   //private user
-  gender: {type: String, enum: ["Female", "Male"]},
-  age: {type: Number, min: 15},
-  imageName: String,
-  imagePath: String,
+  age: {type: Number, min: 15, default: 100},
+  image: {type: String, default:"https://res.cloudinary.com/dg6pkjuui/image/upload/v1526138842/imgdefault.jpg"}, 
   //restaurant user
   address: {type: String},
-  tables: {type: Number},
-  type: {type: String, enum: ['Mediterranean', 'Italian', 'Spanish', 'Japanese', 'Chinese', 'Mexican', 'Asian', 'Fast Food', 'American', 'Lebanese', 'Vegetarian']},
-  menu: {type: Schema.Types.ObjectId, ref: 'Menu'}, //, required: true
+  type: {type: String, enum: ['Italian', 'Mediterranean', 'Japanese', 'Chinese', 'Mexican', 'Asian', 'Vegetarian']},
+  // menu: {type: Schema.Types.ObjectId, ref: 'Menu'}, //, required: true
   openinghours: {type: Schema.Types.ObjectId, ref:'OpeningHours'}, //, required: true
-  reviews: {type: Schema.Types.ObjectId, ref:'Review'},
+  // reviews: {type: Schema.Types.ObjectId, ref:'Review'},
+  tables: {type: Number, default: 0},
+  // isAvailable: {type: Boolean, default: true}
 }, 
 {timestamps: true});
 

@@ -22,8 +22,11 @@ export class UserService{
   }
 
   edit(user) {
+    console.log(user._id)
     return this.http
-      .put(`${environment.BASEURL}/api/profile/${user._id}`, user)
+      .put(`${environment.BASEURL}/api/profile/edit/${user._id}`, user)
       .pipe(map(res => res.json()));
   }
+
+
 }

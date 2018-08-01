@@ -14,6 +14,10 @@ import { SessionService } from '../services/session.service';
 import { UserService } from '../services/user.service';
 import { isLoggedInGuardService } from './guards/isloggedin.guard';
 import { NegateUserLoggedInGuard } from './guards/negateuserloggedin.guard';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
+import { RestaurantComponent } from './restaurant/restaurant.component';
+import { RestaurantService } from '../services/restaurant.service';
 
 
 
@@ -22,9 +26,10 @@ import { NegateUserLoggedInGuard } from './guards/negateuserloggedin.guard';
     AppComponent,
     LoginComponent,
     SignupComponent,
-
     UserProfileComponent,
-
+    UserEditComponent,
+    RestaurantListComponent,
+    RestaurantComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,13 @@ import { NegateUserLoggedInGuard } from './guards/negateuserloggedin.guard';
     RouterModule.forRoot(routes),
     FormsModule,
   ],
-  providers: [SessionService, UserService, isLoggedInGuardService, NegateUserLoggedInGuard], //isLoggedInGuardService
+  providers: [
+    SessionService, 
+    UserService, 
+    isLoggedInGuardService, 
+    NegateUserLoggedInGuard, 
+    RestaurantService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

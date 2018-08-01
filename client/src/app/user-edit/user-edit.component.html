@@ -1,0 +1,46 @@
+<h4> Edit your profile </h4>
+<a [routerLink]="['/profile']">Back to profile</a>
+<form *ngIf="user">
+  <label>Name</label>
+  <input type="text" [(ngModel)]="user.name" name="name" autocomplete='name' required />
+
+  <label>Email</label>
+  <input type="text" [(ngModel)]="user.email" name="email" autocomplete='email' required />
+
+  <label>Phone number</label>
+  <input type="text" [(ngModel)]="user.phone" name="phone" autocomplete='phone' />
+
+  <!-- <select class=".styled-select blue semi-squared" >
+    <option *ngFor="let t of types" [(ngModel)]="user.type" [value]="t.value" name="type">{{ t.text }}</option>
+    </select> -->
+
+  <div *ngIf="user.isRestaurant">
+    <label>Address</label>
+    <input type="text" [(ngModel)]="user.address" name="address" autocomplete='address'/>
+    <label>Type - Italian, Mediterranean, Japanese, Chinese, Mexican, Asian, Vegetarian</label>
+    <input type="text" [(ngModel)]="user.type" name="type" autocomplete='type'>
+    <label>Tables</label>
+    <input type="number" [(ngModel)]="user.tables" name="tables">
+
+    <!-- <label>Lunch time</label>
+    <input type="time" name="openTime1" [(ngModel)]="user.openinghours.openTime1">
+    <input type="time" name="closeTime1" [(ngModel)]="user.openinghours.closeTime1"> -->
+
+
+    <label>Dinner time</label>
+    <input type="time" name="openTime2" [(ngModel)]="user.openinghours.openTime2">
+    <input type="time" name="closeTime2" [(ngModel)]="user.openinghours.closeTime2">
+    <!-- <a [routerLink]="['/menu/edit', user.menu._id]">Edit menu</a> -->
+  </div>
+
+  <div *ngIf="user.isClient">
+    <label>Age</label>
+    <input type="number" [(ngModel)]="user.age" name="age" autocomplete='age' />
+    <label>Image</label>
+    <input type="text" [(ngModel)]="user.image" name="image">
+  </div>
+
+  <button (click)="edit(user._id)"> Edit </button>
+
+
+</form>

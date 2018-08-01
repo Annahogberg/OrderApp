@@ -30,7 +30,7 @@ export class SessionService {
       map( (res:Response) => {
         this.user = res.json();
         // console.log(`Automatically login ${this.user.username}`);
-        console.log(this.user);
+        //console.log(this.user);
         return this.user;
       }),
       catchError(e => {console.log("You have to login first!"); return of(null)})
@@ -49,8 +49,8 @@ export class SessionService {
     return e;
   }
 
-  signup(username:string, password:string, email:string, isRestaurant:boolean): Observable<object>{
-    return this.http.post(`${BASEURL}/api/auth/signup`,{username,password,email, isRestaurant},this.options).pipe(
+  signup(username:string, password:string, email:string, isRestaurant:boolean, isClient:boolean): Observable<object>{
+    return this.http.post(`${BASEURL}/api/auth/signup`,{username,password,email, isRestaurant, isClient},this.options).pipe(
       map( (res:Response) => {
         let data = res.json();
         this.user = data.user;
@@ -71,6 +71,20 @@ export class SessionService {
       catchError( e => of(this.errorHandler(e)))
     )
   }
+
+  get(id) {
+    console.log(this.user);
+    return this.http
+      .get(`${environment.BASEURL}/api/profile/${id}`)
+      .pipe(map(res => res.json()));
+  }
+
+  // edit(user) {
+  //   console.log(user)
+  //   return this.http
+  //     .put(`${environment.BASEURL}/api/profile/edit/${user._id}`, user)
+  //     .pipe(map(res => res.json()));
+  // }
 
 
   logout(){

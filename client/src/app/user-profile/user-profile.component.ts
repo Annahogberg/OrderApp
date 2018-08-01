@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from '../../../node_modules/rxjs';
-import { UserService } from '../../services/user.service';
-import { ActivatedRoute } from '../../../node_modules/@angular/router';
+import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
 import { SessionService } from '../../services/session.service';
 
 @Component({
@@ -14,12 +13,13 @@ export class UserProfileComponent implements OnInit {
   user;
   reservations;
 
-  constructor(public sessionService: SessionService, private aR: ActivatedRoute) { 
+  constructor(public sessionService: SessionService, private aR: ActivatedRoute, private router: Router) { 
     this.sessionService.isLogged().subscribe(user => this.user = user )
-    console.log(this.user)
+    //console.log(this.user)
   }
 
   ngOnInit() {
   }
 
 }
+

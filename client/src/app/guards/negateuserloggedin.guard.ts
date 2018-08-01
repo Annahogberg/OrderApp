@@ -9,6 +9,6 @@ export class NegateUserLoggedInGuard implements CanActivate {
   constructor(public sessionService: SessionService){}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):boolean {
-    return this.sessionService.isLogged().subscribe() ? false : true;
+    return this.sessionService.isLogged() ? true  : false;
     }
 }

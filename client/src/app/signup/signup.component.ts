@@ -23,11 +23,11 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
 
-  signup(username, password, email, isRestaurant){
+  signup(username, password, email, isRestaurant, isClient){
     console.log("signup....");
-    this.sessionService.signup(username,password, email, isRestaurant).subscribe( (user:any) =>{
+    this.sessionService.signup(username,password, email, isRestaurant, isClient).subscribe( (user:any) =>{
       console.log(`WELCOME USER ${user.username}, register OK`);
-      console.log(user);
+      //console.log(user);
       this.router.navigate(['/']);
     });
   }

@@ -1,6 +1,7 @@
   <section class="container">
     <div class="row">
     <h3 class="center-align">SIGN UP</h3>
+    <br>
       <article class="col s6 offset-s3">
         <form method="POST" action="formulario-contacto.php">
           <div class="input-field">
@@ -22,37 +23,21 @@
           </div>
 
           <div class="input-field">
-            <i class="material-icons prefix">email</i>
-            <input class="form-check-input" type="radio" id="gridCheck" [(ngModel)]="isRestaurant" name="isRestaurant" value="value">
+            <i class="material-icons prefix">account_box</i>
+            <input class="form-check-input" type="checkbox" id="gridCheck" [(ngModel)]="isRestaurant" name="isRestaurant" value="value">
             <label class="form-check-label paragraph" for="gridCheck">
               Restaurant
             </label>
+            <input class="form-check-input" type="checkbox" id="gridCheck2" [(ngModel)]="isClient" name="isClient" value="value">
+            <label class="form-check-label paragraph" for="gridCheck2">
+              Client
+            </label>
 
           </div>
-
-
-  
-          <!-- <div class="input-field">
-            <i class="material-icons prefix">face</i>
-            <label for="firstname">Firstname</label>
-            <input type="text" [(ngModel)]="firstname" name="firstname" required>
+  <br><br>
+          <div class="center-align">
+            <button (click)="signup(username, password, email, isRestaurant, isClient)"class="waves-effect waves-light btn" type="submit"><i class="material-icons right">send</i>Sign up</button>
           </div>
-
-          <div class="input-field">
-            <i class="material-icons prefix">face</i>
-            <label for="lastname">Lastname</label>
-            <input type="text" [(ngModel)]="lastname" name="lastname" required>
-          </div>
-    
-          <div class="input-field">
-            <i class="material-icons prefix">lock</i>
-            <label for="age">Age</label>
-            <input type="number" [(ngModel)]="age" name="age" required>
-          </div> -->
-  
-          <p class="center-align">
-            <button (click)="signup(username, password, email, isRestaurant)"class="waves-effect waves-light btn" type="submit"><i class="material-icons right">send</i>Sign up</button>
-          </p>
   
         </form>
   

@@ -1,0 +1,7 @@
+<div *ngFor="let restaurant of restaurantList">
+  <h4>{{restaurant.name}}</h4>
+  <p>{{restaurant.phone}}</p>
+  <p>{{restaurant.address}}</p>
+  <p>{{restaurant.type}}</p>
+  <button [routerLink]="['/restaurants', restaurant._id]">More info</button>
+</div>
