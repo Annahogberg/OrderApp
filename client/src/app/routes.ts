@@ -18,6 +18,6 @@ export const routes: Routes = [
   { path:'edit/:id', component:UserEditComponent, canActivate: [ isLoggedInGuardService]},
   { path:'menu/:id', component:UserEditComponent, canActivate: [ isLoggedInGuardService]},
   {path: 'restaurants', component: RestaurantListComponent, canActivate: [isLoggedInGuardService]},
-  {path: 'restaurants/:id', component: RestaurantComponent, canActivate: [isLoggedInGuardService]}
+  {path: 'restaurants/restaurant/:id', component: RestaurantComponent, canActivate: [isLoggedInGuardService]}
 ];
 

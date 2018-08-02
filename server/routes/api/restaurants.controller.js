@@ -14,21 +14,23 @@ router.get("/", (req, res, next) => {
     .catch(e => next(e));
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/restaurant/:id', (req, res, next) => {
   User.findById(req.params.id)
+  .populate("openinghours")
     .then(restaurant => res.json(restaurant))
     .catch(e => next(e));
 });
 
 //USER SEES RESTAURANT FILE
-router.post("/:id", (req, res, next) => {
-  User.findById(req.params.id).then(restaurant => {
+router.post("/restaurant/reservation", (req, res, next) => {
+  let restaurant = req.body.restaurant
+  User.findById(restaurant).then(restaurant => {
     const reservationInfo = {
       date: moment(req.body.date).format("YYYY-MM-DD, dddd"),
       time: req.body.time,
       pax: req.body.pax,
       user: req.user._id,
-      restaurant: req.params.restaurantId
+      restaurant: restaurant
     };
 
     if (req.body.date == "" || req.body.time == "" || req.body.pax == "") {
@@ -52,10 +54,5 @@ router.post("/:id", (req, res, next) => {
   });
 });
 
-// router.post('/reserve', (req, res, next) => {
-//   User.find({ isRestaurant: true })
-//     .then(restaurants => res.json(restaurants))
-//     .catch(e => next(e));
-// });
 
 module.exports = router;

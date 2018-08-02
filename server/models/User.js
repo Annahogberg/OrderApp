@@ -11,7 +11,7 @@ const userSchema = new Schema ({
   isClient: {type: Boolean, default: false},
   //private user
   age: {type: Number, min: 15, default: 100},
-  image: {type: String, default:"https://res.cloudinary.com/dg6pkjuui/image/upload/v1526138842/imgdefault.jpg"}, 
+  image: {type: String, default:"http://www.franbosquet.com/wp-content/uploads/ironhack_logonegro.png"}, 
   //restaurant user
   address: {type: String},
   type: {type: String, enum: ['Italian', 'Mediterranean', 'Japanese', 'Chinese', 'Mexican', 'Asian', 'Vegetarian']},

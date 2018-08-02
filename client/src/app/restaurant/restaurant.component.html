@@ -3,6 +3,49 @@
   <p>{{restaurant.phone}}</p>
   <p>{{restaurant.address}}</p>
   <p>{{restaurant.type}}</p>
+
+  <p>{{restaurant._id}}</p>
+
 <!-- <p>{{restaurant.openingHours}}</p> -->
-<!-- <label>Lunch time: {{user.openingHours.openTime1}} to </label> -->
+<div *ngIf="restaurant.openinghours">
+<p>Lunch time: {{restaurant.openinghours.openTime1}} - {{restaurant.openinghours.closeTime1}} </p>
+<p>Dinner time: {{restaurant.openinghours.openTime2}} - {{restaurant.openinghours.closeTime2}} </p>
+</div>
+
+<section class="container">
+  <div class="row">
+  <h3 class="center-align">Reserve</h3>
+  <br>
+    <article class="col s6 offset-s3">
+      <form>
+        <div class="input-field">
+          <i class="material-icons prefix">date_range</i>
+          <input type="date" [(ngModel)]="date" name="date" required id="datepicker">
+        </div>
+
+          <div class="input-field">
+          <i class="material-icons prefix">access_time</i>
+          <input type="time" [(ngModel)]="time" name="time" required id="timepicker">
+        </div>
+
+        <div class="input-field">
+          <i class="material-icons prefix">people</i>
+          <label for="pax">People</label>
+          <input type="number" [(ngModel)]="pax" name="pax" required>
+        </div>
+
+        <div class="input-field">
+          <i class="material-icons prefix">comment</i>
+         <textarea [(ngModel)]="comment" name="comment"></textarea>
+        </div>
+<br><br>
+        <div class="center-align">
+          <button (click)="reserve(date, time, pax, comment)"class="waves-effect waves-light btn" type="submit"><i class="material-icons right">send</i>Book</button>
+        </div>
+
+      </form>
+
+    </article>
+  </div>
+</section>
 </div>

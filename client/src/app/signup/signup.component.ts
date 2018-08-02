@@ -14,6 +14,7 @@ export class SignupComponent implements OnInit {
   password: string;
   email: string;
   isRestaurant: boolean;
+  isClient: boolean;
   // firstname: string;
   // lastname: string;
   // age: number;

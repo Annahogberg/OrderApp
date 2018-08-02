@@ -1,0 +1,11 @@
+#timepicker:before {
+  content: "Time:";
+  margin-right: 0.6em;
+  color: #9d9d9d;
+}
+
+#datepicker:before {
+  content: "Date:";
+  margin-right: 0.6em;
+  color: #9d9d9d;
+}

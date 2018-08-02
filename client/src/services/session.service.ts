@@ -72,12 +72,12 @@ export class SessionService {
     )
   }
 
-  get(id) {
-    console.log(this.user);
-    return this.http
-      .get(`${environment.BASEURL}/api/profile/${id}`)
-      .pipe(map(res => res.json()));
-  }
+  // get(id) {
+  //   console.log(this.user);
+  //   return this.http
+  //     .get(`${environment.BASEURL}/api/profile/${id}`)
+  //     .pipe(map(res => res.json()));
+  // }
 
   // edit(user) {
   //   console.log(user)

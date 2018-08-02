@@ -18,6 +18,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { RestaurantService } from '../services/restaurant.service';
+import { ReservationService } from '../services/reservation.service';
 
 
 
@@ -43,6 +44,7 @@ import { RestaurantService } from '../services/restaurant.service';
     isLoggedInGuardService, 
     NegateUserLoggedInGuard, 
     RestaurantService,
+    ReservationService,
   ],
   bootstrap: [AppComponent]
 })

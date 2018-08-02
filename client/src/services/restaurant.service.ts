@@ -1,12 +1,20 @@
 import { Injectable } from "../../node_modules/@angular/core";
 import { Http } from "../../node_modules/@angular/http";
 import { environment } from '../environments/environment';
-import { map } from 'rxjs/operators'
+import { map } from 'rxjs/operators';
+
+interface reservationObject{
+  date: string,
+  time: string,
+  pax: number,
+  comment: string,
+}
 
 @Injectable()
 export class RestaurantService {
   restaurant;
-  // options: any = { withCredentials: true };
+  reservation: reservationObject;
+  options: any = { withCredentials: true };
 
 
   constructor(private http: Http) {}
@@ -19,7 +27,15 @@ export class RestaurantService {
 
   getRestaurant(id) {
     return this.http
-      .get(`${environment.BASEURL}/api/restaurants/${id}` )
-      .pipe(map(res => res.json()));
+      .get(`${environment.BASEURL}/api/restaurants/restaurant/${id}` )
+      .pipe(map(res => res.json()
+    ));
+  }
+
+  reserve(reservation){
+    console.log(reservation);
+    return this.http
+    .post(`${environment.BASEURL}/api/restaurants/restaurant/reservation`,reservation, this.options)
+    .pipe(map(res => res.json()));
   }
 };

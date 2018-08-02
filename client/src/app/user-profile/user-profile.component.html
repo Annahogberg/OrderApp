@@ -1,26 +1,37 @@
 <div *ngIf="user">
-  
+
   <p>Name: {{user.name}}</p>
-<p>Email: {{user.email}}</p>
-<p>Phone Number: {{user.phone}}</p>
+  <p>Email: {{user.email}}</p>
+  <p>Phone Number: {{user.phone}}</p>
 
-<p *ngIf="user.isClient">Age: {{user.age}}</p>
-<div *ngIf="user.isRestaurant">
-  <p>Address: {{user.address}}</p>
-  <p>Type: {{user.type}}</p>
-  <p>Tables: {{user.tables}}</p>
-</div>
-<p></p>
-<p>Total reservations:</p>
-<img [src]="user.imageName">
-
-<div>
-
-  <button [routerLink]="['/edit',user._id]">Edit profile</button>
-
-  <div *ngIf="user.isClient">
-  <button [routerLink]="['/restaurants']">Restaurants</button>
+  <p *ngIf="user.isClient">Age: {{user.age}}</p>
+  <div *ngIf="user.isRestaurant">
+    <p>Address: {{user.address}}</p>
+    <p>Type: {{user.type}}</p>
+    <p>Tables: {{user.tables}}</p>
   </div>
-<!-- 
+  <p></p>
+
+
+  <div *ngFor="let reser of reservation">
+    <p> {{reser.date}}</p>
+ </div>
+
+  <div>
+
+    <button [routerLink]="['/edit',user._id]">Edit profile</button>
+
+    <div *ngIf="user.isClient">
+      <button [routerLink]="['/restaurants']">Restaurants</button>
+    </div>
+    <!-- 
   <button [routerLink]="['/menu', menu._id]">View Menu</button> -->
+
+
+
+    <div *ngFor="let reser of reservation">
+       <p> {{reser.date}}</p>
+    </div>
+
+  </div>
 </div>
