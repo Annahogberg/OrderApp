@@ -29,6 +29,7 @@ router.post("/restaurant/reservation", (req, res, next) => {
       date: moment(req.body.date).format("YYYY-MM-DD, dddd"),
       time: req.body.time,
       pax: req.body.pax,
+      comment: req.body.comment,
       user: req.user._id,
       restaurant: restaurant
     };

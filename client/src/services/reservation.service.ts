@@ -11,21 +11,28 @@ export class ReservationService{
 
   getAllReservations() {
     return this.http
-      .get(`${environment.BASEURL}/api/profile`)
+      .get(`${environment.BASEURL}/api/reservations`)
       .pipe(map(res => res.json()));
   }
 
+  getMyReservations() {
+    return this.http
+      .get(`${environment.BASEURL}/api/reservations/myreservations`)
+      .pipe(map(res => {
+        res.json()}));
+      }
+  
+
   getReservation(id) {
     return this.http
-      .get(`${environment.BASEURL}/api/profile/reservation/${id}`)
+      .get(`${environment.BASEURL}/api/reservations/reservation/${id}`)
       .pipe(map(res => res.json()));
   }
 
   editReservation(reservation) {
     return this.http
-      .put(`${environment.BASEURL}/api/profile/edit/reservation/${reservation._id}`, reservation)
+      .put(`${environment.BASEURL}/api/reservations/edit/reservation/${reservation._id}`, reservation)
       .pipe(map(res => res.json()));
   }
-
 
 }

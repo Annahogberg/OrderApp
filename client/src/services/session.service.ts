@@ -38,7 +38,7 @@ export class SessionService {
   }
 
   isNotLogged(){
-    !this.isLogged();
+    return !this.isLogged();
   }
 
 
@@ -71,20 +71,6 @@ export class SessionService {
       catchError( e => of(this.errorHandler(e)))
     )
   }
-
-  // get(id) {
-  //   console.log(this.user);
-  //   return this.http
-  //     .get(`${environment.BASEURL}/api/profile/${id}`)
-  //     .pipe(map(res => res.json()));
-  // }
-
-  // edit(user) {
-  //   console.log(user)
-  //   return this.http
-  //     .put(`${environment.BASEURL}/api/profile/edit/${user._id}`, user)
-  //     .pipe(map(res => res.json()));
-  // }
 
 
   logout(){

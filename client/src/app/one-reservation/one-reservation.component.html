@@ -1,0 +1,9 @@
+
+
+<div *ngIf="reservation">
+  <p>Date: {{reservation.date}}</p>
+  <p>Time: {{reservation.time}}</p>
+  <p>Address: {{reservation.restaurant.address}}</p>
+  <p>Comments: {{reservation.comment}}</p>
+  <button [routerLink]="['/reservations/reservation/edit', reservation._id]">Check reservation</button>
+</div>

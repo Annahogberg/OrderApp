@@ -14,6 +14,16 @@ router.get("/", (req, res, next) => {
 });
 
 // Retrive DETAIL
+router.get("/myreservations/:idUser", (req, res, next) => {
+  Reservation.find({user: req.params.idUser})
+    .populate("user")
+    .populate("restaurant")
+    .then(object => res.json(object))
+    .catch(e => next(e));
+});
+
+
+// Retrive DETAIL
 router.get("/reservation/:id", (req, res, next) => {
   Reservation.findById(req.params.id)
     .populate("user")
@@ -27,10 +37,10 @@ router.put("/edit/reservation/:id", (req, res, next) => {
 
   Reservation.findById(req.params.id).then(reservation => {
     const date =
-      req.body.username != "" ? req.body.username : user.username;
-    const time = req.body.email != "" ? req.body.email : user.email;
-    const pax = req.body.name != "" ? req.body.name : user.name;
-    const comment = req.body.age ? req.body.age : user.age;
+      req.body.date != "" ? req.body.date : user.date;
+    const time = req.body.time != "" ? req.body.time : user.time;
+    const pax = req.body.pax != "" ? req.body.pax : user.pax;
+    const comment = req.body.comment ? req.body.comment : user.comment;
    
     
       const updates = {

@@ -8,8 +8,8 @@ const reservationRoutes = require('./reservations.controller')
 
 
 router.use('/auth', authRoutes);
-router.use('/profile', profileRoutes, reservationRoutes);
+router.use('/profile', profileRoutes);
 router.use('/restaurants', restaurantsRoutes);
-
+router.use('/reservations', reservationRoutes);
 
 module.exports = router;

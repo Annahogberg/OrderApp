@@ -19,6 +19,8 @@ import { RestaurantListComponent } from './restaurant-list/restaurant-list.compo
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { RestaurantService } from '../services/restaurant.service';
 import { ReservationService } from '../services/reservation.service';
+import { ReservationsListComponent } from './reservations-list/reservations-list.component';
+import { OneReservationComponent } from './one-reservation/one-reservation.component';
 
 
 
@@ -31,6 +33,8 @@ import { ReservationService } from '../services/reservation.service';
     UserEditComponent,
     RestaurantListComponent,
     RestaurantComponent,
+    ReservationsListComponent,
+    OneReservationComponent,
   ],
   imports: [
     BrowserModule,

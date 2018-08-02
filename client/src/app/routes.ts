@@ -8,6 +8,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
+import { ReservationsListComponent } from './reservations-list/reservations-list.component';
+import { OneReservationComponent } from './one-reservation/one-reservation.component';
 
 
 export const routes: Routes = [
@@ -18,6 +20,10 @@ export const routes: Routes = [
   { path:'edit/:id', component:UserEditComponent, canActivate: [ isLoggedInGuardService]},
   { path:'menu/:id', component:UserEditComponent, canActivate: [ isLoggedInGuardService]},
   {path: 'restaurants', component: RestaurantListComponent, canActivate: [isLoggedInGuardService]},
-  {path: 'restaurants/restaurant/:id', component: RestaurantComponent, canActivate: [isLoggedInGuardService]}
+  {path: 'restaurants/restaurant/:id', component: RestaurantComponent, canActivate: [isLoggedInGuardService]},
+  {path: 'reservations/myreservations', component: ReservationsListComponent, canActivate: [isLoggedInGuardService]},
+  {path: 'reservations/reservation/:id', component: OneReservationComponent, canActivate: [isLoggedInGuardService]},
+
+
 ];
 

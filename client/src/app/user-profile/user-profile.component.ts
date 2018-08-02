@@ -11,7 +11,7 @@ import { ReservationService } from "../../services/reservation.service";
 })
 export class UserProfileComponent implements OnInit {
   user;
-  reservation;
+  reservation: Array<Object>;
 
   constructor(
     public sessionService: SessionService,
@@ -21,9 +21,9 @@ export class UserProfileComponent implements OnInit {
   ) {
     this.sessionService.isLogged().subscribe(user => (this.user = user));
   }
-  
+
   ngOnInit() {
 
-    this.reservationService.getAllReservations().subscribe(reservation => (this.reservation = reservation));
   }
 }
+
