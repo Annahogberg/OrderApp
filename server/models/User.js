@@ -9,16 +9,13 @@ const userSchema = new Schema ({
   phone: {type: Number, match: /^[0-9\-]+$/i, trim: true},
   isRestaurant: {type: Boolean, default: false},
   isClient: {type: Boolean, default: false},
-  // reservations: [{ reservationId: { type: Schema.Types.ObjectId, ref: 'Reservation' }, quantity: Number, _id: false, default: 0}],
   //private user
   age: {type: Number, min: 15, default: 100},
   image: {type: String, default:"https://res.cloudinary.com/dg6pkjuui/image/upload/v1526138842/imgdefault.jpg"}, 
   //restaurant user
   address: {type: String},
   type: {type: String, enum: ['Italian', 'Mediterranean', 'Japanese', 'Chinese', 'Mexican', 'Asian', 'Vegetarian']},
-  // menu: {type: Schema.Types.ObjectId, ref: 'Menu'}, //, required: true
-  openinghours: {type: Schema.Types.ObjectId, ref:'OpeningHours'}, //, required: true
-  // reviews: {type: Schema.Types.ObjectId, ref:'Review'},
+  openinghours: {type: Schema.Types.ObjectId, ref:'OpeningHours', default: "5b62c583dff2d824c875c4c8"}, //, required: true
   tables: {type: Number, default: 0},
   // isAvailable: {type: Boolean, default: true}
 }, 

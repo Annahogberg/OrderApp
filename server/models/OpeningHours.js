@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const hoursSchema = new Schema ({
-  restaurant: {type: Schema.Types.ObjectId, ref: 'User'},
-  openTime1: {type: Number, required: true},
-  closeTime1: {type: Number, required: true},
-  openTime2: {type: Number, required: true}, 
-  closeTime2: {type: Number, required: true},
+
+  openTime1: {type: String, required: true, default: "11:00"},
+  closeTime1: {type: String, required: true, default: "16:00"},
+  openTime2: {type: String, required: true, default: "19:00"}, 
+  closeTime2: {type: String, required: true, default: "00:00"},
 });
 
 const OpeningHours = mongoose.model('OpeningHours', hoursSchema);

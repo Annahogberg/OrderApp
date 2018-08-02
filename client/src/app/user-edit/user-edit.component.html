@@ -22,14 +22,14 @@
     <label>Tables</label>
     <input type="number" [(ngModel)]="user.tables" name="tables">
 
-    <!-- <label>Lunch time</label>
-    <input type="time" name="openTime1" [(ngModel)]="user.openinghours.openTime1">
-    <input type="time" name="closeTime1" [(ngModel)]="user.openinghours.closeTime1"> -->
 
+    <label>Lunch time</label>
+    <input type="time" name="lunchopening" [(ngModel)]="user.openinghours.openTime1">
+    <input type="time" name="lunchclosing" [(ngModel)]="user.openinghours.closeTime1">
 
     <label>Dinner time</label>
-    <input type="time" name="openTime2" [(ngModel)]="user.openinghours.openTime2">
-    <input type="time" name="closeTime2" [(ngModel)]="user.openinghours.closeTime2">
+    <input type="time" name="dinneropening" [(ngModel)]="user.openinghours.openTime2">
+    <input type="time" name="dinnerclosing" [(ngModel)]="user.openinghours.closeTime2">
     <!-- <a [routerLink]="['/menu/edit', user.menu._id]">Edit menu</a> -->
   </div>
 

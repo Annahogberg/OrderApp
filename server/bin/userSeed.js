@@ -30,7 +30,8 @@ const users = [
     isRestaurant: true,
     isClient: false,
     address: 'Calle Santiago Bernabeu 7',
-    type: 'Spanish',
+    type: 'Italian',
+  
   },
 ];
 
