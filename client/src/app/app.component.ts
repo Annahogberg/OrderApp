@@ -8,7 +8,8 @@ import { SessionService } from '../services/session.service';
   providers: [SessionService]
 })
 export class AppComponent {
-  title = 'app';
+  title = 'Order';
+
   constructor(public sessionService: SessionService) { }
   logout(){
     this.sessionService.logout().subscribe();

@@ -31,4 +31,10 @@ export class OneReservationComponent implements OnInit {
   ngOnInit() {
   }
 
+  editReservation(reservation) {
+    this.reservationService.editReservation(this.reservation).subscribe(reservation => {
+      this.reservation = reservation;
+      this.router.navigate(["/reservations/myreservations"]);
+    })
+  };
 }

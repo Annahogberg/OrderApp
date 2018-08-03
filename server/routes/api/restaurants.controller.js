@@ -14,6 +14,8 @@ router.get("/", (req, res, next) => {
     .catch(e => next(e));
 });
 
+
+//USER SEES RESTAURANT FILE & RESERVES
 router.get('/restaurant/:id', (req, res, next) => {
   User.findById(req.params.id)
   .populate("openinghours")
@@ -21,10 +23,14 @@ router.get('/restaurant/:id', (req, res, next) => {
     .catch(e => next(e));
 });
 
-//USER SEES RESTAURANT FILE
+//CREATES RESERVATION
 router.post("/restaurant/reservation", (req, res, next) => {
   let restaurant = req.body.restaurant
-  User.findById(restaurant).then(restaurant => {
+  console.log(restaurant)
+  User.findById(restaurant)
+  .populate("user")
+  .populate("openinghours")
+  .then(restaurant => {
     const reservationInfo = {
       date: moment(req.body.date).format("YYYY-MM-DD, dddd"),
       time: req.body.time,
@@ -33,6 +39,8 @@ router.post("/restaurant/reservation", (req, res, next) => {
       user: req.user._id,
       restaurant: restaurant
     };
+
+    //console.log(restaurant.openinghours.closeTime1)
 
     if (req.body.date == "" || req.body.time == "" || req.body.pax == "") {
       return res.status(500).json({ message: "Can't be empty" });
@@ -45,14 +53,34 @@ router.post("/restaurant/reservation", (req, res, next) => {
       return res.status(500).json({ message: "Not possible for those dates" });
     }
 
+    const time = req.body.time;
+
+    const tooEarly = restaurant.openinghours.openTime1
+    const afterLunch = restaurant.openinghours.closeTime1
+    const beforeDinner = restaurant.openinghours.openTime2
+    const tooLate = restaurant.openinghours.closeTime2
+
+    if (time >  afterLunch && time < beforeDinner || time < tooEarly && time > tooLate) {
+      return res.status(500).json({ message: "Restaurant is closed" });
+    }
+
     const newReservation = new Reservation(reservationInfo);
-    console.log(newReservation);
 
     newReservation
       .save()
       .then(restaurant => res.status(200).json(restaurant))
       .catch(err => res.status(500).json(err));
   });
+
+
+  // router.get("/myreservations", (req, res, next) => {
+  //   Reservation.find({user: req.user._id})
+  //   console.log(user)
+  //     .populate("user")
+  //     .populate("restaurant")
+  //     .then(object => res.json(object))
+  //     .catch(e => next(e));
+  // });
 });
 
 

@@ -12,13 +12,14 @@ cloudinary.config({
 
 var storage = cloudinaryStorage({
   cloudinary: cloudinary,
-  folder: "Order",
-  allowedFormats: ["jpg", "png"],
-  filename: function(req, file, cb) {
+  folder: 'Order',
+  allowedFormats: ['jpg', 'png'],
+  filename: function (req, file, cb) {
     photo = new Date().getTime();
-    cb(null, photo);
+    cb(undefined, photo);
   }
 });
+
 
 const uploadCloud = multer({ storage: storage })
 module.exports = uploadCloud;

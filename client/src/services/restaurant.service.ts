@@ -38,4 +38,11 @@ export class RestaurantService {
     .post(`${environment.BASEURL}/api/restaurants/restaurant/reservation`,reservation, this.options)
     .pipe(map(res => res.json()));
   }
+
+  // getMyReservations() {
+  //   return this.http
+  //     .get(`${environment.BASEURL}/api/restaurants/myreservations`)
+  //     .pipe(map(res => {
+  //       res.json()}));
+  //     }
 };

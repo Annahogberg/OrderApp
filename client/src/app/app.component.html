@@ -1,16 +1,41 @@
 <!--The content below is only a placeholder and can be replaced.-->
+
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="/">Order</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">
+      <i class="fa fa-bars"></i>
+    </span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <div *ngIf="sessionService.user">
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/profile']">Home</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/restaurants']">Restaurants</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/reservations/myreservations']">My reservations</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" (click)="logout()">Log Out</a></li>
+      </div>
+      <div *ngIf="!sessionService.user">
+        <li class="nav-item"><a class="nav-link" href="#id" [routerLink]="['/login']">Login</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/signup']">Sign up</a></li>
+      </div>
+    </ul>
+  </div>
+</nav>
+
+
 <div style="text-align:center">
 
-  <h1 *ngIf="!sessionService.user" >Welcome to {{ title }}!</h1>
-  <h1 *ngIf="sessionService.user" >Welcome {{ sessionService.user.username }}!</h1>
+  <h1 *ngIf="sessionService.user">Welcome {{ sessionService.user.username }}!</h1>
 
 
-<ul>
+  <!-- <ul>
   <li *ngIf="!sessionService.user"><a [routerLink]="['/signup']">Signup</a></li>
   <li *ngIf="!sessionService.user"><a [routerLink]="['/login']">Login</a></li>
   <li *ngIf="sessionService.user"><a [routerLink]="['/profile']">HOME</a></li>
   <li *ngIf="sessionService.user"><a href="#" (click)="logout()">Logout</a></li>
-</ul>
+</ul> -->
 </div>
 
 <router-outlet></router-outlet>

@@ -133,6 +133,10 @@ body {
 }
 
 
-
+.middle{
+	margin: 0 auto;
+	max-width: 75%;
+	width: 400px;
+}
 
 

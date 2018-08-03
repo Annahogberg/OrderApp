@@ -44,6 +44,7 @@ export class RestaurantComponent implements OnInit {
     }
   
     console.log("creating reservation....");
+
     this.restaurantService.reserve(reservation).subscribe( (reser:any) =>{
       this.router.navigate(['/profile']);
     });
