@@ -12,11 +12,14 @@ import { RestaurantService } from "../../services/restaurant.service";
 })
 export class UserProfileComponent implements OnInit {
   user;
-  reservation: Array<Object>;
+  isHidden: boolean = false;
   restaurantList;
-  lat: number = 40.4222785;
-  lng: number = -3.7072047;
+  // lat: number = 40.4222785;
+  // lng: number = -3.7072047;
 
+  toggleHidden(e){
+    this.isHidden = !this.isHidden
+  }
 
   constructor(
     public sessionService: SessionService,

@@ -13,30 +13,22 @@ router.get("/", (req, res, next) => {
   .catch(e => next(e));
 });
 
-// Retrive DETAIL
-  // router.get("/myreservations/:idUser", (req, res, next) => {
-  //   Reservation.find({user: req.params.idUser})
-  //     .populate("user")
-  //     .populate("restaurant")
-  //     .then(object => res.json(object))
-  //     .catch(e => next(e));
-  // });
 
-  // router.get("/myreservations", (req, res, next) => {
-  //   Reservation.find({})
-  //     // .populate("user")
-  //     // .populate("restaurant")
-  //     .then(object => res.json(object))
-  //     .catch(e => next(e));
-  // });
+  router.get("/reservationsdetails/:id", (req, res, next) => {
+    Reservation.findById(req.params.id)
+      .populate("user")
+      .populate("restaurant")
+      .then(object => res.json(object))
+      .catch(e => next(e));
+  });
 
 
 // Retrive DETAIL
 router.get("/reservation/:id", (req, res, next) => {
   Reservation.find({user: req.params.id})
-    // .populate("user")
-    // .populate("restaurant")
-    .then(object => {console.log(object);res.json(object)})
+    .populate("user")
+    .populate("restaurant")
+    .then(object => res.json(object))
     .catch(e => next(e));
 });
 
@@ -58,16 +50,16 @@ router.put("/reservation/edit/:id", (req, res, next) => {
         comment,
       };
 
-    //       if (req.body.date == "" || req.body.time == "" || req.body.pax == "") {
-    //   return res.status(500).json({ message: "Can't be empty" });
-    // }
+          if (req.body.date == "" || req.body.time == "" || req.body.pax == "") {
+      return res.status(500).json({ message: "Can't be empty" });
+    }
 
-    // const now = new Date();
-    // const noDate = new Date(req.body.date);
+    const now = new Date();
+    const noDate = new Date(req.body.date);
 
-    // if (now > noDate || noDate.getFullYear() >= 2019) {
-    //   return res.status(500).json({ message: "Not possible for those dates" });
-    // }
+    if (now > noDate || noDate.getFullYear() >= 2019) {
+      return res.status(500).json({ message: "Not possible for those dates" });
+    }
 
     // const time = req.body.time;
 
@@ -90,6 +82,7 @@ router.put("/reservation/edit/:id", (req, res, next) => {
     });
 
   });
+
 
   router.delete("/reservation/delete/:id", (req, res, next) => {
     Reservation.findByIdAndRemove(req.params.id)

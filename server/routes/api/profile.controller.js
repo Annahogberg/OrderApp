@@ -25,7 +25,6 @@ router.get("/:id", (req, res, next) => {
 router.put("/edit/:id", (req, res, next) => { //uploadCloud.single('file'), 
 
   User.findById(req.params.id).then(user => {
-    console.log(user);
     const username =
       req.body.username != "" ? req.body.username : user.username;
     const email = req.body.email != "" ? req.body.email : user.email;
@@ -39,7 +38,6 @@ router.put("/edit/:id", (req, res, next) => { //uploadCloud.single('file'),
     const openinghours =
       req.body.openinghours;
       delete openinghours._id;
-      console.log(openinghours)
 
     const newHour = new Hours(openinghours)
     newHour.save().then(hour => {

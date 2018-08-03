@@ -28,6 +28,8 @@ import { FileSelectDirective} from 'ng2-file-upload'
 import {environment} from '../environments/environment'
 
 import { AgmCoreModule } from '@agm/core';
+import { NguiMapModule} from '@ngui/map';
+
 
 
 
@@ -53,9 +55,12 @@ import { AgmCoreModule } from '@agm/core';
     HttpModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAMr7l3yXxN3hJdhgapxECHdHDNwhfGjrY'//environment.GOOGLEKEY
-    })
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyAMr7l3yXxN3hJdhgapxECHdHDNwhfGjrY',
+    //   libraries: ["places"]//environment.GOOGLEKEY
+    // }),
+
+    NguiMapModule.forRoot({apiUrl: `https://maps.google.com/maps/api/js?key=AIzaSyAMr7l3yXxN3hJdhgapxECHdHDNwhfGjrY`})
   ],
   providers: [
     SessionService, 

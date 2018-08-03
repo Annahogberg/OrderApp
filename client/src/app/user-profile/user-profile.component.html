@@ -28,17 +28,30 @@
     <form class="form-inline">
       <!-- searchbar -->
       <input class="form-control mr-sm-2" [(ngModel)]="date" type="date" placeholder="Date" aria-label="Search" name="date" required>
-      <input class="form-control mr-sm-2" [(ngModel)]="time" type="time" placeholder="Time" aria-label="Search" name="time" required>
+      <!-- <input class="form-control mr-sm-2" [(ngModel)]="time" type="time" placeholder="Time" aria-label="Search" name="time" required> -->
       <input class="form-control mr-sm-2" [(ngModel)]="pax" type="number" placeholder="People" aria-label="Search" name="pax" required>
-      <!-- <button class="btn" type="submit" (click)="">Search</button> -->
+      <button class="btn" type="submit" (click)="toggleHidden()">Search</button>
     </form>
 
+    <div *ngIf="isHidden">
+      <div class="restaurantCard">
+        <div *ngFor="let restaurant of restaurantList">
+          <h4>{{restaurant.name}}</h4>
+          <p>{{restaurant.phone}}</p>
+          <p>{{restaurant.address}}</p>
+          <p>{{restaurant.type}}</p>
+          <button [routerLink]="['/restaurants/restaurant', restaurant._id]">More info</button>
+          <button [routerLink]="['/restaurants/restaurant', restaurant._id]">Book</button>
+        </div>
+        
+      <!--<button class="btn btn-primary" (click)="addFood(textInputName, textInputCalories, textInputImage)">Submit New Food</button>-->
+    </div>
 
-    <agm-map [latitude]="lat" [longitude]="lng">
-        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-      </agm-map>
+
   </div>
 
 
 
   </div>
+</div>
+</div>

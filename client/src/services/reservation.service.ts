@@ -15,20 +15,17 @@ export class ReservationService{
       .pipe(map(res => res.json()));
   }
 
-  // getMyReservations() {
-  //   return this.http
-  //     .get(`${environment.BASEURL}/api/reservations/myreservations`)
-  //     .pipe(map(res => {
-  //       res.json()}));
-  //     }
-
-  
-  
+  getReservationDetails(id) {
+    return this.http
+      .get(`${environment.BASEURL}/api/reservations/reservationsdetails/${id}`)
+      .pipe(map(res => res.json()));
+      }
 
   getReservation(id) {
     return this.http
       .get(`${environment.BASEURL}/api/reservations/reservation/${id}`)
-      .pipe(map(res => res.json()));
+      .pipe(map(res =>  res.json()
+      ));
   }
 
   editReservation(reservation) {
@@ -36,6 +33,7 @@ export class ReservationService{
       .put(`${environment.BASEURL}/api/reservations/reservation/edit/${reservation._id}`, reservation)
       .pipe(map(res => res.json()));
   }
+
 
   remove(id) {
     return this.http

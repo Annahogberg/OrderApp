@@ -19,7 +19,7 @@ export class ReservationsListComponent implements OnInit {
     private aR: ActivatedRoute,
     private router: Router
   ) {
-    //this.reservationService.getAllReservations().subscribe(reservations => {console.log(reservations);this.reservationList = reservations})
+  
     this.sessionService.isLogged().subscribe(user => {
       this.reservationService
         .getReservation(user._id)

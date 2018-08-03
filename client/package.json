@@ -21,9 +21,13 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "@ngui/map": "^0.30.3",
+    "@types/googlemaps": "^3.30.11",
     "core-js": "^2.5.4",
+    "google-maps-ng2": "^1.0.10",
     "ng-file-upload": "^12.2.13",
     "ng2-file-upload": "^1.3.0",
+    "ngx-smart-modal": "^7.0.2",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },

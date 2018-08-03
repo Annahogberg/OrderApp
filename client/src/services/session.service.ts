@@ -29,8 +29,6 @@ export class SessionService {
     return this.http.get(`${BASEURL}/api/auth/currentuser`,this.options).pipe(
       map( (res:Response) => {
         this.user = res.json();
-        // console.log(`Automatically login ${this.user.username}`);
-        //console.log(this.user);
         return this.user;
       }),
       catchError(e => {console.log("You have to login first!"); return of(null)})

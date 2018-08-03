@@ -15,20 +15,14 @@ export class SignupComponent implements OnInit {
   email: string;
   isRestaurant: boolean;
   isClient: boolean;
-  // firstname: string;
-  // lastname: string;
-  // age: number;
-  
+
   constructor(private sessionService:SessionService, public router:Router) { }
 
   ngOnInit() {
   }
 
   signup(username, password, email, isRestaurant, isClient){
-    console.log("signup....");
     this.sessionService.signup(username,password, email, isRestaurant, isClient).subscribe( (user:any) =>{
-      console.log(`WELCOME USER ${user.username}, register OK`);
-      //console.log(user);
       this.router.navigate(['/']);
     });
   }

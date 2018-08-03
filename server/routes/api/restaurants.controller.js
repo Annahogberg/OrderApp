@@ -26,7 +26,6 @@ router.get('/restaurant/:id', (req, res, next) => {
 //CREATES RESERVATION
 router.post("/restaurant/reservation", (req, res, next) => {
   let restaurant = req.body.restaurant
-  console.log(restaurant)
   User.findById(restaurant)
   .populate("user")
   .populate("openinghours")
@@ -40,7 +39,6 @@ router.post("/restaurant/reservation", (req, res, next) => {
       restaurant: restaurant
     };
 
-    //console.log(restaurant.openinghours.closeTime1)
 
     if (req.body.date == "" || req.body.time == "" || req.body.pax == "") {
       return res.status(500).json({ message: "Can't be empty" });
@@ -72,15 +70,6 @@ router.post("/restaurant/reservation", (req, res, next) => {
       .catch(err => res.status(500).json(err));
   });
 
-
-  // router.get("/myreservations", (req, res, next) => {
-  //   Reservation.find({user: req.user._id})
-  //   console.log(user)
-  //     .populate("user")
-  //     .populate("restaurant")
-  //     .then(object => res.json(object))
-  //     .catch(e => next(e));
-  // });
 });
 
 

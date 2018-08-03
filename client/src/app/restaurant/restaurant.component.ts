@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
 import { RestaurantService } from '../../services/restaurant.service';
 import { SessionService } from '../../services/session.service';
+import { MapsAPILoader } from '@agm/core';
+import { ViewChild, ElementRef, NgZone, } from '@angular/core';
+import { FormControl } from '@angular/forms';
+// import {} from '@types/googlemaps'; 
 
 
 @Component({
@@ -42,8 +46,7 @@ export class RestaurantComponent implements OnInit {
       restaurant: this.restaurant._id,
       user: this.user._id
     }
-  
-    console.log("creating reservation....");
+
 
     this.restaurantService.reserve(reservation).subscribe( (reser:any) =>{
       this.router.navigate(['/profile']);

@@ -53,7 +53,7 @@ export class UserEditComponent implements OnInit {
 // export class UserEditComponent implements OnInit {
 
 //   uploader: FileUploader = new FileUploader({
-//     url: `http://localhost:3000/api/profile/edit/`, 
+//     url: `${environment.BASEURL}/profile/edit/`, 
 //     method: 'PUT'
 //   });
 

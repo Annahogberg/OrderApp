@@ -4,12 +4,13 @@
   <p>{{restaurant.address}}</p>
   <p>{{restaurant.type}}</p>
 
-  <p>{{restaurant._id}}</p>
-
-<!-- <p>{{restaurant.openingHours}}</p> -->
 <div *ngIf="restaurant.openinghours">
 <p>Lunch time: {{restaurant.openinghours.openTime1}} - {{restaurant.openinghours.closeTime1}} </p>
 <p>Dinner time: {{restaurant.openinghours.openTime2}} - {{restaurant.openinghours.closeTime2}} </p>
+</div>
+
+<div *ngIf="restaurant.address">
+<ngui-map center="{{restaurant.address}}"></ngui-map>
 </div>
 
 <section class="container">

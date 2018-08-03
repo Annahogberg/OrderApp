@@ -20,6 +20,5 @@ const openinghours = [
 
   OpeningHours.create(openinghours, (err, data) => {
   if (err) {throw (err)}
-  console.log("hours created")
   //mongoose.disconnect();
 })

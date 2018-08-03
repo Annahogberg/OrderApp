@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   BASEURL:'http://localhost:3000',
-  GOOGLEKEY: 'AIzaSyDWNDHKM_T4Vy44vAdcRTbCtpyVrTJgBsc'
+  GOOGLEKEY: 'AIzaSyCKTrR13CwUcK6vCXOdTqg-NhoMXgHj3Pc',
 };
 
 /*

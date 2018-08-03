@@ -12,7 +12,7 @@ export class ReservationEditComponent implements OnInit {
 
   reservation;
   constructor(public reservationService: ReservationService, public userService: UserService, private aR: ActivatedRoute, private router: Router) { 
-    this.aR.params.subscribe(params => this.reservationService.getReservation(params.id).subscribe(reservation => {
+    this.aR.params.subscribe(params => this.reservationService.getReservationDetails(params.id).subscribe(reservation => {
       this.reservation = reservation;
     }))
   }
@@ -20,7 +20,7 @@ export class ReservationEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  editReservation(reservation) {
+  editReservation() {
     this.reservationService.editReservation(this.reservation).subscribe(reservation => {
       this.reservation = reservation;
       this.router.navigate(["/reservations/myreservations"]);
