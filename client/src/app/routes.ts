@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
-import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
+
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { isLoggedInGuardService } from './guards/isloggedin.guard';
 import { NegateUserLoggedInGuard } from './guards/negateuserloggedin.guard';
@@ -11,7 +10,10 @@ import { RestaurantListComponent } from './restaurant-list/restaurant-list.compo
 import { ReservationsListComponent } from './reservations-list/reservations-list.component';
 import { OneReservationComponent } from './one-reservation/one-reservation.component';
 import { ReservationEditComponent } from './reservation-edit/reservation-edit.component';
-import { LandingComponent } from './landing/landing.component';
+import { LandingComponent } from './Components/AuthLanding/landing/landing.component';
+import { SignupComponent } from './Components/AuthLanding/signup/signup.component';
+import { LoginComponent } from './Components/AuthLanding/login/login.component';
+
 
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../../services/session.service';
+
+
 
 @Component({
   selector: 'app-landing',
@@ -8,7 +9,7 @@ import { SessionService } from '../../services/session.service';
 })
 export class LandingComponent implements OnInit {
 
-  constructor(public sessionService: SessionService) { }
+  constructor() { }
 
   ngOnInit() {
   }

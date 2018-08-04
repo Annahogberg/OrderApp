@@ -2,8 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+
 import { HttpModule } from '../../node_modules/@angular/http';
 import { RouterModule } from '../../node_modules/@angular/router';
 import { routes } from './routes';
@@ -23,12 +22,15 @@ import { ReservationsListComponent } from './reservations-list/reservations-list
 import { OneReservationComponent } from './one-reservation/one-reservation.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { ReservationEditComponent } from './reservation-edit/reservation-edit.component';
-import { LandingComponent } from './landing/landing.component';
+
 import { FileSelectDirective} from 'ng2-file-upload'
 import {environment} from '../environments/environment'
 
 import { AgmCoreModule } from '@agm/core';
 import { NguiMapModule} from '@ngui/map';
+import { LoginComponent } from './Components/AuthLanding/login/login.component';
+import { SignupComponent } from './Components/AuthLanding/signup/signup.component';
+import { LandingComponent } from './Components/AuthLanding/landing/landing.component';
 
 
 
@@ -38,6 +40,7 @@ import { NguiMapModule} from '@ngui/map';
     AppComponent,
     LoginComponent,
     SignupComponent,
+    LandingComponent,
     UserProfileComponent,
     UserEditComponent,
     RestaurantListComponent,
@@ -46,7 +49,6 @@ import { NguiMapModule} from '@ngui/map';
     OneReservationComponent,
     FilterPipe,
     ReservationEditComponent,
-    LandingComponent,
     FileSelectDirective
 
   ],
@@ -60,7 +62,7 @@ import { NguiMapModule} from '@ngui/map';
     //   libraries: ["places"]//environment.GOOGLEKEY
     // }),
 
-    NguiMapModule.forRoot({apiUrl: `https://maps.google.com/maps/api/js?key=AIzaSyAMr7l3yXxN3hJdhgapxECHdHDNwhfGjrY`})
+    NguiMapModule.forRoot({apiUrl: `https://maps.google.com/maps/api/js?key=${environment.GOOGLEKEY}`})
   ],
   providers: [
     SessionService, 

@@ -14,7 +14,7 @@ h2 {
 
 #hero {
   text-align: center; 
-  background: url(../../assets/images/background002.jpg) no-repeat;
+  background: url(../../../../assets/images/background002.jpg) no-repeat;
   min-height: calc(100vh - 200px);
   background-size: cover;
   display: flex;
