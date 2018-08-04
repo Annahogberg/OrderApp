@@ -9,12 +9,12 @@ import { routes } from './routes';
 import { FormsModule } from '@angular/forms';
 import { SessionService } from '../services/session.service';
 import { UserService } from '../services/user.service';
-import { isLoggedInGuardService } from './guards/isloggedin.guard';
-import { NegateUserLoggedInGuard } from './guards/negateuserloggedin.guard';
+import { isLoggedInGuardService } from './Guards/isloggedin.guard';
+import { NegateUserLoggedInGuard } from './Guards/negateuserloggedin.guard';
 import { RestaurantService } from '../services/restaurant.service';
 import { ReservationService } from '../services/reservation.service';
 
-import { FilterPipe } from './pipes/filter.pipe';
+import { FilterPipe } from './Pipes/filter.pipe';
 
 
 import { FileSelectDirective} from 'ng2-file-upload'
@@ -42,10 +42,6 @@ import { OneReservationComponent } from './Components/Reservations/one-reservati
 import { ReservationEditComponent } from './Components/Reservations/reservation-edit/reservation-edit.component';
 
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,12 +64,12 @@ import { ReservationEditComponent } from './Components/Reservations/reservation-
     HttpModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    // AgmCoreModule.forRoot({
-    //   apiKey: 'AIzaSyAMr7l3yXxN3hJdhgapxECHdHDNwhfGjrY',
-    //   libraries: ["places"]//environment.GOOGLEKEY
-    // }),
+    AgmCoreModule.forRoot({
+      apiKey: environment.GOOGLEKEY,
+      libraries: ["places"]
+    }),
 
-   // NguiMapModule.forRoot({apiUrl: `https://maps.google.com/maps/api/js?key=${environment.GOOGLEKEY}`})
+   NguiMapModule.forRoot({apiUrl: `https://maps.google.com/maps/api/js?key=${environment.GOOGLEKEY}`})
   ],
   providers: [
     SessionService, 

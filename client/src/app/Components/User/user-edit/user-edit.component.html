@@ -30,6 +30,14 @@
     <label>Dinner time</label>
     <input type="time" name="dinneropening" [(ngModel)]="user.openinghours.openTime2">
     <input type="time" name="dinnerclosing" [(ngModel)]="user.openinghours.closeTime2">
+
+    <label>Coordinates - provide Lat & Long so that your restaurant is shown in the map</label>
+    <input type="number" name="coordinateslat" [(ngModel)]="user.coordinates.lat" >
+    <input type="number" name="coordinateslng" [(ngModel)]="user.coordinates.lng">
+
+     <!-- <div *ngIf="user.address">
+<ngui-map center="{{user.address}}"></ngui-map>
+</div> -->
     <!-- <a [routerLink]="['/menu/edit', user.menu._id]">Edit menu</a> -->
   </div>
 

@@ -37,4 +37,10 @@ export class OneReservationComponent implements OnInit {
       this.router.navigate(["/reservations/myreservations"]);
     })
   };
+
+  deleteReservation() {
+    this.reservationService
+      .remove(this.reservation)
+      .subscribe(() => this.router.navigate(["/reservations/myreservations"]));
+  }
 }

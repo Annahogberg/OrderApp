@@ -14,8 +14,9 @@ const userSchema = new Schema ({
   image: {type: String, default:""}, 
   //restaurant user
   address: {type: String},
+  coordinates: {type: Schema.Types.ObjectId, ref:'Cords', default: "5b65a3c0ce68bb28a39eaec1"},
   type: {type: String, enum: ['Italian', 'Mediterranean', 'Japanese', 'Chinese', 'Mexican', 'Asian', 'Vegetarian']},
-  openinghours: {type: Schema.Types.ObjectId, ref:'OpeningHours', default: "5b62c583dff2d824c875c4c8"}, //, required: true
+  openinghours: {type: Schema.Types.ObjectId, ref:'OpeningHours', default: "5b65a3c0ce68bb28a39eaec0"}, //, required: true
   tables: {type: Number, default: 0},
   // isAvailable: {type: Boolean, default: true}
 }, 

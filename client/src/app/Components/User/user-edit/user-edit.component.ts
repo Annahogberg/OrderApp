@@ -13,7 +13,9 @@ import { ActivatedRoute, Router } from "../../../../../node_modules/@angular/rou
   styleUrls: ["./user-edit.component.css"]
 })
 export class UserEditComponent implements OnInit {
+
   user;
+
 
 
   constructor(
@@ -30,11 +32,18 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+
   edit(user) {
     this.userService.edit(this.user).subscribe(user => {
       this.user = user;
       this.router.navigate(["/profile"]);
     });
+  }
+
+  placeMarker($event){
+    console.log($event.coords.lat);
+    console.log($event.coords.lng);
   }
 }
 

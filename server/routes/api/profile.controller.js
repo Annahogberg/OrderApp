@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
 const Hours = require("../../models/OpeningHours");
+const Cords = require("../../models/Cords");
 const multer = require('multer');
 const uploadCloud = require("../../config/cloudinary");
 
@@ -17,6 +18,7 @@ router.get("/", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
   User.findById(req.params.id)
     .populate("openinghours")
+    .populate("coordinates")
     .then(object => res.json(object))
     .catch(e => next(e));
 });
@@ -24,7 +26,13 @@ router.get("/:id", (req, res, next) => {
 //EDIT PROFILE
 router.put("/edit/:id", (req, res, next) => { //uploadCloud.single('file'), 
 
-  User.findById(req.params.id).then(user => {
+user = req.params.id
+
+  User.findById(user)
+  .populate("coordinates")
+  .then(user => {
+    console.log(user.coordinates.lat)
+    console.log(user.coordinates.lng)
     const username =
       req.body.username != "" ? req.body.username : user.username;
     const email = req.body.email != "" ? req.body.email : user.email;
@@ -34,6 +42,14 @@ router.put("/edit/:id", (req, res, next) => { //uploadCloud.single('file'),
     const type = req.body.type != "" ? req.body.type : user.type;
     const phone = req.body.phone != "" ? req.body.phone : user.phone;
     const tables = req.body.tables != "" ? req.body.tables : user.tables;
+
+
+    const coordinates =
+    req.body.coordinates;
+    delete coordinates._id;
+
+  const newCords = new Cords(coordinates)
+  newCords.save().then(cords => {
 
     const openinghours =
       req.body.openinghours;
@@ -48,6 +64,7 @@ router.put("/edit/:id", (req, res, next) => { //uploadCloud.single('file'),
         name,
         age,
         address,
+        coordiantes: cords._id,
         type,
         phone,
         tables,
@@ -61,11 +78,12 @@ router.put("/edit/:id", (req, res, next) => { //uploadCloud.single('file'),
       
       User.findByIdAndUpdate(req.params.id, updates, { new: true })
         .then(object => {
-        
-          res.json(object);
+        console.log(user);
+          return res.json(object);
         })
         .catch(e => next(e));
     });
+  });
 
   });
 });

@@ -4,6 +4,7 @@ import { isLoggedInGuardService } from './isloggedin.guard';
 import { SessionService } from '../../services/session.service';
 
 
+
 @Injectable()
 export class NegateUserLoggedInGuard implements CanActivate {    
   constructor(public sessionService: SessionService){}
