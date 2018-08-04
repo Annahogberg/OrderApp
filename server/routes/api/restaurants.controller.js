@@ -66,7 +66,10 @@ router.post("/restaurant/reservation", (req, res, next) => {
 
     newReservation
       .save()
-      .then(restaurant => res.status(200).json(restaurant))
+      .then(restaurant => {
+        console.log(restaurant)
+        return res.status(200).json(restaurant)
+      })
       .catch(err => res.status(500).json(err));
   });
 

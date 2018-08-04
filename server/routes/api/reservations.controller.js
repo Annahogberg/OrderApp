@@ -83,7 +83,6 @@ router.put("/reservation/edit/:id", (req, res, next) => {
 
   });
 
-
   router.delete("/reservation/delete/:id", (req, res, next) => {
     Reservation.findByIdAndRemove(req.params.id)
     .then(() => res.json({ message: `SUCESSFUL DELETE ${req.params.id}` }))

@@ -73,7 +73,7 @@ import { ReservationEditComponent } from './Components/Reservations/reservation-
     //   libraries: ["places"]//environment.GOOGLEKEY
     // }),
 
-    NguiMapModule.forRoot({apiUrl: `https://maps.google.com/maps/api/js?key=${environment.GOOGLEKEY}`})
+   // NguiMapModule.forRoot({apiUrl: `https://maps.google.com/maps/api/js?key=${environment.GOOGLEKEY}`})
   ],
   providers: [
     SessionService, 
