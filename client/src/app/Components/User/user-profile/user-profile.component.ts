@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "../../../node_modules/rxjs";
-import { ActivatedRoute, Router } from "../../../node_modules/@angular/router";
-import { SessionService } from "../../services/session.service";
-import { ReservationService } from "../../services/reservation.service";
-import { RestaurantService } from "../../services/restaurant.service";
+import { SessionService } from "../../../../services/session.service";
+import { ReservationService } from "../../../../services/reservation.service";
+import { RestaurantService } from "../../../../services/restaurant.service";
+import { ActivatedRoute, Router } from "../../../../../node_modules/@angular/router";
+
 
 @Component({
   selector: "app-user-profile",

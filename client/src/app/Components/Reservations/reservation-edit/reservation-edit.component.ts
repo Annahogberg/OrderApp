@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ReservationService } from '../../services/reservation.service';
-import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
-import { UserService } from '../../services/user.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ReservationService } from '../../../../services/reservation.service';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-reservation-edit',

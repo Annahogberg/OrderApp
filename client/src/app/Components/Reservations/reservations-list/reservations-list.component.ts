@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { ReservationService } from "../../services/reservation.service";
-import { ActivatedRoute, Router } from "../../../node_modules/@angular/router";
-import { SessionService } from "../../services/session.service";
-import { RestaurantService } from "../../services/restaurant.service";
+
+import { ActivatedRoute, Router } from "@angular/router";
+import { ReservationService } from "../../../../services/reservation.service";
+import { SessionService } from "../../../../services/session.service";
+import { RestaurantService } from "../../../../services/restaurant.service";
+
 
 @Component({
   selector: "app-reservations-list",

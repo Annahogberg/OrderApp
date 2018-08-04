@@ -7,30 +7,41 @@ import { HttpModule } from '../../node_modules/@angular/http';
 import { RouterModule } from '../../node_modules/@angular/router';
 import { routes } from './routes';
 import { FormsModule } from '@angular/forms';
-
-import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SessionService } from '../services/session.service';
 import { UserService } from '../services/user.service';
 import { isLoggedInGuardService } from './guards/isloggedin.guard';
 import { NegateUserLoggedInGuard } from './guards/negateuserloggedin.guard';
-import { UserEditComponent } from './user-edit/user-edit.component';
-import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
-import { RestaurantComponent } from './restaurant/restaurant.component';
 import { RestaurantService } from '../services/restaurant.service';
 import { ReservationService } from '../services/reservation.service';
-import { ReservationsListComponent } from './reservations-list/reservations-list.component';
-import { OneReservationComponent } from './one-reservation/one-reservation.component';
+
 import { FilterPipe } from './pipes/filter.pipe';
-import { ReservationEditComponent } from './reservation-edit/reservation-edit.component';
+
 
 import { FileSelectDirective} from 'ng2-file-upload'
 import {environment} from '../environments/environment'
 
 import { AgmCoreModule } from '@agm/core';
 import { NguiMapModule} from '@ngui/map';
+
+      //AUTH&LANDING
 import { LoginComponent } from './Components/AuthLanding/login/login.component';
 import { SignupComponent } from './Components/AuthLanding/signup/signup.component';
 import { LandingComponent } from './Components/AuthLanding/landing/landing.component';
+
+      //USER
+import { UserProfileComponent } from './Components/User/user-profile/user-profile.component';
+import { UserEditComponent } from './Components/User/user-edit/user-edit.component';
+
+      //RESTAURANT
+import { RestaurantListComponent } from './Components/Restaurants/restaurant-list/restaurant-list.component';
+import { RestaurantComponent } from './Components/Restaurants/restaurant/restaurant.component';
+
+      //RESERVATIONS
+import { ReservationsListComponent } from './Components/Reservations/reservations-list/reservations-list.component';
+import { OneReservationComponent } from './Components/Reservations/one-reservation/one-reservation.component';
+import { ReservationEditComponent } from './Components/Reservations/reservation-edit/reservation-edit.component';
+
+
 
 
 
@@ -47,8 +58,8 @@ import { LandingComponent } from './Components/AuthLanding/landing/landing.compo
     RestaurantComponent,
     ReservationsListComponent,
     OneReservationComponent,
-    FilterPipe,
     ReservationEditComponent,
+    FilterPipe,
     FileSelectDirective
 
   ],

@@ -35,7 +35,9 @@ router.get("/reservation/:id", (req, res, next) => {
 //EDIT PROFILE
 router.put("/reservation/edit/:id", (req, res, next) => {
 
-  Reservation.findById(req.params.id).then(reservation => {
+  Reservation.findById(req.params.id)
+  .populate({ path: "restaurant", populate: {path: "openinghours"}}).then(reservation => {
+    console.log(reservation)
     const date =
       req.body.date != "" ? req.body.date : reservation.date;
     const time = req.body.time != "" ? req.body.time : reservation.time;
@@ -61,18 +63,16 @@ router.put("/reservation/edit/:id", (req, res, next) => {
       return res.status(500).json({ message: "Not possible for those dates" });
     }
 
-    // const time = req.body.time;
-
-    // const tooEarly = restaurant.openinghours.openTime1
-    // const afterLunch = restaurant.openinghours.closeTime1
-    // const beforeDinner = restaurant.openinghours.openTime2
-    // const tooLate = restaurant.openinghours.closeTime2
-
-    // if (time >  afterLunch && time < beforeDinner || time < tooEarly && time > tooLate) {
-    //   return res.status(500).json({ message: "Restaurant is closed" });
-    // }
-
   
+    const tooEarly = reservation.restaurant.openinghours.openTime1
+    const afterLunch = reservation.restaurant.openinghours.closeTime1
+    const beforeDinner = reservation.restaurant.openinghours.openTime2
+    const tooLate = reservation.restaurant.openinghours.closeTime2
+
+    if (time >  afterLunch && time < beforeDinner || time < tooEarly && time > tooLate) {
+      return res.status(500).json({ message: "Restaurant is closed" });
+    }
+
       Reservation.findByIdAndUpdate(req.params.id, updates, { new: true })
         .then(object => {
         

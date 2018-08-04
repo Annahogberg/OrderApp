@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ReservationService } from '../../services/reservation.service';
-import { SessionService } from '../../services/session.service';
-import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ReservationService } from '../../../../services/reservation.service';
+import { SessionService } from '../../../../services/session.service';
 
 @Component({
   selector: 'app-one-reservation',
