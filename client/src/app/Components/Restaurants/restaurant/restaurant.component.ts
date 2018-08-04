@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { RestaurantService } from '../../../../services/restaurant.service';
 import { SessionService } from '../../../../services/session.service';
 import { ActivatedRoute, Router } from '../../../../../node_modules/@angular/router';
+import { ReviewService } from '../../../../services/review.service';
 // import {} from '@types/googlemaps'; 
 
 
@@ -19,13 +20,20 @@ export class RestaurantComponent implements OnInit {
   restaurant;
   user;
 
-  reservation
+  reservation;
   date: string;
   time: string;
   pax: number;
   comment: string;
 
-  constructor(public restaurantService: RestaurantService, public sessionService: SessionService, private aR: ActivatedRoute, private router: Router) {
+  content;
+  rating;
+  name;
+
+reviews;
+review;
+
+  constructor(public restaurantService: RestaurantService, public sessionService: SessionService, public reviewService: ReviewService, private aR: ActivatedRoute, private router: Router) {
     this.aR.params.subscribe(params =>
       this.restaurantService.getRestaurant(params.id).subscribe(restaurant => {
         this.restaurant = restaurant;
@@ -51,6 +59,31 @@ export class RestaurantComponent implements OnInit {
     this.restaurantService.reserve(reservation).subscribe( (reser:any) =>{
       this.router.navigate(['/profile']);
     });
+  }
+
+  refreshReviews() {
+    this.reviewService
+      .getReviews(this.restaurant._id)
+      .subscribe(reviews => (this.reviews = reviews));
+  }
+
+  saveReview(content, rating,name) {
+
+    const reviewInfo = {
+      restaurant: this.restaurant._id,
+      content,
+      rating,
+      name,
+    }
+
+
+    this.reviewService
+      .saveReview(reviewInfo)
+      .subscribe(() => this.refreshReviews());
+
+    this.content = '';
+    this.rating = '';
+    this.name = '';
   }
 
 }

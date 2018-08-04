@@ -40,6 +40,7 @@ import { RestaurantComponent } from './Components/Restaurants/restaurant/restaur
 import { ReservationsListComponent } from './Components/Reservations/reservations-list/reservations-list.component';
 import { OneReservationComponent } from './Components/Reservations/one-reservation/one-reservation.component';
 import { ReservationEditComponent } from './Components/Reservations/reservation-edit/reservation-edit.component';
+import { ReviewService } from '../services/review.service';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { ReservationEditComponent } from './Components/Reservations/reservation-
     NegateUserLoggedInGuard, 
     RestaurantService,
     ReservationService,
+    ReviewService
   ],
   bootstrap: [AppComponent]
 })

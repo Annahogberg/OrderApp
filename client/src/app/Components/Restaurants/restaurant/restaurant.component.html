@@ -46,6 +46,26 @@
 
       </form>
 
+
+      <div *ngIf="reviews">
+      <ul *ngFor="let review of reviews">
+          <li>{{review.content}}</li>
+          <li>{{review.rating}}</li>
+        </ul>
+      </div>
+
+
+        <div *ngIf="sessionService.user.isClient">
+        <div>
+            <label>Write a review</label>
+            <textarea [(ngModel)]="content" placeholder="Review"></textarea>
+
+            <input type="number" [(ngModel)]="rating">
+            <input [(ngModel)]="name">
+            <button (click)="saveReview(content, rating, name)"> Save </button>
+          </div>
+        </div>
+
     </article>
   </div>
 </section>

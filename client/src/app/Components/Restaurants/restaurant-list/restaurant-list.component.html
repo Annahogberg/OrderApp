@@ -1,3 +1,4 @@
+<div class="container">
 <form class="form-inline">
 
 <input class="form-control mr-sm-2" [(ngModel)]="searchName" type="text" placeholder="Restaurant Name" aria-label="Search" name="name" required>
@@ -5,9 +6,11 @@
       <input class="form-control mr-sm-2" [(ngModel)]="searchType" type="text" placeholder="Type" aria-label="Search" name="type" required>
       </form>
 
+
 <div *ngFor="let restaurant of restaurantList |  filter:'name':searchName |filter:'address':searchCity |  filter:'type':searchType">
   <h4>{{restaurant.name}}</h4>
   <p>{{restaurant.address}}</p>
   <p>{{restaurant.type}}</p>
   <button [routerLink]="['/restaurants/restaurant', restaurant._id]">More info</button>
+</div>
 </div>
