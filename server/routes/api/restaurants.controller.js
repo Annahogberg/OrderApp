@@ -69,24 +69,18 @@ router.post("/restaurant/reservation", (req, res, next) => {
         return res.status(500).json({ message: "Restaurant is closed" });
       }
 
-      if ( restaurant.tables < 0){
-        return res
-          .status(500)
-          .json({ message: "Be aware that the restaurant might be fully booked" });
-      }
-
       const newReservation = new Reservation(reservationInfo);
-
       newReservation
-        .save()
-        .then(reservation => {
-          reservation.restaurant.tables -= 1;
-
-          User.findOneAndUpdate({ tables: reservation.restaurant.tables })
-            .then(reservation => res.status(200).json(reservation))
-            .catch(err => res.status(500).json(err));
-        })
-        .catch(err => res.status(500).json(err));
+      .save()
+      .then(reservation => {
+        console.log(reservation.restaurant._id);
+        reservation.restaurant.reservations += 1;
+      
+        User.findByIdAndUpdate( reservation.restaurant, { reservations: reservation.restaurant.reservations })
+          .then(reservation => res.status(200).json(reservation))
+          .catch(err => res.status(500).json(err));
+      })
+      .catch(err => res.status(500).json(err));
     });
 });
 

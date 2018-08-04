@@ -85,9 +85,9 @@ router.post("/reservation/delete/:id", (req, res, next) => {
     .populate("restaurant")
     .then(reservation => {
 
-      reservation.restaurant.tables += 1;
+      reservation.restaurant.reservations -= 1;
 
-      User.findOneAndUpdate({ tables: reservation.restaurant.tables })
+      User.findByIdAndUpdate( reservation.restaurant, { reservations: reservation.restaurant.reservations })
             .then(reservation => {
               Reservation.findByIdAndRemove(req.params.id)
               .then( reservation => res.status(200).json(reservation))

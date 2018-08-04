@@ -33,18 +33,6 @@ const users = [
     type: 'Italian',
   
   },
-  {
-    username: 'hola',
-    password: hashPass,
-    email: 'hola@gmail.com',
-    name: 'Casa hola',
-    phone: 111111111,
-    isRestaurant: true,
-    isClient: false,
-    address: 'Calle Santiago Bernabeu 7',
-    type: 'Italian',
-  
-  },
 ];
 
 User.collection.drop();

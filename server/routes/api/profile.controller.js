@@ -24,7 +24,7 @@ router.get("/:id", (req, res, next) => {
 });
 
 //EDIT PROFILE
-router.put("/edit/:id", (req, res, next) => { //uploadCloud.single('file'), 
+router.put("/edit/:id", (req, res, next) => {
 
 user = req.params.id
 
@@ -41,7 +41,7 @@ user = req.params.id
     const address = req.body.address != "" ? req.body.address : user.address;
     const type = req.body.type != "" ? req.body.type : user.type;
     const phone = req.body.phone != "" ? req.body.phone : user.phone;
-    const tables = req.body.tables != "" ? req.body.tables : user.tables;
+    const reservations = req.body.reservations != "" ? req.body.reservations : user.reservations;
 
 
     const coordinates =
@@ -67,14 +67,11 @@ user = req.params.id
         coordiantes: cords._id,
         type,
         phone,
-        tables,
+        reservations,
         openinghours: hour._id,
       };
   
 
-      // if(req.file) {
-      //   update.image = req.file.url;
-      // }
       
       User.findByIdAndUpdate(req.params.id, updates, { new: true })
         .then(object => {

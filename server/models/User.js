@@ -17,7 +17,7 @@ const userSchema = new Schema ({
   coordinates: {type: Schema.Types.ObjectId, ref:'Cords', default: "5b65a3c0ce68bb28a39eaec1"},
   type: {type: String, enum: ['Italian', 'Mediterranean', 'Japanese', 'Chinese', 'Mexican', 'Asian', 'Vegetarian']},
   openinghours: {type: Schema.Types.ObjectId, ref:'OpeningHours', default: "5b65a3c0ce68bb28a39eaec0"}, //, required: true
-  tables: {type: Number, default: 0},
+  reservations: {type: Number, default: 0},
   // isAvailable: {type: Boolean, default: true}
 }, 
 {timestamps: true});
