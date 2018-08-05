@@ -32,7 +32,7 @@ router.get("/reservation/:id", (req, res, next) => {
 //EDIT PROFILE
 router.put("/reservation/edit/:id", (req, res, next) => {
   Reservation.findById(req.params.id)
-    .populate({ path: "restaurant", populate: { path: "openinghours" } })
+    .populate("restaurant")
     .then(reservation => {
       console.log(reservation);
       const date = req.body.date != "" ? req.body.date : reservation.date;
@@ -60,10 +60,10 @@ router.put("/reservation/edit/:id", (req, res, next) => {
           .json({ message: "Not possible for those dates" });
       }
 
-      const tooEarly = reservation.restaurant.openinghours.openTime1;
-      const afterLunch = reservation.restaurant.openinghours.closeTime1;
-      const beforeDinner = reservation.restaurant.openinghours.openTime2;
-      const tooLate = reservation.restaurant.openinghours.closeTime2;
+      const tooEarly = reservation.restaurant.openTime1;
+      const afterLunch = reservation.restaurant.closeTime1;
+      const beforeDinner = reservation.restaurant.openTime2;
+      const tooLate = reservation.restaurant.closeTime2;
 
       if (
         (time > afterLunch && time < beforeDinner) ||
@@ -80,22 +80,33 @@ router.put("/reservation/edit/:id", (req, res, next) => {
     });
 });
 
+
 router.post("/reservation/delete/:id", (req, res, next) => {
-  Reservation.findById(req.params.id)
-    .populate("restaurant")
-    .then(reservation => {
+Reservation.findById(req.params.id)
+.populate("user")
+.populate("restaurant")
+.then( reservation => {
+  reservation.restaurant.Restreservations -= 1;
+  reservation.user.Clientreservations -= 1;
 
-      reservation.restaurant.reservations -= 1;
+  User.findByIdAndUpdate( reservation.restaurant, { Restreservations: reservation.restaurant.Restreservations })
+  .then (() =>  console.log("deleted Restreservation"))
+  .catch(err => res.status(500).json(err))
 
-      User.findByIdAndUpdate( reservation.restaurant, { reservations: reservation.restaurant.reservations })
-            .then(reservation => {
-              Reservation.findByIdAndRemove(req.params.id)
-              .then( reservation => res.status(200).json(reservation))
-            .catch(err => res.status(500).json(err));
-          })
-          .catch(err => res.status(500).json(err));
-    })
-    .catch(err => res.status(500).json(err));
-});
+
+  User.findByIdAndUpdate( reservation.user, { Clientreservations: reservation.user.Clientreservations })
+  .then(() =>  console.log("deleted Clientreservation"))
+  .catch(err => res.status(500).json(err))
+
+
+  Reservation.findByIdAndRemove(req.params.id)
+  .then(() =>  console.log("deleted Main Reservation"))
+  .catch(err => res.status(500).json(err))
+
+  return res.status(200).json(reservation)
+})
+.catch(err => res.status(500).json(err))
+})
+
 
 module.exports = router;

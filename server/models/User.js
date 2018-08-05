@@ -13,16 +13,21 @@ const userSchema = new Schema ({
   age: {type: Number, min: 15, default: 100},
   image: {type: String, default:""}, 
   //restaurant user
-  address: {type: String},
-  coordinates: {type: Schema.Types.ObjectId, ref:'Cords', default: "5b65a3c0ce68bb28a39eaec1"},
+  address: {type: String, default: "Paseo de la Chopera 14"}, 
+  lat: {type: Number, default: 40.3923033}, 
+  lng: {type: Number, default: -3.6996187},
   type: {type: String, enum: ['Italian', 'Mediterranean', 'Japanese', 'Chinese', 'Mexican', 'Asian', 'Vegetarian']},
-  openinghours: {type: Schema.Types.ObjectId, ref:'OpeningHours', default: "5b65a3c0ce68bb28a39eaec0"}, //, required: true
-  reservations: {type: Number, default: 0},
+  openTime1: {type: String, default: "11:00"}, 
+  closeTime1: {type: String, default: "16:00"},
+  openTime2: {type: String, default: "19:00"}, 
+  closeTime2: {type: String, default: "00:00"},
+  Restreservations: {type: Number, default: 0},
+  Clientreservations: {type: Number, default: 0},
+
   // isAvailable: {type: Boolean, default: true}
 }, 
 {timestamps: true});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
-
 

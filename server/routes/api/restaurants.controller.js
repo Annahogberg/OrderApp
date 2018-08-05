@@ -17,18 +17,16 @@ router.get("/", (req, res, next) => {
 //USER SEES RESTAURANT FILE & RESERVES
 router.get("/restaurant/:id", (req, res, next) => {
   User.findById(req.params.id)
-    .populate("openinghours")
-    .then(restaurant => res.json(restaurant))
+    .then(restaurant => {
+      return res.json(restaurant)})
     .catch(e => next(e));
 });
 
 //CREATES RESERVATION
 router.post("/restaurant/reservation", (req, res, next) => {
   let restaurant = req.body.restaurant;
-  User.findById(restaurant)
-    .populate("user")
-    .populate("openinghours")
-    .then(restaurant => {
+ 
+    //console.log(user)
       const reservationInfo = {
         date: moment(req.body.date).format("YYYY-MM-DD, dddd"),
         time: req.body.time,
@@ -58,10 +56,10 @@ router.post("/restaurant/reservation", (req, res, next) => {
 
       const time = req.body.time;
 
-      const tooEarly = restaurant.openinghours.openTime1;
-      const afterLunch = restaurant.openinghours.closeTime1;
-      const beforeDinner = restaurant.openinghours.openTime2;
-      const tooLate = restaurant.openinghours.closeTime2;
+      const tooEarly = restaurant.openTime1;
+      const afterLunch = restaurant.closeTime1;
+      const beforeDinner = restaurant.openTime2;
+      const tooLate = restaurant.closeTime2;
 
       if (
         (time > afterLunch && time < beforeDinner) ||
@@ -73,16 +71,32 @@ router.post("/restaurant/reservation", (req, res, next) => {
       const newReservation = new Reservation(reservationInfo);
       newReservation
       .save()
-      .then(reservation => {
-        console.log(reservation.restaurant._id);
-        reservation.restaurant.reservations += 1;
+      .then( () => {
+
+      const reservationtId = newReservation._id;
+
+      Reservation.findById(reservationtId)
+      .populate("user")
+      .populate("restaurant")
+      .then( reservation => {
+        reservation.restaurant.Restreservations += 1;
+        reservation.user.Clientreservations += 1;
       
-        User.findByIdAndUpdate( reservation.restaurant, { reservations: reservation.restaurant.reservations })
-          .then(reservation => res.status(200).json(reservation))
-          .catch(err => res.status(500).json(err));
+        User.findByIdAndUpdate( reservation.restaurant, { Restreservations: reservation.restaurant.Restreservations })
+        .then (() => 
+          console.log("updated RestReservations"))
+        .catch(err => res.status(500).json(err))
+
+        User.findByIdAndUpdate( reservation.user, { Clientreservations: reservation.user.Clientreservations })
+        .then(() => 
+        console.log("updated ClientReservations"))
+        .catch(err => res.status(500).json(err))
+
+        return res.status(200).json(reservation)
       })
-      .catch(err => res.status(500).json(err));
-    });
+      .catch(err => {console.log(err); return res.status(500).json(err)});
+    })
+   
 });
 
 module.exports = router;
