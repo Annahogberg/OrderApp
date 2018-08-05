@@ -6,7 +6,7 @@ ratingValue = [1,2,3,4,5]
 
 const reviewSchema = new Schema({
     name: String,
-    restaurant: {type: Schema.Types.ObjectId, ref: 'User', required: true},
+    restaurant: {type: Schema.Types.ObjectId, ref: 'User'},
     content: String,
     rating: { type: Number, enum: ratingValue},
     image1: {type: String, default: ''},

@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Review = require('../../models/Reviews');
 const User = require('../../models/User')
+const multer = require("multer");
+const uploadCloud = require('./../../config/cloudinary');
+const _ = require("lodash");
 
 router.get('/byrestaurant/:id', (req,res) => {
   Review.find({restaurant: req.params.id}).then(reviews => 
@@ -9,8 +12,10 @@ router.get('/byrestaurant/:id', (req,res) => {
   )
 })
 
-router.post('/newReview', (req, res) => {
+router.post('/newReview', uploadCloud.single('file'), (req, res) => {
   let restaurant = req.body.restaurant;
+
+  
   console.log(restaurant)
 
   const reviewInfo = {
@@ -20,9 +25,28 @@ router.post('/newReview', (req, res) => {
     rating: req.body.rating
   }
 
-  Review.create(reviewInfo) 
+  const newReview = _.pickBy(reviewInfo, _.identity);
+
+  if(req.file) {
+    newReview.image1 = req.file.url;
+  }
+
+  Review.create(newReview) 
   .then( data => res.json(data))
   .catch( err => console.log(err));
 })
+
+
+// router.get('/byrestaurant/:id', (req,res,next) => {
+//   Review.findById(req.params.id)
+//   .populate("restaurant")
+//   .then(reviews =>{ 
+//     console.log(restaurant)
+//      return res.json(reviews)}
+//   )
+//   .catch(e => next(e));
+// })
+
+
 
 module.exports = router;

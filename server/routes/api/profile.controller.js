@@ -3,8 +3,6 @@ const router = express.Router();
 const User = require("../../models/User");
 const Hours = require("../../models/OpeningHours");
 const Cords = require("../../models/Cords");
-const multer = require('multer');
-const uploadCloud = require("../../config/cloudinary");
 
 
 // Retrive ALL
@@ -31,8 +29,7 @@ user = req.params.id
   User.findById(user)
   .populate("coordinates")
   .then(user => {
-    console.log(user.coordinates.lat)
-    console.log(user.coordinates.lng)
+
     const username =
       req.body.username != "" ? req.body.username : user.username;
     const email = req.body.email != "" ? req.body.email : user.email;
