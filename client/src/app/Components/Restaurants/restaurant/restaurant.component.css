@@ -10,3 +10,12 @@
   color: #9d9d9d;
 }
 
+
+.space {
+  margin-left: 15px;
+  font-size: 200;
+}
+
+agm-map {
+  height: 300px;
+}

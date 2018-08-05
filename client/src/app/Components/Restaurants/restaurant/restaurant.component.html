@@ -4,69 +4,93 @@
   <p>{{restaurant.address}}</p>
   <p>{{restaurant.type}}</p>
 
-<div *ngIf="restaurant.openinghours">
-<p>Lunch time: {{restaurant.openinghours.openTime1}} - {{restaurant.openinghours.closeTime1}} </p>
-<p>Dinner time: {{restaurant.openinghours.openTime2}} - {{restaurant.openinghours.closeTime2}} </p>
-</div>
+    <p>Lunch time: {{restaurant.openTime1}} - {{restaurant.closeTime1}} </p>
+    <p>Dinner time: {{restaurant.openTime2}} - {{restaurant.closeTime2}} </p>
 
-<!-- <div *ngIf="restaurant.address">
-<ngui-map center="{{restaurant.address}}"></ngui-map>
-</div> -->
+  <p>Total Rate: </p>
 
-<section class="container">
-  <div class="row">
-  <h3 class="center-align">Reserve</h3>
-  <br>
-    <article class="col s6 offset-s3">
-      <form>
-        <div class="input-field">
-          <i class="material-icons prefix">date_range</i>
-          <input type="date" [(ngModel)]="date" name="date" required id="datepicker">
-        </div>
+<!-- <div class="mapa">
+    <agm-map [latitude]="restaurant.lat" [longitude]="restaurant.lng">
+        <agm-marker [latitude]="restaurant.lat" [longitude]="restaurant.lng"></agm-marker>
+      </agm-map>
+  </div> -->
+
+  <section class="container">
+    <div class="row">
+      <h3 class="center-align">Reserve</h3>
+      <br>
+      <article class="col s6 offset-s3">
+        <form>
+          <div class="input-field">
+            <i class="material-icons prefix">date_range</i>
+            <input type="date" [(ngModel)]="date" name="date" required id="datepicker">
+          </div>
 
           <div class="input-field">
-          <i class="material-icons prefix">access_time</i>
-          <input type="time" [(ngModel)]="time" name="time" required id="timepicker">
+            <i class="material-icons prefix">access_time</i>
+            <input type="time" [(ngModel)]="time" name="time" required id="timepicker">
+          </div>
+
+          <div class="input-field">
+            <i class="material-icons prefix">people</i>
+            <label for="pax">People</label>
+            <input type="number" [(ngModel)]="pax" name="pax" required>
+          </div>
+
+          <div class="input-field">
+            <i class="material-icons prefix">comment</i>
+            <textarea [(ngModel)]="comment" name="comment"></textarea>
+          </div>
+          <br>
+          <br>
+          <div class="center-align">
+            <button (click)="reserve(date, time, pax, comment)" class="waves-effect waves-light btn" type="submit">
+              <i class="material-icons right">send</i>Book</button>
+          </div>
+
+        </form>
+
+        <div *ngFor="let review of reviews">
+          <img [src]="review.image1" width=300>
         </div>
 
-        <div class="input-field">
-          <i class="material-icons prefix">people</i>
-          <label for="pax">People</label>
-          <input type="number" [(ngModel)]="pax" name="pax" required>
-        </div>
 
-        <div class="input-field">
-          <i class="material-icons prefix">comment</i>
-         <textarea [(ngModel)]="comment" name="comment"></textarea>
-        </div>
-<br><br>
-        <div class="center-align">
-          <button (click)="reserve(date, time, pax, comment)"class="waves-effect waves-light btn" type="submit"><i class="material-icons right">send</i>Book</button>
-        </div>
-
-      </form>
-
-
-      <div *ngIf="reviews">
-      <ul *ngFor="let review of reviews">
-          <li>{{review.content}}</li>
-          <li>{{review.rating}}</li>
+        <ul *ngFor="let review of reviews">
+          <li>Rating: {{review.rating}} out of 5</li>
+          <li>Comment: {{review.content}}</li>
+          <li>By {{review.name}}</li>
         </ul>
-      </div>
 
 
         <div *ngIf="sessionService.user.isClient">
-        <div>
-            <label>Write a review</label>
-            <textarea [(ngModel)]="content" placeholder="Review"></textarea>
+          <form>
+            <h4>Write a review</h4>
 
-            <input type="number" [(ngModel)]="rating">
-            <input [(ngModel)]="name">
-            <button (click)="saveReview(content, rating, name)"> Save </button>
-          </div>
+            <label>Rate: 0-5</label>
+            <input type="number" [(ngModel)]="rating" max=5 min=0 name="rating">
+
+
+            <textarea [(ngModel)]="content" placeholder="Review" name="content"></textarea>
+            <label>Your name</label>
+            <input type="text" [(ngModel)]="name" placeholder="Your name" name="name">
+            <div *ngIf="!isPicture">
+              <button (click)="saveReviewSimple(rating,content,name)"> Save </button>
+
+
+              <a class="space" (click)="toggleHidden()">Want to upload an image?</a>
+            </div>
+            <div *ngIf="isPicture">
+              <input type="file" name="file" ng2FileSelect [uploader]="uploader" />
+              <button (click)="saveReviewWithImage()"> Save </button>
+              <a class="space" (click)="toggleHidden()">Back to no picture!</a>
+            </div>
+          </form>
         </div>
 
-    </article>
-  </div>
-</section>
+
+
+
+      </article>
+    </div>
+  </section>
 </div>

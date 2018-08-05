@@ -1,0 +1,145 @@
+<form>
+    <h4>Add an Appetizer</h4>
+
+    <label>Title</label>
+    <input type="text" [(ngModel)]="appTitle" max=5 min=0 name="appTitle">
+    <textarea [(ngModel)]="appDescription" placeholder="Describe your dish" name="appDescription"></textarea>
+    <label>Price</label>
+    <input type="number" [(ngModel)]="appPrice" placeholder="0.00€" name="appPrice">
+    <button (click)="createAppetizer(appTitle,appDescription,appPrice)"> Create </button>
+</form>
+
+<form>
+    <h4>Add a Main course</h4>
+
+    <label>Title</label>
+    <input type="text" [(ngModel)]="mainTitle" max=5 min=0 name="mainTitle">
+    <textarea [(ngModel)]="mainDescription" placeholder="Describe your dish" name="mainDescription"></textarea>
+    <label>Price</label>
+    <input type="number" [(ngModel)]="mainPrice" placeholder="0.00€" name="mainPrice">
+    <button (click)="createMainCourse(mainTitle,mainDescription,mainPrice)"> Create </button>
+</form>
+
+<form>
+        <h4>Add a Dessert</h4>
+    
+        <label>Title</label>
+        <input type="text" [(ngModel)]="dessertTitle" max=5 min=0 name="dessertTitle">
+        <textarea [(ngModel)]="dessertDescription" placeholder="Describe your dish" name="dessertDescription"></textarea>
+        <label>Price</label>
+        <input type="number" [(ngModel)]="dessertPrice" placeholder="0.00€" name="dessertPrice">
+        <button (click)="createDessert(dessertTitle,dessertDescription,dessertPrice)"> Create </button>
+    </form>
+    
+    <form>
+        <h4>Add a Drink</h4>
+    
+        <label>Title</label>
+        <input type="text" [(ngModel)]="drinkTitle" max=5 min=0 name="drinkTitle">
+        <textarea [(ngModel)]="drinkDescription" placeholder="Describe your dish" name="drinkDescription"></textarea>
+        <label>Price</label>
+        <input type="number" [(ngModel)]="drinkPrice" placeholder="0.00€" name="drinkPrice">
+        <input type="text" [(ngModel)]="drinkType" max=5 min=0 name="drinkType">
+        <button (click)="createDrink(drinkTitle,drinkDescription,drinkPrice, drinkType)"> Create </button>
+    </form>
+
+
+   
+<button (click)="getMenu()">View menu</button>
+
+<div *ngIf="isHidden">
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+<div *ngFor="let appetizer of appetizers">
+      <h5>{{appetizer.appTitle}}</h5>
+      <p>Description: {{appetizer.appDescription}}</p>
+      <p>Price {{appetizer.appPrice}}€</p>
+      <button (click)="deleteApp()">Delete</button>
+  </div>
+
+
+<div *ngFor="let maincourse of maincourses">
+    <h5>{{maincourse.mainTitle}}</h5>
+    <p>Description: {{maincourse.mainDescription}}</p>
+    <p>Price {{maincourse.mainPrice}}€</p>
+    <button (click)="deleteMain()">Delete</button>
+</div>
+</div>
+
+<div class="col-6">
+  <div *ngFor="let dessert of desserts">
+      <h5>{{dessert.dessertTitle}}</h5>
+      <p>Description: {{dessert.dessertDescription}}</p>
+      <p>Price: {{dessert.dessertPrice}}</p>
+      <button (click)="deleteDessert()">Delete</button>
+  </div>
+
+  <div *ngFor="let drink of drinks">
+      <h5>{{drink.drinkTitle}}</h5>
+      <p>Description: {{drink.drinkDescription}}</p>
+      <p>Price: {{drink.drinkPrice}}</p>
+      <p>Type: {{drink.drinkType}}</p>
+      <button (click)="deleteDrink()">Delete</button>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- 
+<div *ngIf="isHiddenApp">
+    <ul *ngFor="let appetizer of appetizers">
+        <li>{{appetizer.appTitle}}</li>
+        <li>Description: {{appetizer.appDescription}}</li>
+        <li>Price {{appetizer.appPrice}}€</li>
+        <button (click)="deleteApp()">Delete</button>
+    </ul>
+    <button (click)="toggleHiddenApp()">Hide</button>
+</div>
+<div *ngIf="!isHiddenApp">
+    <button (click)="toggleHiddenApp()">View Appetizers</button>
+</div>
+
+
+<div *ngIf="isHiddenMain">
+    <ul *ngFor="let maincourse of maincourses">
+        <li>{{maincourse.mainTitle}}</li>
+        <li>Description: {{maincourse.mainDescription}}</li>
+        <li>Price {{maincourse.mainPrice}}€</li>
+        <button (click)="deleteMain()">Delete</button>
+    </ul>
+    <button (click)="toggleHiddenMain()">Hide</button>
+</div>
+<div *ngIf="!isHiddenMain">
+    <button (click)="toggleHiddenMain()">View Main Courses</button>
+</div>
+
+<div *ngIf="isHiddenDessert">
+        <ul *ngFor="let dessert of desserts">
+            <li>{{dessert.dessertTitle}}</li>
+            <li>Description: {{dessert.dessertDescription}}</li>
+            <li>Price {{dessert.dessertPrice}}€</li>
+            <button (click)="deleteDessert()">Delete</button>
+        </ul>
+        <button (click)="toggleHiddenDessert()">Hide</button>
+    </div>
+    <div *ngIf="!isHiddenDessert">
+        <button (click)="toggleHiddenDessert()">View Desserts</button>
+    </div>
+    
+    
+    <div *ngIf="isHiddenDrink">
+        <ul *ngFor="let drink of drinks">
+            <li>{{drink.drinkTitle}}</li>
+            <li>Description: {{drink.drinkDescription}}</li>
+            <li>Price {{drink.drinkPrice}}€</li>
+            <li>Type {{drink.drinkType}}€</li>
+            <button (click)="deleteDrink()">Delete</button>
+        </ul>
+        <button (click)="toggleHiddenDrink()">Hide</button>
+    </div>
+    <div *ngIf="!isHiddenDrink">
+        <button (click)="toggleHiddenDrink()">View drink Courses</button>
+    </div> -->
