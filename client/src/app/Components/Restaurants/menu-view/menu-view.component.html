@@ -9,7 +9,6 @@
       <h5>{{appetizer.appTitle}}</h5>
       <p>Description: {{appetizer.appDescription}}</p>
       <p>Price {{appetizer.appPrice}}€</p>
-      <button (click)="delete()">Delete</button>
   </div>
 
 
@@ -17,7 +16,6 @@
     <h5>{{maincourse.mainTitle}}</h5>
     <p>Description: {{maincourse.mainDescription}}</p>
     <p>Price {{maincourse.mainPrice}}€</p>
-    <button (click)="delete()">Delete</button>
 </div>
 </div>
 
@@ -26,7 +24,6 @@
       <h5>{{dessert.dessertTitle}}</h5>
       <p>Description: {{dessert.dessertDescription}}</p>
       <p>Price: {{dessert.dessertPrice}}</p>
-      <button (click)="delete()">Delete</button>
   </div>
 
   <div *ngFor="let drink of drinks">
@@ -34,7 +31,6 @@
       <p>Description: {{drink.drinkDescription}}</p>
       <p>Price: {{drink.drinkPrice}}</p>
       <p>Type: {{drink.drinkType}}</p>
-      <button (click)="delete()">Delete</button>
   </div>
 </div>
 </div>

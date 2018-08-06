@@ -55,7 +55,7 @@
       <h5>{{appetizer.appTitle}}</h5>
       <p>Description: {{appetizer.appDescription}}</p>
       <p>Price {{appetizer.appPrice}}€</p>
-      <button (click)="deleteApp()">Delete</button>
+      <a [routerLink]="['/menu/edit', appetizer._id]">Modify</a>
   </div>
 
 
@@ -63,7 +63,7 @@
     <h5>{{maincourse.mainTitle}}</h5>
     <p>Description: {{maincourse.mainDescription}}</p>
     <p>Price {{maincourse.mainPrice}}€</p>
-    <button (click)="deleteMain()">Delete</button>
+    <button [routerLink]="['/menu/edit', maincourse._id]">Modify</button>
 </div>
 </div>
 
@@ -72,7 +72,7 @@
       <h5>{{dessert.dessertTitle}}</h5>
       <p>Description: {{dessert.dessertDescription}}</p>
       <p>Price: {{dessert.dessertPrice}}</p>
-      <button (click)="deleteDessert()">Delete</button>
+      <button [routerLink]="['/menu/edit', dessert._id]">Modify</button>
   </div>
 
   <div *ngFor="let drink of drinks">
@@ -80,66 +80,9 @@
       <p>Description: {{drink.drinkDescription}}</p>
       <p>Price: {{drink.drinkPrice}}</p>
       <p>Type: {{drink.drinkType}}</p>
-      <button (click)="deleteDrink()">Delete</button>
+      <button [routerLink]="['/menu/edit', drink._id]">Modify</button>
   </div>
 </div>
 </div>
 </div>
 </div>
-
-
-<!-- 
-<div *ngIf="isHiddenApp">
-    <ul *ngFor="let appetizer of appetizers">
-        <li>{{appetizer.appTitle}}</li>
-        <li>Description: {{appetizer.appDescription}}</li>
-        <li>Price {{appetizer.appPrice}}€</li>
-        <button (click)="deleteApp()">Delete</button>
-    </ul>
-    <button (click)="toggleHiddenApp()">Hide</button>
-</div>
-<div *ngIf="!isHiddenApp">
-    <button (click)="toggleHiddenApp()">View Appetizers</button>
-</div>
-
-
-<div *ngIf="isHiddenMain">
-    <ul *ngFor="let maincourse of maincourses">
-        <li>{{maincourse.mainTitle}}</li>
-        <li>Description: {{maincourse.mainDescription}}</li>
-        <li>Price {{maincourse.mainPrice}}€</li>
-        <button (click)="deleteMain()">Delete</button>
-    </ul>
-    <button (click)="toggleHiddenMain()">Hide</button>
-</div>
-<div *ngIf="!isHiddenMain">
-    <button (click)="toggleHiddenMain()">View Main Courses</button>
-</div>
-
-<div *ngIf="isHiddenDessert">
-        <ul *ngFor="let dessert of desserts">
-            <li>{{dessert.dessertTitle}}</li>
-            <li>Description: {{dessert.dessertDescription}}</li>
-            <li>Price {{dessert.dessertPrice}}€</li>
-            <button (click)="deleteDessert()">Delete</button>
-        </ul>
-        <button (click)="toggleHiddenDessert()">Hide</button>
-    </div>
-    <div *ngIf="!isHiddenDessert">
-        <button (click)="toggleHiddenDessert()">View Desserts</button>
-    </div>
-    
-    
-    <div *ngIf="isHiddenDrink">
-        <ul *ngFor="let drink of drinks">
-            <li>{{drink.drinkTitle}}</li>
-            <li>Description: {{drink.drinkDescription}}</li>
-            <li>Price {{drink.drinkPrice}}€</li>
-            <li>Type {{drink.drinkType}}€</li>
-            <button (click)="deleteDrink()">Delete</button>
-        </ul>
-        <button (click)="toggleHiddenDrink()">Hide</button>
-    </div>
-    <div *ngIf="!isHiddenDrink">
-        <button (click)="toggleHiddenDrink()">View drink Courses</button>
-    </div> -->

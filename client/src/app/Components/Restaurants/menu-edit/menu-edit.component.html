@@ -1,0 +1,8 @@
+<h1>hola</h1>
+
+<div *ngFor="let app of appetizer">
+  {{app.appTitle}}
+  {{app.appDescription}}
+  {{app.appPrice}}
+  <button (click)="deleteApp()">Delete</button>
+</div>

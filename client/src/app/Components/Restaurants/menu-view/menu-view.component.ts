@@ -27,7 +27,7 @@ export class MenuViewComponent implements OnInit {
   }
   
   getMenu() {
-    this.menuService.getAppetizer(this.user._id).subscribe(appetizers => this.appetizers = appetizers);
+    this.menuService.getAppetizer().subscribe(appetizers => this.appetizers = appetizers);
     this.menuService.getMainCourse(this.user._id).subscribe(maincourses => this.maincourses = maincourses);
     this.menuService.getDessert(this.user._id).subscribe(desserts => this.desserts = desserts);
     this.menuService.getDrink(this.user._id).subscribe(drinks => this.drinks = drinks);

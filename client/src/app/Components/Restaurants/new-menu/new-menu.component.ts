@@ -32,7 +32,7 @@ export class NewMenuComponent implements OnInit {
   ngOnInit() {}
 
   getMenu() {
-    this.menuService.getAppetizer(this.user._id).subscribe(appetizers => this.appetizers = appetizers);
+    this.menuService.getAppetizer().subscribe(appetizers => this.appetizers = appetizers);
     this.menuService.getMainCourse(this.user._id).subscribe(maincourses => this.maincourses = maincourses);
     this.menuService.getDessert(this.user._id).subscribe(desserts => this.desserts = desserts);
     this.menuService.getDrink(this.user._id).subscribe(drinks => this.drinks = drinks);
@@ -90,22 +90,22 @@ export class NewMenuComponent implements OnInit {
 
 
   deleteApp() {
-    this.menuService.removeApp(this.appetizers.id)
+    this.menuService.deleteApp(this.appetizers.id)
     .subscribe(() => {this.getMenu(); return this.isHidden = !this.isHidden; });
   }
 
    deleteMain() {
-    this.menuService.removeMain(this.maincourses.id)
+    this.menuService.deleteMain(this.maincourses.id)
     .subscribe(() => {this.getMenu(); return this.isHidden = !this.isHidden; });
   }
 
   deleteDessert() {
-    this.menuService.removeDessert(this.desserts.id)
+    this.menuService.deleteDessert(this.desserts.id)
     .subscribe(() => {this.getMenu(); return this.isHidden = !this.isHidden; });
   }
 
    deleteDrink() {
-    this.menuService.removeDrink(this.drinks.id)
+    this.menuService.deleteDrink(this.drinks.id)
     .subscribe(() => {this.getMenu(); return this.isHidden = !this.isHidden; });
   }
 }
