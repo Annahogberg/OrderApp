@@ -13,7 +13,12 @@
       <div *ngIf="sessionService.user">
         <li class="nav-item"><a class="nav-link" [routerLink]="['/profile']">Home</a></li>
         <li class="nav-item"><a class="nav-link" [routerLink]="['/restaurants']">Restaurants</a></li>
-        <li class="nav-item"><a class="nav-link" [routerLink]="['/reservations/myreservations']">My reservations</a></li>
+        <span *ngIf="sessionService.user.isClient">
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/reservations/reservations']">My reservations</a></li>
+        </span>
+        <span *ngIf="sessionService.user.isRestaurant">
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/reservations/restaurant-reservations']">My reservations</a></li>
+      </span>
         <li class="nav-item"><a class="nav-link" href="#" (click)="logout()">Log Out</a></li>
       </div>
       <div *ngIf="!sessionService.user">

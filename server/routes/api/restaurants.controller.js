@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
 const Reservation = require("../../models/Reservation");
+const Restaurant = require("../../models/User")
 const Review = require('../../models/Reviews')
 const moment = require("moment");
 moment().format();
@@ -25,8 +26,14 @@ router.get("/restaurant/:id", (req, res, next) => {
 //CREATES RESERVATION
 router.post("/restaurant/reservation", (req, res, next) => {
   let restaurant = req.body.restaurant;
+
+  Restaurant.findById(restaurant)
+  .then ( restaurant => {
+
+  
+
+  console.log(restaurant.openTime1)
  
-    //console.log(user)
       const reservationInfo = {
         date: moment(req.body.date).format("YYYY-MM-DD, dddd"),
         time: req.body.time,
@@ -40,7 +47,7 @@ router.post("/restaurant/reservation", (req, res, next) => {
         req.body.date == "" ||
         req.body.time == "" ||
         req.body.pax == "" ||
-        req.body.pax == 0
+        req.body.pax <= 0
       ) {
         return res.status(500).json({ message: "Can't be empty" });
       }
@@ -56,15 +63,14 @@ router.post("/restaurant/reservation", (req, res, next) => {
 
       const time = req.body.time;
 
+      //console.log(restaurant.openTime1)
+
       const tooEarly = restaurant.openTime1;
       const afterLunch = restaurant.closeTime1;
       const beforeDinner = restaurant.openTime2;
       const tooLate = restaurant.closeTime2;
 
-      if (
-        (time > afterLunch && time < beforeDinner) ||
-        (time < tooEarly && time > tooLate)
-      ) {
+      if ((time > afterLunch && time < beforeDinner) ||(time < tooEarly && time > tooLate)) {
         return res.status(500).json({ message: "Restaurant is closed" });
       }
 
@@ -82,6 +88,10 @@ router.post("/restaurant/reservation", (req, res, next) => {
         reservation.restaurant.Restreservations += 1;
         reservation.user.Clientreservations += 1;
       
+
+
+
+
         User.findByIdAndUpdate( reservation.restaurant, { Restreservations: reservation.restaurant.Restreservations })
         .then (() => 
           console.log("updated RestReservations"))
@@ -96,7 +106,7 @@ router.post("/restaurant/reservation", (req, res, next) => {
       })
       .catch(err => {console.log(err); return res.status(500).json(err)});
     })
-   
+  })
 });
 
 module.exports = router;

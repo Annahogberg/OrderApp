@@ -3,6 +3,7 @@ import { SessionService } from "../../../../services/session.service";
 import { ReservationService } from "../../../../services/reservation.service";
 import { RestaurantService } from "../../../../services/restaurant.service";
 import { ActivatedRoute, Router } from "../../../../../node_modules/@angular/router";
+import { UserService } from "../../../../services/user.service";
 
 
 @Component({
@@ -13,11 +14,8 @@ import { ActivatedRoute, Router } from "../../../../../node_modules/@angular/rou
 export class UserProfileComponent implements OnInit {
   user;
   isHidden: boolean = false;
-  restaurantList;
-  // lat: number = 40.4222785;
-  // lng: number = -3.7072047;
 
-  toggleHidden(e){
+  toggleHidden(){
     this.isHidden = !this.isHidden
   }
 
@@ -25,13 +23,20 @@ export class UserProfileComponent implements OnInit {
     public sessionService: SessionService,
     public reservationService: ReservationService,
     public restaurantService: RestaurantService,
-    private aR: ActivatedRoute,
-    private router: Router
+    public userService: UserService,
   ) {
     this.sessionService.isLogged().subscribe(user => (this.user = user));
   }
 
   ngOnInit() {
-    this.restaurantService.getRestaurantList().subscribe(restaurants => this.restaurantList = restaurants)
+   
   }
+
+  edit() {
+    this.userService.edit(this.user).subscribe(user => {
+      this.user = user;
+      this.toggleHidden();
+    });
+  }
+
 }

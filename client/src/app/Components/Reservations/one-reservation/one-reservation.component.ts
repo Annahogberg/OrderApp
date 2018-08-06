@@ -12,11 +12,12 @@ export class OneReservationComponent implements OnInit {
 
   reservation;
   user;
-  // isHidden: boolean = false;
 
-  // toggleHidden(e){
-  //   this.isHidden = !this.isHidden
-  // }
+  isHidden: boolean = false;
+
+  toggleHidden(e){
+    this.isHidden = !this.isHidden
+  }
 
   constructor(public reservationService: ReservationService, public sessionService: SessionService, private aR: ActivatedRoute, private router: Router) {
     this.aR.params.subscribe(params => {
@@ -31,16 +32,31 @@ export class OneReservationComponent implements OnInit {
   ngOnInit() {
   }
 
-  editReservation(reservation) {
+  editReservation() {
     this.reservationService.editReservation(this.reservation).subscribe(reservation => {
       this.reservation = reservation;
-      this.router.navigate(["/reservations/myreservations"]);
+      this.router.navigate(["/profile"]);
     })
   };
 
-  deleteReservation() {
+  cancelReservation() {
     this.reservationService
-      .remove(this.reservation)
-      .subscribe(() => this.router.navigate(["/reservations/myreservations"]));
-  }
+      .cancelReservation(this.reservation)
+      .subscribe(() => this.router.navigate(["/profile"]));
+  };
+
+
+  confirmReservation(){
+    this.reservationService.confirmReservation(this.reservation).subscribe(reservation => {
+      this.reservation = reservation;
+      this.router.navigate(["reservations/restaurant-reservations"]);
+    })
+  };
+
+  declineReservation(){
+    this.reservationService.declineReservation(this.reservation).subscribe(reservation => {
+      this.reservation = reservation;
+      this.router.navigate(["reservations/restaurant-reservations"]);
+    })
+  };
 }

@@ -5,6 +5,10 @@
     </section>
 
 
-    <agm-map [latitude]="lat" [longitude]="lng">
-        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-      </agm-map>
+      <div class="mapa">
+          <agm-map [latitude]="lat" [longitude]="lng">
+             <div *ngFor="let restaurant of restaurantList">
+              <agm-marker [latitude]="restaurant.lat" [longitude]="restaurant.lng"></agm-marker>
+            </div>
+          </agm-map>
+        </div>

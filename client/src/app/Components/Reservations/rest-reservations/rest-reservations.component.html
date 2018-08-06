@@ -1,3 +1,13 @@
-<p>
-  rest-reservations works!
-</p>
+  <div *ngFor="let reservation of reservationList">
+
+    <h5>{{reservation.user.name}}</h5>
+    <p>Date: {{reservation.date}}</p>
+    <p>Time: {{reservation.time}}</p>
+    <p>Status: {{reservation.confirmation}}</p>
+    <p>Comments: {{reservation.comment}}</p>
+    <span *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'">
+    <button [routerLink]="['/reservations/reservation/', reservation._id]">MODIFY</button>
+    </span>
+
+  </div>
+  <!-- </div> -->

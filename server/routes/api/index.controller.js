@@ -6,6 +6,7 @@ const profileRoutes = require('./profile.controller')
 const restaurantsRoutes = require('./restaurants.controller')
 const reservationRoutes = require('./reservations.controller')
 const reviewRoutes = require('./review.controller')
+const carteRoutes = require('./dish.controller')
 
 
 
@@ -16,6 +17,7 @@ router.use('/reservations', reservationRoutes);
 router.use('/reviews', reviewRoutes);
 
 
+router.use('/carte', carteRoutes);
 
 
 module.exports = router;

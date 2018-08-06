@@ -5,7 +5,7 @@ const reservationSchema = new Schema({
   date: {type: String, required:true},
   time: {type: String, required: true},
   pax: {type: Number, required: true},
-  confirmation: {type: String, enum: ['Pending', 'Confirmed', 'Declined', 'Cancelled'], default: 'Pending'},
+  confirmation: {type: String, enum: ['Pending', 'Confirmed', 'Not accepted'], default: 'Pending'},
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   restaurant: {type: Schema.Types.ObjectId, ref: 'User'},
   comment: { type: String, default: "" }

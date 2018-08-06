@@ -28,8 +28,6 @@ user = req.params.id
   User.findById(user)
   
   .then(user => {
-    console.log(user)
-
     const username =req.body.username != "" ? req.body.username : user.username;
     const email = req.body.email != "" ? req.body.email : user.email;
     const name = req.body.name != "" ? req.body.name : user.name;
@@ -64,10 +62,7 @@ user = req.params.id
   
 
       User.findByIdAndUpdate(req.params.id, updates, { new: true })
-        .then(object => {
-        console.log(user);
-          return res.json(object);
-        })
+        .then(object =>  res.json(object))
         .catch(e => next(e));
     });
   })

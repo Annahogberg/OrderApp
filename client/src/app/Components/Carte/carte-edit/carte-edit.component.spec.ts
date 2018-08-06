@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MenuEditComponent } from './menu-edit.component';
+import { CarteEditComponent } from './carte-edit.component';
 
-describe('MenuEditComponent', () => {
-  let component: MenuEditComponent;
-  let fixture: ComponentFixture<MenuEditComponent>;
+describe('CarteEditComponent', () => {
+  let component: CarteEditComponent;
+  let fixture: ComponentFixture<CarteEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MenuEditComponent ]
+      declarations: [ CarteEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MenuEditComponent);
+    fixture = TestBed.createComponent(CarteEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

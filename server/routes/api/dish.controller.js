@@ -1,0 +1,81 @@
+const express = require("express");
+const router = express.Router();
+const Dish = require("../../models/Dish");
+
+module.exports = router;
+
+
+//GET DISHES
+router.get('/:id', (req,res) => {
+  console.log('kfdjskfjñs')
+  console.log(req.params.id)
+  Dish.find({restaurant: req.params.id})
+  .then(dish => res.json(dish))
+  .catch(err => console.log(err))
+})
+
+
+router.get('/details/:id', (req,res) => {
+  Dish.findById(req.params.id)
+  .then(dish => res.json(dish))
+  .catch(err => console.log(err))
+})
+
+
+//CREATE DISH
+router.post('/newDish', (req, res) => {
+  let restaurant = req.body.restaurant;
+
+  const dish = {
+   title: req.body.title,
+    restaurant: restaurant,
+    description: req.body.description,
+    price: req.body.price,
+    type: req.body.type
+  }
+
+  if (req.body.title == "" || req.body.price == "" || req.body.type == "") {
+    return res.status(500).json({ message: "Can't be empty" });
+  }
+  
+  const newDish = new Dish(dish);
+  newDish.save()
+  .then( dish => res.status(200).json(dish))
+  .catch(err => console.log(err))
+})
+
+//EDIT DISH
+router.post('/edit/:id', (req, res, next) =>{
+  
+  console.log(req.params.id)
+  console.log(req.body)
+
+
+    const updates = {
+      title: req.body.title,
+      description: req.body.description,
+      price: req.body.price,
+      type: req.body.type
+    }
+    
+    if (req.body.title == "" || req.body.type == "" || req.body.price == "") { 
+      return res.status(500).json({ message: "Can't be empty" });
+    }
+    
+    console.log(updates);
+
+      Dish.findByIdAndUpdate(req.params.id, updates, { new: true })
+      .then(dish => {
+        return res.json(dish);
+      })
+      .catch(e => next(e));
+    })
+
+
+
+//DELETE DISH
+router.delete("/delete/:id", (req, res, next) => {
+  Dish.findByIdAndRemove(req.params.id)
+  .then(() => res.json({ message: `SUCESSFUL DELETE ${req.params.id}` }))
+  .catch(e => next (e))
+})

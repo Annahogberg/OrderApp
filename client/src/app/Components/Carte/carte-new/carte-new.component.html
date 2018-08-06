@@ -1,0 +1,25 @@
+<form>
+  <h4>Add a Dish</h4>
+
+  <label>Title</label>
+  <input type="text" [(ngModel)]="title" max=5 min=0 name="title">
+  <textarea [(ngModel)]="description" placeholder="Describe your dish" name="description"></textarea>
+  <label>Price</label>
+  <input type="number" [(ngModel)]="price" placeholder="0.00€" name="Price" min=0>
+  <label>Type of Dish - Appetizer, Main Course, Dessert, Soft Drink, Alcohol, Other</label>
+  <input type="text" [(ngModel)]="type" name="type">
+  <button (click)="createDish(title, description, price, type)"> Create </button>
+</form>
+
+
+<button (click)="getDishes()">See all dishes</button>
+
+<div *ngIf="isHidden">
+<div *ngFor="let dish of dishes">
+  <h5>{{dish.title}}</h5>
+  <p>Description: {{dish.description}}</p>
+  <p>Price: {{dish.price}}€</p>
+  <p>Type: {{dish.type}}</p>
+  <a [routerLink]="['/carte/edit', dish._id]">Modify</a>
+</div>
+</div>

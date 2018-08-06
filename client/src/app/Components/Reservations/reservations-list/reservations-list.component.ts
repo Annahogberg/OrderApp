@@ -16,20 +16,18 @@ export class ReservationsListComponent implements OnInit {
 
   constructor(
     public reservationService: ReservationService,
-    public sessionService: SessionService,
-    public restaurantService: RestaurantService,
-    private aR: ActivatedRoute,
-    private router: Router
+    public sessionService: SessionService,  
   ) {
   
     this.sessionService.isLogged().subscribe(user => {
       this.reservationService
-        .getReservation(user._id)
+        .getUserReservation(user._id)
         .subscribe(reservations => {
           this.reservationList = reservations;
         });
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }

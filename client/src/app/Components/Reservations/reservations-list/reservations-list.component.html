@@ -5,7 +5,11 @@
     <h5>{{reservation.restaurant.name}}</h5>
     <p>Date: {{reservation.date}}</p>
     <p>Time: {{reservation.time}}</p>
+    <p>People: {{reservation.pax}}</p>
     <p>Status: {{reservation.confirmation}}</p>
-    <button [routerLink]="['/reservations/reservation/', reservation._id]">Check reservation</button>
+    <p>Comments: {{reservation.comment}}</p>
+    <span *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'  ">
+    <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">MODIFY</button>
+    </span>
   </div>
   <!-- </div> -->

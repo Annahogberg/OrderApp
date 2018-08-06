@@ -30,7 +30,6 @@ import { LandingComponent } from './Components/AuthLanding/landing/landing.compo
 
       //USER
 import { UserProfileComponent } from './Components/User/user-profile/user-profile.component';
-import { UserEditComponent } from './Components/User/user-edit/user-edit.component';
 
       //RESTAURANT
 import { RestaurantListComponent } from './Components/Restaurants/restaurant-list/restaurant-list.component';
@@ -39,8 +38,15 @@ import { RestaurantComponent } from './Components/Restaurants/restaurant/restaur
       //RESERVATIONS
 import { ReservationsListComponent } from './Components/Reservations/reservations-list/reservations-list.component';
 import { OneReservationComponent } from './Components/Reservations/one-reservation/one-reservation.component';
-import { ReservationEditComponent } from './Components/Reservations/reservation-edit/reservation-edit.component';
+import { RestReservationsComponent } from './Components/Reservations/rest-reservations/rest-reservations.component';
+
+      //REVIEWS
 import { ReviewService } from '../services/review.service';
+import { CarteViewComponent } from './Components/Carte/carte-view/carte-view.component';
+import { CarteEditComponent } from './Components/Carte/carte-edit/carte-edit.component';
+import { CarteNewComponent } from './Components/Carte/carte-new/carte-new.component';
+import { CarteService } from '../services/carte.service';
+
 
 
 @NgModule({
@@ -50,14 +56,16 @@ import { ReviewService } from '../services/review.service';
     SignupComponent,
     LandingComponent,
     UserProfileComponent,
-    UserEditComponent,
     RestaurantListComponent,
     RestaurantComponent,
     ReservationsListComponent,
     OneReservationComponent,
-    ReservationEditComponent,
     FilterPipe,
-    FileSelectDirective
+    FileSelectDirective,
+    RestReservationsComponent,
+    CarteViewComponent,
+    CarteEditComponent,
+    CarteNewComponent,
 
   ],
   imports: [
@@ -69,8 +77,6 @@ import { ReviewService } from '../services/review.service';
       apiKey: environment.GOOGLEKEY,
       libraries: ["places"]
     }),
-
-   NguiMapModule.forRoot({apiUrl: `https://maps.google.com/maps/api/js?key=${environment.GOOGLEKEY}`})
   ],
   providers: [
     SessionService, 
@@ -79,7 +85,8 @@ import { ReviewService } from '../services/review.service';
     NegateUserLoggedInGuard, 
     RestaurantService,
     ReservationService,
-    ReviewService
+    ReviewService,
+    CarteService,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,21 @@
+<h5> Edit Dish </h5>
+
+<form *ngIf="dish">
+  <label>Title</label>
+  <input type="text" [(ngModel)]="dish.title" name="title" autocomplete='title' required />
+
+  <textarea [(ngModel)]="dish.description" autocomplete='description'  name="description"></textarea>
+
+  <label>Price</label>
+  <input type="number" [(ngModel)]="dish.price" name="price" autocomplete='price' min=0/>
+
+
+  <label>Type</label>
+  <input type="text" [(ngModel)]="dish.type" name="type" autocomplete='type'/>
+
+
+  <button class="btn" (click)="editDish()"> Edit </button>
+  <button class="btn" (click)="deleteDish()"> Delete </button>
+
+  <a [routerLink]="['/carte/new']">Back</a>
+</form>

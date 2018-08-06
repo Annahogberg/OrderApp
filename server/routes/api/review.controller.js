@@ -6,17 +6,17 @@ const multer = require("multer");
 const uploadCloud = require('./../../config/cloudinary');
 const _ = require("lodash");
 
+//get comments
 router.get('/byrestaurant/:id', (req,res) => {
-  Review.find({restaurant: req.params.id}).then(reviews => 
-     res.json(reviews)
-  )
+  Review.find({restaurant: req.params.id})
+  .then(reviews => res.json(reviews))
+  .catch(err => console.log(err))
 })
 
+
+//create review
 router.post('/newReview', uploadCloud.single('file'), (req, res) => {
   let restaurant = req.body.restaurant;
-
-  
-  console.log(restaurant)
 
   const reviewInfo = {
    name: req.body.name,
