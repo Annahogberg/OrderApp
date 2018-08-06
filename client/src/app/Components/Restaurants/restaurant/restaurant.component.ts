@@ -39,6 +39,8 @@ export class RestaurantComponent implements OnInit {
   reviews;
   review;
 
+  isHiddenReview: boolean = false;
+
   isPicture: boolean = false;
 
   toggleHidden(e) {
@@ -63,6 +65,8 @@ export class RestaurantComponent implements OnInit {
     this.sessionService.isLogged().subscribe(user => (this.user = user));
   }
 
+
+
   ngOnInit() {}
 
   reserve(date, time, pax, comment) {
@@ -80,10 +84,11 @@ export class RestaurantComponent implements OnInit {
     });
   }
 
-  refreshReviews() {
+  getReviews() {
     this.reviewService
       .getReviews(this.restaurant._id)
       .subscribe(reviews => (this.reviews = reviews));
+      this.isHiddenReview = !this.isHiddenReview;
   }
 
   saveReviewWithImage() {
@@ -95,7 +100,7 @@ export class RestaurantComponent implements OnInit {
     };
     this.uploader.uploadAll();
     this.uploader.onSuccessItem = (item, response, status, headers) =>
-      this.refreshReviews();
+      this.getReviews();
     this.rating = "";
     this.content = "";
     this.name = "";
@@ -111,7 +116,7 @@ export class RestaurantComponent implements OnInit {
 
     this.reviewService
       .saveReview(reviewInfo)
-      .subscribe(() => this.refreshReviews());
+      .subscribe(() => this.getReviews());
 
     this.content = "";
     this.rating = "";
