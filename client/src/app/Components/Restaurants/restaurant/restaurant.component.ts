@@ -11,6 +11,7 @@ import {
 import { ReviewService } from "../../../../services/review.service";
 import { FileUploader } from "ng2-file-upload";
 import { environment } from "../../../../environments/environment";
+import { CarteService } from "../../../../services/carte.service";
 
 @Component({
   selector: "app-restaurant",
@@ -39,9 +40,13 @@ export class RestaurantComponent implements OnInit {
   reviews;
   review;
 
+  dishes;
+
   isHiddenReview: boolean = false;
 
   isPicture: boolean = false;
+
+  isHiddenMenu: boolean = true;
 
   toggleHidden(e) {
     this.isPicture = !this.isPicture;
@@ -52,6 +57,7 @@ export class RestaurantComponent implements OnInit {
 
   constructor(
     public restaurantService: RestaurantService,
+    public carteService: CarteService,
     public sessionService: SessionService,
     public reviewService: ReviewService,
     private aR: ActivatedRoute,
@@ -121,5 +127,11 @@ export class RestaurantComponent implements OnInit {
     this.content = "";
     this.rating = "";
     this.name = "";
+  }
+
+  getDishes() {
+    this.carteService.getDishesPublic(this.restaurant._id)
+      .subscribe(dishes => (this.dishes = dishes));
+      this.isHiddenMenu = !this.isHiddenMenu;
   }
 }

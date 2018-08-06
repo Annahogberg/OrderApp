@@ -8,6 +8,15 @@ import { environment } from '../environments/environment';
 export class CarteService{
   constructor(private http: Http) {}
 
+  getDishesPublic(id) {
+    return this.http
+      .get(`${environment.BASEURL}/api/carte/byrestaurantmenu/${id}`)
+      .pipe(map(res => res.json()));
+  }
+
+
+
+
   getDishes(id) {
     return this.http.get(`${environment.BASEURL}/api/carte/${id}`)
       .pipe(map((res) => res.json()));

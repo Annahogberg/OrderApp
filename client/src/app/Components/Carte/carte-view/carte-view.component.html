@@ -1,3 +1,12 @@
-<p>
-  carte-view works!
-</p>
+<button (click)="getDishes()">View menu</button>
+
+
+<div *ngIf="isHidden">
+<div *ngIf="dishes">
+    <h3>YOUR MENU</h3>
+  <div *ngFor="let dish of dishes">
+    {{dish.title}}
+  </div>
+</div>
+
+</div>

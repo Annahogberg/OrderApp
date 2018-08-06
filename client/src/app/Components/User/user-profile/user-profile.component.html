@@ -64,10 +64,11 @@
         
         </form>
       </div>
-
-      <div *ngIf="user.isRestaurant">
-      <h3>YOUR MENU</h3>
       
+      <div *ngIf="user.isRestaurant">
+      
+      
+      <app-carte-view></app-carte-view>
         
 </div>
   </div>

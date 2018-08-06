@@ -5,25 +5,33 @@ const Dish = require("../../models/Dish");
 module.exports = router;
 
 
+
 //GET DISHES
-router.get('/:id', (req,res) => {
-  console.log('kfdjskfjñs')
-  console.log(req.params.id)
+
+router.get('/byrestaurantmenu/:id', (req,res, next) => {
   Dish.find({restaurant: req.params.id})
+  .then(dish => {console.log(dish); return res.json(dish)})
+  .catch(err => next(err))
+})
+
+//GET DISHES - from restaurant
+
+router.get('/:id', (req,res, next) => {
+  Dish.findbyId({restaurant: req.params.id})
   .then(dish => res.json(dish))
-  .catch(err => console.log(err))
+  .catch(err => next(err))
 })
 
 
-router.get('/details/:id', (req,res) => {
+router.get('/details/:id', (req,res,next) => {
   Dish.findById(req.params.id)
   .then(dish => res.json(dish))
-  .catch(err => console.log(err))
+  .catch(err => next(err))
 })
 
 
 //CREATE DISH
-router.post('/newDish', (req, res) => {
+router.post('/newDish', (req, res,next) => {
   let restaurant = req.body.restaurant;
 
   const dish = {
@@ -41,14 +49,12 @@ router.post('/newDish', (req, res) => {
   const newDish = new Dish(dish);
   newDish.save()
   .then( dish => res.status(200).json(dish))
-  .catch(err => console.log(err))
+  .catch(err => next(err))
 })
 
 //EDIT DISH
 router.post('/edit/:id', (req, res, next) =>{
-  
-  console.log(req.params.id)
-  console.log(req.body)
+
 
 
     const updates = {
@@ -62,8 +68,6 @@ router.post('/edit/:id', (req, res, next) =>{
       return res.status(500).json({ message: "Can't be empty" });
     }
     
-    console.log(updates);
-
       Dish.findByIdAndUpdate(req.params.id, updates, { new: true })
       .then(dish => {
         return res.json(dish);

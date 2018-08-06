@@ -27,7 +27,6 @@ router.get("/restReservations/:id", (req, res, next) => {
     .populate("user")
     .populate("restaurant")
     .then(restaurantReservations => {
-      console.log(restaurantReservations);
       return res.json(restaurantReservations);
     })
     .catch(e => next(e));

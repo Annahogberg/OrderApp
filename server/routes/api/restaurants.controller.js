@@ -30,9 +30,6 @@ router.post("/restaurant/reservation", (req, res, next) => {
   Restaurant.findById(restaurant)
   .then ( restaurant => {
 
-  
-
-  console.log(restaurant.openTime1)
  
       const reservationInfo = {
         date: moment(req.body.date).format("YYYY-MM-DD, dddd"),
@@ -62,8 +59,6 @@ router.post("/restaurant/reservation", (req, res, next) => {
       }
 
       const time = req.body.time;
-
-      //console.log(restaurant.openTime1)
 
       const tooEarly = restaurant.openTime1;
       const afterLunch = restaurant.closeTime1;
@@ -104,7 +99,7 @@ router.post("/restaurant/reservation", (req, res, next) => {
 
         return res.status(200).json(reservation)
       })
-      .catch(err => {console.log(err); return res.status(500).json(err)});
+      .catch(err => { return res.status(500).json(err)});
     })
   })
 });

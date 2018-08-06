@@ -15,8 +15,6 @@ router.use('/profile', profileRoutes);
 router.use('/restaurants', restaurantsRoutes);
 router.use('/reservations', reservationRoutes);
 router.use('/reviews', reviewRoutes);
-
-
 router.use('/carte', carteRoutes);
 
 

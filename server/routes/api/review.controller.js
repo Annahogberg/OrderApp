@@ -7,15 +7,15 @@ const uploadCloud = require('./../../config/cloudinary');
 const _ = require("lodash");
 
 //get comments
-router.get('/byrestaurant/:id', (req,res) => {
+router.get('/byrestaurant/:id', (req,res,next) => {
   Review.find({restaurant: req.params.id})
-  .then(reviews => res.json(reviews))
-  .catch(err => console.log(err))
+  .then(reviews => {console.log(reviews); return res.json(reviews)})
+  .catch(err => next(err))
 })
 
 
 //create review
-router.post('/newReview', uploadCloud.single('file'), (req, res) => {
+router.post('/newReview', uploadCloud.single('file'), (req, res, next) => {
   let restaurant = req.body.restaurant;
 
   const reviewInfo = {
@@ -33,20 +33,8 @@ router.post('/newReview', uploadCloud.single('file'), (req, res) => {
 
   Review.create(newReview) 
   .then( data => res.json(data))
-  .catch( err => console.log(err));
+  .catch( err => next(err));
 })
-
-
-// router.get('/byrestaurant/:id', (req,res,next) => {
-//   Review.findById(req.params.id)
-//   .populate("restaurant")
-//   .then(reviews =>{ 
-//     console.log(restaurant)
-//      return res.json(reviews)}
-//   )
-//   .catch(e => next(e));
-// })
-
 
 
 module.exports = router;
