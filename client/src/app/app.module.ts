@@ -17,7 +17,7 @@ import { ReservationService } from '../services/reservation.service';
 import { FilterPipe } from './Pipes/filter.pipe';
 
 
-import { FileSelectDirective} from 'ng2-file-upload'
+import { FileUploadModule} from 'ng2-file-upload'
 import {environment} from '../environments/environment'
 
 import { AgmCoreModule } from '@agm/core';
@@ -61,7 +61,6 @@ import { OrderService } from '../services/order.service';
     ReservationsListComponent,
     OneReservationComponent,
     FilterPipe,
-    FileSelectDirective,
     RestReservationsComponent,
     CarteViewComponent,
     CarteEditComponent,
@@ -71,6 +70,7 @@ import { OrderService } from '../services/order.service';
   imports: [
     BrowserModule,
     HttpModule,
+    FileUploadModule,
     RouterModule.forRoot(routes),
     FormsModule,
     AgmCoreModule.forRoot({

@@ -13,6 +13,10 @@ export class RestaurantListComponent implements OnInit {
   restaurantList;
   restaurant;
 
+  searchName;
+  searchCity;
+  searchType;
+
   constructor(public restaurantService: RestaurantService, private aR: ActivatedRoute) {
     this.restaurantService.getRestaurantList().subscribe(restaurants => this.restaurantList = restaurants)
   }
