@@ -9,7 +9,6 @@ body {
 }
 
 a {
-  color: #00b7ff;
   text-decoration: none;
 }
 
@@ -47,7 +46,7 @@ nav .nabvar-collapse {
   justify-content: flex-end;
 }
 nav .navbar-toggler-icon {
-  color: #fff;
+  color: black;
 }
 nav .nav-link {
   padding-left: 1em;

@@ -14,6 +14,7 @@ import { UserService } from "../../../../services/user.service";
 export class UserProfileComponent implements OnInit {
   user;
   isHidden: boolean = false;
+  reservationList;
 
   toggleHidden(){
     this.isHidden = !this.isHidden
@@ -39,4 +40,13 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  getTodaysRes(){
+    this.reservationService
+    .getUserReservation(this.user._id)
+    .subscribe(reservations => {
+      this.reservationList = reservations;
+   });
+  }
+
+  
 }

@@ -44,4 +44,6 @@ export class ReservationService {
     return this.http.post(`${environment.BASEURL}/api/reservations/reservation/decline/${reservation._id}`,reservation)
       .pipe(map(res => res.json()));
   }
+
+  
 }

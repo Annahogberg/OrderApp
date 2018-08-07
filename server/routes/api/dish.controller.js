@@ -4,8 +4,6 @@ const Dish = require("../../models/Dish");
 
 module.exports = router;
 
-
-
 //GET DISHES
 
 router.get('/byrestaurantmenu/:id', (req,res, next) => {

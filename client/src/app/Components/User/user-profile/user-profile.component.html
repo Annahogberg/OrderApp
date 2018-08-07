@@ -6,16 +6,14 @@
   <p>Phone Number: {{user.phone}}</p>
   <p>Total reservations: {{user.reservations}}</p>
 
-  <div *ngIf="user.isClient">
-    <p>Age: {{user.age}}</p>
-  </div>
+
+    <p *ngIf="user.isClient">Age: {{user.age}}</p>
+
 
   <div *ngIf="user.isRestaurant">
     <p>Address: {{user.address}}</p>
     <p>Type: {{user.type}}</p>
-    <!-- <a [routerLink]="['/menu/newMenu']">Create menu</a> -->
     <a [routerLink]="['/carte/new']">Create Menu</a>
-    <!-- <a [routerLink]="['/menu']">View menu</a> -->
   </div>
       <button class="btn" type="submit" (click)="toggleHidden()">Edit profile</button>
     </div>
@@ -51,7 +49,6 @@
             <input type="time" name="dinneropening" [(ngModel)]="user.openTime2">
             <input type="time" name="dinnerclosing" [(ngModel)]="user.closeTime2">
         
-            <a [routerLink]="['/menu', menu._id]">Edit menu</a>
           </div>
         
           <div *ngIf="user.isClient">
@@ -64,11 +61,7 @@
         
         </form>
       </div>
+
       
-      <div *ngIf="user.isRestaurant">
-      
-      
-      <app-carte-view></app-carte-view>
-        
-</div>
+    
   </div>

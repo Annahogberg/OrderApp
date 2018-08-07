@@ -35,8 +35,8 @@ export class SessionService {
     );
   }
 
-  isNotLogged(){
-    return !this.isLogged();
+  isLoggedGuard(){
+    return this.http.get(`${BASEURL}/api/auth/currentuser`,this.options)
   }
 
 

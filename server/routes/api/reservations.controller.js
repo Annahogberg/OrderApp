@@ -26,9 +26,7 @@ router.get("/restReservations/:id", (req, res, next) => {
   Reservation.find({ restaurant: req.params.id })
     .populate("user")
     .populate("restaurant")
-    .then(restaurantReservations => {
-      return res.json(restaurantReservations);
-    })
+    .then(restaurantReservations => res.json(restaurantReservations))
     .catch(e => next(e));
 });
 
@@ -51,19 +49,9 @@ router.put("/reservation/edit/:id", (req, res, next) => {
       const pax = req.body.pax != "" ? req.body.pax : reservation.pax;
       const comment = req.body.comment ? req.body.comment : reservation.comment;
 
-      const updates = {
-        date,
-        time,
-        pax,
-        comment
-      };
+      const updates = { date, time, pax, comment };
 
-      if (
-        req.body.date == "" ||
-        req.body.time == "" ||
-        req.body.pax == "" ||
-        req.body.pax <= 0
-      ) {
+      if ( req.body.date == "" || req.body.time == "" || req.body.pax == "" || req.body.pax <= 0) {
         return res.status(500).json({ message: "Can't be empty" });
       }
 
@@ -71,9 +59,7 @@ router.put("/reservation/edit/:id", (req, res, next) => {
       const noDate = new Date(req.body.date);
 
       if (now > noDate || noDate.getFullYear() >= 2019) {
-        return res
-          .status(500)
-          .json({ message: "Not possible for those dates" });
+        return res.status(500).json({ message: "Not possible for those dates" });
       }
 
       const tooEarly = reservation.restaurant.openTime1;
@@ -88,9 +74,7 @@ router.put("/reservation/edit/:id", (req, res, next) => {
       }
 
       Reservation.findByIdAndUpdate(req.params.id, updates, { new: true })
-        .then(object => {
-          res.json(object);
-        })
+        .then(object => res.json(object))
         .catch(e => next(e));
     });
 });
@@ -104,21 +88,15 @@ router.post("/reservation/cancel/:id", (req, res, next) => {
       reservation.restaurant.Restreservations -= 1;
       reservation.user.Clientreservations -= 1;
 
-      User.findByIdAndUpdate(reservation.restaurant, {
-        Restreservations: reservation.restaurant.Restreservations
-      })
+      User.findByIdAndUpdate(reservation.restaurant, {Restreservations: reservation.restaurant.Restreservations})
         .then(() => console.log("deleted Restreservation"))
         .catch(err => res.status(500).json(err));
 
-      User.findByIdAndUpdate(reservation.user, {
-        Clientreservations: reservation.user.Clientreservations
-      })
+      User.findByIdAndUpdate(reservation.user, {Clientreservations: reservation.user.Clientreservations})
         .then(() => console.log("deleted Clientreservation"))
         .catch(err => res.status(500).json(err));
 
-      Reservation.findByIdAndUpdate(req.params.id, {
-        confirmation: "Cancelled"
-      })
+      Reservation.findByIdAndUpdate(req.params.id, {confirmation: "Cancelled"})
         .then(() => console.log("deleted Main Reservation"))
         .catch(err => res.status(500).json(err));
 
@@ -131,9 +109,7 @@ router.post("/reservation/cancel/:id", (req, res, next) => {
 router.post("/reservation/confirm/:id", (req, res, next) => {
   let reservationId = req.params.id;
 
-  const updates = {
-    confirmation: "Confirmed"
-  };
+  const updates = {confirmation: "Confirmed"};
 
   Reservation.findByIdAndUpdate(reservationId, updates, { new: true })
     .then(reservation => res.json(reservation))
@@ -149,15 +125,11 @@ router.post("/reservation/decline/:id", (req, res, next) => {
       reservation.restaurant.Restreservations -= 1;
       reservation.user.Clientreservations -= 1;
 
-      User.findByIdAndUpdate(reservation.restaurant, {
-        Restreservations: reservation.restaurant.Restreservations
-      })
+      User.findByIdAndUpdate(reservation.restaurant, {Restreservations: reservation.restaurant.Restreservations})
         .then(() => console.log("deleted Restreservation"))
         .catch(err => res.status(500).json(err));
 
-      User.findByIdAndUpdate(reservation.user, {
-        Clientreservations: reservation.user.Clientreservations
-      })
+      User.findByIdAndUpdate(reservation.user, {Clientreservations: reservation.user.Clientreservations})
         .then(() => console.log("deleted Clientreservation"))
         .catch(err => res.status(500).json(err));
 
@@ -170,12 +142,10 @@ router.post("/reservation/decline/:id", (req, res, next) => {
     .catch(err => res.status(500).json(err));
 });
 
-router.get("/userOrder/:id", (req, res, next) => {
-  Orde.find({ user: req.params.id })
-    .populate("user")
-    .populate("restaurant")
-    .then(userReservations => res.json(userReservations))
-    .catch(e => next(e));
-});
+// router.delete("/reservation/delete/:id", (req, res, next) => {
+//   Reservation.findByIdAndRemove(req.params.id)
+//   .then(() => res.json({ message: `SUCESSFUL DELETE ${req.params.id}` }))
+//    .catch(e => next(e));
+//  });
 
 module.exports = router;
