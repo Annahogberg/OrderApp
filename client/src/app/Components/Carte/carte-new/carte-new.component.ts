@@ -30,7 +30,8 @@ export class CarteNewComponent implements OnInit {
   }
   
   getDishes(){
-    this.carteService.getDishes(this.user._id).subscribe(dishes => this.dishes = dishes);
+    //console.log(this.user._id)
+    this.carteService.getDishesPublic(this.user._id).subscribe(dishes => {console.log(dishes); return this.dishes = dishes});
     this.isHidden = !this.isHidden
   }
   

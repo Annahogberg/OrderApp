@@ -14,12 +14,20 @@ router.get('/byrestaurantmenu/:id', (req,res, next) => {
 
 //GET DISHES - from restaurant
 
-router.get('/:id', (req,res, next) => {
-  Dish.findbyId({restaurant: req.params.id})
-  .then(dish => res.json(dish))
-  .catch(err => next(err))
-})
+// router.get('/:id', (req,res, next) => {
+//   Dish.findById({restaurant: req.params.id})
+//   .then(dish => {console.log ("hola"); return res.json(dish)})
+//   .catch(err => next(err))
+// })
 
+
+// router.get('/:id', (req,res) => {
+//   console.log('kfdjskfjñs')
+//   console.log(req.params.id)
+//   Dish.find({restaurant: req.params.id})
+//   .then(dish => res.json(dish))
+//   .catch(err => console.log(err))
+// })
 
 router.get('/details/:id', (req,res,next) => {
   Dish.findById(req.params.id)
@@ -52,8 +60,6 @@ router.post('/newDish', (req, res,next) => {
 
 //EDIT DISH
 router.post('/edit/:id', (req, res, next) =>{
-
-
 
     const updates = {
       title: req.body.title,
