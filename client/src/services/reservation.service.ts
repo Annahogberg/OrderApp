@@ -7,12 +7,6 @@ import { map } from "rxjs/operators";
 export class ReservationService {
   constructor(private http: Http) {}
 
-  getAllReservations() {
-    return this.http
-      .get(`${environment.BASEURL}/api/reservations`)
-      .pipe(map(res => res.json()));
-  }
-
   getUserReservation(id) {
     return this.http
       .get(`${environment.BASEURL}/api/reservations/userReservations/${id}`)

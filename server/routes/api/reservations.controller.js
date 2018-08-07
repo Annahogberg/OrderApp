@@ -37,7 +37,7 @@ router.get("/reservationsdetails/:id", (req, res, next) => {
   Reservation.findById(req.params.id)
     .populate("user")
     .populate("restaurant")
-    .then(reservations => res.json(reservations))
+    .then(reservations => {console.log(reservations); return res.json(reservations)})
     .catch(e => next(e));
 });
 
@@ -170,16 +170,12 @@ router.post("/reservation/decline/:id", (req, res, next) => {
     .catch(err => res.status(500).json(err));
 });
 
-
-//   let reservationId = req.params.id;
-
-//   const updates = {
-//     confirmation: "Not accepted"
-//   }
-
-//   Reservation.findByIdAndUpdate(reservationId, updates, {new: true})
-//     .then(reservation => res.json(reservation))
-//     .catch(e => next(e));
-// });
+router.get("/userOrder/:id", (req, res, next) => {
+  Orde.find({ user: req.params.id })
+    .populate("user")
+    .populate("restaurant")
+    .then(userReservations => res.json(userReservations))
+    .catch(e => next(e));
+});
 
 module.exports = router;

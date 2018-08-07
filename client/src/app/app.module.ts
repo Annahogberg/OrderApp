@@ -21,7 +21,6 @@ import { FileSelectDirective} from 'ng2-file-upload'
 import {environment} from '../environments/environment'
 
 import { AgmCoreModule } from '@agm/core';
-import { NguiMapModule} from '@ngui/map';
 
       //AUTH&LANDING
 import { LoginComponent } from './Components/AuthLanding/login/login.component';
@@ -46,6 +45,7 @@ import { CarteViewComponent } from './Components/Carte/carte-view/carte-view.com
 import { CarteEditComponent } from './Components/Carte/carte-edit/carte-edit.component';
 import { CarteNewComponent } from './Components/Carte/carte-new/carte-new.component';
 import { CarteService } from '../services/carte.service';
+import { OrderService } from '../services/order.service';
 
 
 
@@ -87,6 +87,7 @@ import { CarteService } from '../services/carte.service';
     ReservationService,
     ReviewService,
     CarteService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

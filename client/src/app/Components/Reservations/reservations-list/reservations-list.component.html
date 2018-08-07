@@ -9,7 +9,7 @@
     <p>Status: {{reservation.confirmation}}</p>
     <p>Comments: {{reservation.comment}}</p>
     <span *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'  ">
-    <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">MODIFY</button>
+    <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">VIEW MORE DETAILS & ORDER</button>
     </span>
   </div>
   <!-- </div> -->

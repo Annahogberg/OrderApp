@@ -82,10 +82,6 @@ router.post("/restaurant/reservation", (req, res, next) => {
       .then( reservation => {
         reservation.restaurant.Restreservations += 1;
         reservation.user.Clientreservations += 1;
-      
-
-
-
 
         User.findByIdAndUpdate( reservation.restaurant, { Restreservations: reservation.restaurant.Restreservations })
         .then (() => 

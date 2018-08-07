@@ -6,6 +6,7 @@
   <p>Address: {{reservation.restaurant.address}}</p>
   <p>Comments: {{reservation.comment}}</p>
       <button class="btn" type="submit" (click)="toggleHidden()">Change</button>
+    
       <span *ngIf="sessionService.user.isClient">
   <button class="btn" (click)="cancelReservation()">Cancel</button>
   </span>
@@ -54,6 +55,27 @@
     </div>
   </section>
 </div>
+
+
+  <h3>Order</h3>
+  <label>Appetizers</label>
+  <div *ngIf="dishes">
+  <div *ngIf="dishes.type == Appetizer">
+<div *ngFor="let dish of dishes">
+<form>
+
+  {{dish.title}}
+  {{dish.description}}
+  {{dish.price}}€
+  {{dish.type}}
+
+  <input type="number" #quantity>
+  <button (click)="orderService.addOrder(reservation._id,dish._id, quantity.value).subscribe()">Add</button>
+</form>
+</div>
+</div>
+</div>
+<!-- <button type="submit" (click)="order(textInputDish, textInputQuantity )">Order</button> -->
 
 </div>
 

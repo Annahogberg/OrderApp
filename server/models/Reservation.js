@@ -8,7 +8,11 @@ const reservationSchema = new Schema({
   confirmation: {type: String, enum: ['Pending', 'Confirmed', 'Not accepted'], default: 'Pending'},
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   restaurant: {type: Schema.Types.ObjectId, ref: 'User'},
-  comment: { type: String, default: "" }
+  comment: { type: String, default: "" },
+  order: [{
+    dishId: {type: Schema.Types.ObjectId, ref: 'Dish'},
+    quantity: {type: Number, _id: false, required: true}
+  }]
 },
 {timestamps: true});
 

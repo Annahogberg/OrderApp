@@ -12,7 +12,7 @@ interface reservationObject{
 
 @Injectable()
 export class RestaurantService {
-  restaurant;
+
   reservation: reservationObject;
   options: any = { withCredentials: true };
 
