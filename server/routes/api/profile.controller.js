@@ -36,8 +36,8 @@ router.put("/edit/:id", (req, res, next) => {
         phone: req.body.phone != "" ? req.body.phone : user.phone,
         openTime1: req.body.openTime1 != "" ? req.body.openTime1 : user.openTime1,
         closeTime1: req.body.closeTime1 != "" ? req.body.closeTime1 : user.closeTime1,
-        openTime2: req.body.openTime2 != "" ? req.body.openTime2 : user.openTime2,
-        closeTime2: req.body.closeTime2 != "" ? req.body.closeTime2 : user.closeTime2,
+        openTime2: req.body.openTime2,
+        closeTime2: req.body.closeTime2,
       };
   
 
