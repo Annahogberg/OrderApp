@@ -14,6 +14,9 @@ import { NegateUserLoggedInGuard } from './Guards/negateuserloggedin.guard';
 import { RestaurantService } from '../services/restaurant.service';
 import { ReservationService } from '../services/reservation.service';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatMenuModule, MatIconModule } from '@angular/material';
+
 import { FilterPipe } from './Pipes/filter.pipe';
 
 
@@ -77,6 +80,9 @@ import { OrderService } from '../services/order.service';
       apiKey: environment.GOOGLEKEY,
       libraries: ["places"]
     }),
+    BrowserAnimationsModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [
     SessionService, 

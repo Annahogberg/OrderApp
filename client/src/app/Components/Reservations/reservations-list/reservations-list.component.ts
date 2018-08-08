@@ -13,21 +13,29 @@ import { RestaurantService } from "../../../../services/restaurant.service";
 })
 export class ReservationsListComponent implements OnInit {
   reservationList;
+  cancelledReservation;
+
+  searchDate;
+  searchStatus;
 
   constructor(
     public reservationService: ReservationService,
     public sessionService: SessionService,  
+    private router: Router
   ) {
   
     this.sessionService.isLogged().subscribe(user => {
       this.reservationService
         .getUserReservation(user._id)
         .subscribe(reservations => {
-          this.reservationList = reservations;
+
+          return this.reservationList = reservations;
         });
     });
   }
 
   ngOnInit() {
   }
+
+  
 }

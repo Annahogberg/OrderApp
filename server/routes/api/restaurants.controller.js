@@ -6,7 +6,7 @@ const Restaurant = require("../../models/User")
 const Review = require('../../models/Reviews')
 const moment = require("moment");
 moment().format();
-moment.locale("es");
+moment.locale("en");
 
 //LIST OF ALL RESTAURANTS
 router.get("/", (req, res, next) => {

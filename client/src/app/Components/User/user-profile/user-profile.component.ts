@@ -20,16 +20,34 @@ export class UserProfileComponent implements OnInit {
     this.isHidden = !this.isHidden
   }
 
+  searchStatus = "Confirmed";
+
   constructor(
     public sessionService: SessionService,
     public reservationService: ReservationService,
     public restaurantService: RestaurantService,
     public userService: UserService,
   ) {
-    this.sessionService.isLogged().subscribe(user => (this.user = user));
+    this.sessionService.isLogged().subscribe(user => {this.user = user;
+      this.reservationService.getUserReservation(this.user._id).subscribe(reservations => {
+        return this.reservationList = reservations;
+  });
+    });
   }
 
+
+//   this.sessionService.isLogged().subscribe(user => {this.user = user;
+//     this.reservationService.getUserReservation(this.user._id).subscribe(reservations => {
+//       console.log(reservations[0].date)
+//       let today = reservations[0].date
+//       this.searchToday = today;
+//       return this.reservationList = reservations;
+// });
+//   });
+  
+
   ngOnInit() {
+  
    
   }
 
@@ -40,13 +58,4 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  getTodaysRes(){
-    this.reservationService
-    .getUserReservation(this.user._id)
-    .subscribe(reservations => {
-      this.reservationList = reservations;
-   });
-  }
-
-  
 }

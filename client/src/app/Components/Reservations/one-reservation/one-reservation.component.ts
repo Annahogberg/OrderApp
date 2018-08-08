@@ -94,17 +94,10 @@ let restaurantId = reservation.restaurant._id
       });
   }
 
-  // order(dish, quantity){
-  //     const order = {
-  //       dish,
-  //       quantity,
-  //       user: this.user._id
-  //     };
-  
-  //     this.orderService.order(order).subscribe((reser: any) => {
-  //       this.router.navigate(["/profile"]);
-  //     });
-  //  }
+  deleteReservation(){
+    this.reservationService.deleteReservation(this.reservation).subscribe(reservation => {
+      this.router.navigate(["reservations/reservations"]);
+    })  }
   
   }
 

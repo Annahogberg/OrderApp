@@ -11,6 +11,12 @@ import { SessionService } from '../services/session.service';
 export class AppComponent {
   title = 'Order';
 
+  isHidden: boolean = false;
+
+  toggleHidden(){
+this.isHidden = !this.isHidden
+  }
+
   constructor(public sessionService: SessionService) { }
   logout(){
     this.sessionService.logout().subscribe();

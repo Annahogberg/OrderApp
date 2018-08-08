@@ -1,40 +1,37 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<header>
 
-<nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" href="/">Order</a>
-  <div *ngIf="sessionService.user">
-  <a class="nav-link" [routerLink]="['/profile']">{{sessionService.user.username}}</a>
+  <div class="topbar">
+
+    <div class="logo blocks">
+      <a class="navbar-brand orderLogo" href="/">Order <i href="/" class="fas fa-concierge-bell bellLogo"></i></a>
+    </div>
+
+    <div class="blocks" *ngIf="sessionService.user">
+      <a class="userName" [routerLink]="['/profile']">{{sessionService.user.username}}</a>
+    </div>
+
+    <i (click)="toggleHidden()" class="fa fa-bars"></i>
   </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-    aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon">
-      <i class="fa fa-bars"></i>
+
+</header>
+
+  <div class="hidden" *ngIf="sessionService.user && isHidden">
+    <span *ngIf="sessionService.user.isClient">
+      <li><a [routerLink]="['/profile']">Home</a></li>
+      <li><a [routerLink]="['/reservations/reservations']">Reservations</a></li>
     </span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <div *ngIf="sessionService.user">
-        <li class="nav-item"><a class="nav-link" [routerLink]="['/restaurants']">Restaurants</a></li>
-        <span *ngIf="sessionService.user.isClient">
-        <li class="nav-item"><a class="nav-link" [routerLink]="['/reservations/reservations']">My reservations</a></li>
-        </span>
-        <span *ngIf="sessionService.user.isRestaurant">
-        <li class="nav-item"><a class="nav-link" [routerLink]="['/reservations/restaurant-reservations']">My reservations</a></li>
-      </span>
-        <li class="nav-item"><a class="nav-link" href="#" (click)="logout()">Log Out</a></li>
-
-      </div>
-      <div *ngIf="!sessionService.user">
-        <li class="nav-item"><a class="nav-link" href="#id" [routerLink]="['/login']">Login</a></li>
-        <li class="nav-item"><a class="nav-link" [routerLink]="['/signup']">Sign up</a></li>
-      </div>
-    </ul>
+    <span *ngIf="sessionService.user.isRestaurant">
+      <li><a [routerLink]="['/reservations/restaurant-reservations']">Reservations</a></li>
+    </span>
+    <li><a [routerLink]="['/restaurants']">Restaurants</a></li>
+    <li><a href="#" (click)="logout()">Log Out</a></li>
   </div>
-</nav>
 
 
-<div style="text-align:center">
+  <div class="hidden" *ngIf="!sessionService.user && isHidden">
+    <li><a href="#id" [routerLink]="['/login']">Login</a></li>
+    <li><a [routerLink]="['/signup']">Sign up</a></li>
+  </div>
 
-</div>
 
 <router-outlet></router-outlet>

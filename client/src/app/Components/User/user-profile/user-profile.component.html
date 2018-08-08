@@ -1,6 +1,7 @@
-<div *ngIf="user">
+<div class="container info" *ngIf="user">
 
-    <div *ngIf="!isHidden">
+<div class="row xrow">
+    <div class="text" *ngIf="!isHidden">
   <p>Name: {{user.name}}</p>
   <p>Email: {{user.email}}</p>
   <p>Phone Number: {{user.phone}}</p>
@@ -18,7 +19,9 @@
       <button class="btn" type="submit" (click)="toggleHidden()">Edit profile</button>
     </div>
 
-    <div *ngIf="isHidden">
+
+
+    <div class="formulario" *ngIf="isHidden">
         <h4> Edit your profile </h4>
 
         <form *ngIf="user">
@@ -62,6 +65,31 @@
         </form>
       </div>
 
+
       
+      <input class="form-control mr-sm-2 noDisplay" [(ngModel)]="searchStatus" type="text" aria-label="Search" name="city" required>
+      <div *ngFor="let reservation of reservationList | filter:'confirmation':searchStatus">
+        <span *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'  ">
+          <h3>Confirmed Reservations</h3>
+          <h5>{{reservation.restaurant.name}}</h5>
+        <p>Date: {{reservation.date}}</p>
+        <p>Time: {{reservation.time}}</p>
+        <p>People: {{reservation.pax}}</p>
+        <p>Status: {{reservation.confirmation}}</p>
+        <p>Comments: {{reservation.comment}}</p>
+        <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">MORE DETAILS</button>
+        </span>
+      </div>
+
+
+      <div *ngIf="user.isRestaurant">
+        <div class="mapa">
+    <agm-map [latitude]="user.lat" [longitude]="user.lng">
+        <agm-marker [latitude]="user.lat" [longitude]="user.lng"></agm-marker>
+      </agm-map>
+  </div>
+      </div>
     
+      
+    </div>
   </div>

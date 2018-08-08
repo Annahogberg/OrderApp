@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Reservation = require("../../models/Reservation");
 const User = require("../../models/User");
+const moment = require("moment");
+moment().format();
+moment.locale("en");
 
 // Retrive ALL
 router.get("/", (req, res, next) => {
@@ -14,18 +17,26 @@ router.get("/", (req, res, next) => {
 
 // RETRIEVE ALL USER-RESERVATIONS
 router.get("/userReservations/:id", (req, res, next) => {
-  Reservation.find({ user: req.params.id })
+
+  const now = new Date();
+
+  const momentDate = moment(now).format("YYYY-MM-DD, dddd");
+
+  //Reservation.find({$and: [{ user: req.params.id }, {date: { $gte: momentDate }}]}) 
+  Reservation.find({ user: req.params.id }) 
     .populate("user")
     .populate("restaurant")
+    .sort("date")
     .then(userReservations => res.json(userReservations))
     .catch(e => next(e));
 });
 
 // RETRIEVE ALL REST-RESERVATIONS
 router.get("/restReservations/:id", (req, res, next) => {
-  Reservation.find({ restaurant: req.params.id })
+  Reservation.find({ restaurant: req.params.id }) 
     .populate("user")
     .populate("restaurant")
+    .sort("date")
     .then(restaurantReservations => res.json(restaurantReservations))
     .catch(e => next(e));
 });
@@ -142,10 +153,10 @@ router.post("/reservation/decline/:id", (req, res, next) => {
     .catch(err => res.status(500).json(err));
 });
 
-// router.delete("/reservation/delete/:id", (req, res, next) => {
-//   Reservation.findByIdAndRemove(req.params.id)
-//   .then(() => res.json({ message: `SUCESSFUL DELETE ${req.params.id}` }))
-//    .catch(e => next(e));
-//  });
+router.delete("/reservation/delete/:id", (req, res, next) => {
+  Reservation.findByIdAndRemove(req.params.id)
+  .then(() => res.json({ message: `SUCESSFUL DELETE ${req.params.id}` }))
+   .catch(e => next(e));
+ });
 
 module.exports = router;

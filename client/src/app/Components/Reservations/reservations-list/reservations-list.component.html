@@ -1,6 +1,12 @@
-<!-- <div *ngIf="sessionService.user._id"> -->
 
-  <div *ngFor="let reservation of reservationList">
+
+<form class="form-inline">
+
+    <input class="form-control mr-sm-2" [(ngModel)]="searchDate" type="text" placeholder="Date" aria-label="Search" name="date" required>
+          <input class="form-control mr-sm-2" [(ngModel)]="searchStatus" type="text" placeholder="Status" aria-label="Search" name="confirmation" required>
+          </form>
+
+  <div *ngFor="let reservation of reservationList |filter:'date':searchDate|  filter:'confirmation':searchStatus">
 
     <h5>{{reservation.restaurant.name}}</h5>
     <p>Date: {{reservation.date}}</p>
@@ -8,8 +14,7 @@
     <p>People: {{reservation.pax}}</p>
     <p>Status: {{reservation.confirmation}}</p>
     <p>Comments: {{reservation.comment}}</p>
-    <span *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'  ">
-    <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">VIEW MORE DETAILS & ORDER</button>
-    </span>
+
+    <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">MORE DETAILS</button>
+ 
   </div>
-  <!-- </div> -->

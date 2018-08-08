@@ -4,11 +4,74 @@
         All in one.</h2>
     </section>
 
-
-      <div class="mapa">
-          <agm-map [latitude]="lat" [longitude]="lng">
-             <div *ngFor="let restaurant of restaurantList">
-              <agm-marker [latitude]="restaurant.lat" [longitude]="restaurant.lng"></agm-marker>
+    <div class="boxblue">
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-3 four-texts">
+                <span class="icon"><i class="fas fa-map-marked-alt"></i></span>
+                <div class="main-text">
+                  <h4>Locate</h4>
+                  <p>Find a selection of more than 100 restaurants, you may search by city, type and the name</p>
+                </div>
+              </div>
+              <div class="col-sm-3 four-texts">
+                <span class="icon"><i class="far fa-calendar-alt"></i></span>
+                <div class="main-text">
+                    <h4>Reserve</h4>
+                  <p>Book through the site, and don't worry - if you will be able to modify or cancel later on if you wish.
+                  </p>
+                  </div>
+              </div>
+              <div class="col-sm-3 four-texts">
+                <span class="icon"><i class="fas fa-concierge-bell"></i></span>
+                <div class="main-text">
+                    <h4><b>Order</b></h4>
+                  <p>You may even order beforehand and at the restaurant. No need to wait for a waiter</p>
+                </div>
+              </div>
+              <div class="col-sm-3 four-texts">
+                  <span class="icon"><i class="far fa-credit-card"></i></span>
+                  <div class="main-text">
+                      <h4>Pay</h4>
+                    <p>Once you've finished, click on pay and that's it! Again, no waiter needed!</p>
+                  </div>
+                </div>
             </div>
+          </div>
+
+<div class="mapainfo row">
+      <div class="text col-6">
+        <h3>Restaurants</h3>
+        <span *ngFor="let restaurant of restaurantList">
+            <ul>
+              <li>{{restaurant.name}}</li>
+              </ul>
+          </span>
+        </div>
+        
+        <div class="mapa main-map col-6">
+          <agm-map [latitude]="lat" [longitude]="lng">
+             <span *ngFor="let restaurant of restaurantList">
+              <agm-marker [latitude]="restaurant.lat" [longitude]="restaurant.lng"></agm-marker>
+            </span>
           </agm-map>
         </div>
+      </div>
+       
+
+      
+
+        <footer>
+          
+              <ul>
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">Support</a></li>
+                  <li><a href="#">Jobs</a></li>
+                  <li><a href="#">Privacy</a></li>
+                  <li><a href="#">Terms</a></li>
+                  <li><a href="https://github.com/Annahogberg">Github</a></li>
+                  <li><a href="https://www.linkedin.com/in/annahogberg">LinkedIn</a></li>
+                  <li>&copy; Order - Anna Högberg</li>
+                </ul>
+         
+        </footer>

@@ -4,10 +4,13 @@
   <p>Date: {{reservation.date}}</p>
   <p>Time: {{reservation.time}}</p>
   <p>Address: {{reservation.restaurant.address}}</p>
+  <p>Status: {{reservation.confirmation}}</p>
   <p>Comments: {{reservation.comment}}</p>
-      <button class="btn" type="submit" (click)="toggleHidden()">Change</button>
-    
-      <span *ngIf="sessionService.user.isClient">
+  
+  
+  <div *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'">
+    <button class="btn" type="submit" (click)="toggleHidden()">Change</button>
+    <span *ngIf="sessionService.user.isClient">
   <button class="btn" (click)="cancelReservation()">Cancel</button>
   </span>
   <span *ngIf="sessionService.user.isRestaurant">
@@ -15,6 +18,7 @@
   <button class="btn" (click)="declineReservation()">Decline</button>
   <button class="btn" (click)="cancelReservation()">NoShow</button>
 </span>
+
 
 <div *ngIf="isHidden">
   <section class="container">
@@ -75,7 +79,11 @@
 </div>
 </div>
 </div>
-<!-- <button type="submit" (click)="order(textInputDish, textInputQuantity )">Order</button> -->
+</div>
+
+<div *ngIf="reservation.confirmation == 'Cancelled' || reservation.confirmation == 'Declined'">
+    <button class="btn" (click)="deleteReservation()">Delete</button>
+    </div>
 
 </div>
 

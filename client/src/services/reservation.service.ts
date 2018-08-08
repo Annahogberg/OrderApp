@@ -45,5 +45,9 @@ export class ReservationService {
       .pipe(map(res => res.json()));
   }
 
-  
+  deleteReservation(reservation) {
+    return this.http
+      .delete(`${environment.BASEURL}/api/reservations/reservation/delete/${reservation._id}`)
+       .pipe(map(res => res.json()));
+   } 
 }

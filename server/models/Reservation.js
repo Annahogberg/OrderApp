@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const moment = require("moment");
+moment().format();
+moment.locale("en");
 
 const reservationSchema = new Schema({
   date: {type: String, required:true},
