@@ -21,6 +21,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   searchStatus = "Confirmed";
+  confirmedReservations;
 
   constructor(
     public sessionService: SessionService,
@@ -30,6 +31,7 @@ export class UserProfileComponent implements OnInit {
   ) {
     this.sessionService.isLogged().subscribe(user => {this.user = user;
       this.reservationService.getUserReservation(this.user._id).subscribe(reservations => {
+        this.confirmedReservations = reservations.filter( e => e.confirmation == 'Confirmed');
         return this.reservationList = reservations;
   });
     });

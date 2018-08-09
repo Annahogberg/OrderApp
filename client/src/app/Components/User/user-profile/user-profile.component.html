@@ -1,94 +1,96 @@
 <div class="container info" *ngIf="user">
 
-<div class="row">
+  <div class="row">
     <div class="text" *ngIf="!isHidden">
-        <h4>Info</h4>
-  <p>Name: {{user.name}}</p>
-  <p>Username: {{user.username}}</p>
-  <p>Email: {{user.email}}</p>
-  <p>Phone Number: {{user.phone}}</p>
-  <div *ngIf="user.isClient">
-  <p>Total reservations: {{user.Clientreservations}}</p>
-</div>
-  
-  <div *ngIf="user.isRestaurant">
-      <p>Total reservations: {{user.Restreservations}}</p>
-    <p>Address: {{user.address}}</p>
-    <p>Type: {{user.type}}</p>
-  </div>
+      <h4>Info</h4>
+      <p>Name: {{user.name}}</p>
+      <p>Username: {{user.username}}</p>
+      <p>Email: {{user.email}}</p>
+      <p>Phone Number: {{user.phone}}</p>
+      <div *ngIf="user.isClient">
+        <p>Total reservations: {{user.Clientreservations}}</p>
+      </div>
+
+      <div *ngIf="user.isRestaurant">
+        <p>Total reservations: {{user.Restreservations}}</p>
+        <p>Address: {{user.address}}</p>
+        <p>Type: {{user.type}}</p>
+      </div>
       <button class="btn" type="submit" (click)="toggleHidden()">Edit profile</button>
     </div>
 
 
 
     <div class="formulario" *ngIf="isHidden">
-        <h4> Edit your profile </h4>
+      <h4> Edit your profile </h4>
 
-        <form *ngIf="user">
-          <label>Name</label>
-          <input type="text" [(ngModel)]="user.name" name="name" autocomplete='name' required />
-        
-          <label>Email</label>
-          <input type="text" [(ngModel)]="user.email" name="email" autocomplete='email' required />
-        
-          <label>Phone number</label>
-          <input type="text" [(ngModel)]="user.phone" name="phone" autocomplete='phone' />
-      
-          <div *ngIf="user.isRestaurant">
-            <label>Address</label>
-            <input type="text" [(ngModel)]="user.address" name="address" placeholder="Address"/>
-            <input type="text" [(ngModel)]="user.lat" name="lat" placeholder="Latitude"/>
-            <input type="text" [(ngModel)]="user.lng" name="lng" placeholder="Longitude"/>
-            
-            <label>Type - Italian, Mediterranean, Japanese, Chinese, Mexican, Asian, Vegetarian</label>
-            <input type="text" [(ngModel)]="user.type" name="type" autocomplete='type'>
-        
-        
-            <label>Lunch time</label>
-            <input type="time" name="lunchopening" [(ngModel)]="user.openTime1">
-            <input type="time" name="lunchclosing" [(ngModel)]="user.closeTime1">
-        
-            <label>Dinner time</label>
-            <input type="time" name="dinneropening" [(ngModel)]="user.openTime2">
-            <input type="time" name="dinnerclosing" [(ngModel)]="user.closeTime2">
-        
-          </div>
-        
-          <div *ngIf="user.isClient">
-            <label>Age</label>
-            <input type="number" [(ngModel)]="user.age" name="age" autocomplete='age' />
-          </div>
-        
-          <button class="btn" (click)="edit()"> Edit </button>
-          <button class="btn" type="submit" (click)="toggleHidden()">Go back</button>
-        
-        </form>
+      <form *ngIf="user">
+        <label>Name</label>
+        <input type="text" [(ngModel)]="user.name" name="name" autocomplete='name' required />
+
+        <label>Email</label>
+        <input type="text" [(ngModel)]="user.email" name="email" autocomplete='email' required />
+
+        <label>Phone number</label>
+        <input type="text" [(ngModel)]="user.phone" name="phone" autocomplete='phone' />
+
+        <div *ngIf="user.isRestaurant">
+          <label>Address</label>
+          <input type="text" [(ngModel)]="user.address" name="address" placeholder="Address" />
+          <input type="text" [(ngModel)]="user.lat" name="lat" placeholder="Latitude" />
+          <input type="text" [(ngModel)]="user.lng" name="lng" placeholder="Longitude" />
+
+          <label>Type - Italian, Mediterranean, Japanese, Chinese, Mexican, Asian, Vegetarian</label>
+          <input type="text" [(ngModel)]="user.type" name="type" autocomplete='type'>
+
+
+          <label>Lunch time</label>
+          <input type="time" name="lunchopening" [(ngModel)]="user.openTime1">
+          <input type="time" name="lunchclosing" [(ngModel)]="user.closeTime1">
+
+          <label>Dinner time</label>
+          <input type="time" name="dinneropening" [(ngModel)]="user.openTime2">
+          <input type="time" name="dinnerclosing" [(ngModel)]="user.closeTime2">
+
+        </div>
+
+        <div *ngIf="user.isClient">
+          <label>Age</label>
+          <input type="number" [(ngModel)]="user.age" name="age" autocomplete='age' />
+        </div>
+
+        <button class="btn" (click)="edit()"> Edit </button>
+        <button class="btn" type="submit" (click)="toggleHidden()">Go back</button>
+
+      </form>
+    </div>
+
+
+    <div *ngIf="user.isRestaurant">
+      <div class="mapa">
+        <agm-map [latitude]="user.lat" [longitude]="user.lng">
+          <agm-marker [latitude]="user.lat" [longitude]="user.lng"></agm-marker>
+        </agm-map>
       </div>
+    </div>
+
+  </div>
 
 
-      
-      <input class="form-control mr-sm-2 noDisplay" [(ngModel)]="searchStatus" type="text" aria-label="Search" name="city" required>
-      <div class="reservasConfirmadas" *ngFor="let reservation of reservationList | filter:'confirmation':searchStatus">
-        <span *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'  ">
-          <h4>Confirmed Reservations</h4>
-          <h5>{{reservation.restaurant.name}}</h5>
+  <!-- <input class="form-control mr-sm-2 noDisplay" [(ngModel)]="searchStatus" type="text" aria-label="Search" name="city" required> -->
+  <div class="row reservationsCard" *ngIf="user.isClient">
+    <h4>Confirmed</h4>
+
+    <div class="reservasConfirmadas" *ngFor="let reservation of confirmedReservations">
+      <div *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'  ">
+        <h5>{{reservation.restaurant.name}}</h5>
         <p>Date: {{reservation.date}}</p>
         <p>Time: {{reservation.time}}</p>
         <p>People: {{reservation.pax}}</p>
         <p>Status: {{reservation.confirmation}}</p>
         <p>Comments: {{reservation.comment}}</p>
-        <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">MORE DETAILS</button>
-        </span>
+        <button class="btn buttonMargin" [routerLink]="['/reservations/reservation/', reservation._id]">MORE DETAILS</button>
       </div>
-
-      <div *ngIf="user.isRestaurant">
-        <div class="mapa">
-    <agm-map [latitude]="user.lat" [longitude]="user.lng">
-        <agm-marker [latitude]="user.lat" [longitude]="user.lng"></agm-marker>
-      </agm-map>
-  </div>
-      </div>
-    
-      
     </div>
+
   </div>

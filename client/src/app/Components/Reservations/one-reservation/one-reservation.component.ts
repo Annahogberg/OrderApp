@@ -77,20 +77,10 @@ let restaurantId = reservation.restaurant._id
 
   ngOnInit() {}
   
-  // editReservation() {
-  //   this.reservationService
-  //     .editReservation(this.reservation)
-  //     .subscribe(reservation => {
-  //       this.reservation = reservation;
-  //       this.isHidden = !this.isHidden;
-  //     });
-  // }
-
   editReservation() {
     this.reservationService
       .editReservation(this.reservation)
       .subscribe(reservation => {
-
   if(reservation['status']>=500) {
     this.message = reservation._body
   } 

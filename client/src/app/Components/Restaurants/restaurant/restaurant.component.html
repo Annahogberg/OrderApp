@@ -1,111 +1,164 @@
-<div *ngIf="restaurant">
-  <h4>{{restaurant.name}}</h4>
-  <p>{{restaurant.phone}}</p>
-  <p>{{restaurant.address}}</p>
-  <p>{{restaurant.type}}</p>
+<div class="container" *ngIf="restaurant">
 
-    <p>Lunch time: {{restaurant.openTime1}} - {{restaurant.closeTime1}} </p>
-    <p>Dinner time: {{restaurant.openTime2}} - {{restaurant.closeTime2}} </p>
+  <div class="row mainInfo">
+    <div class="col-6">
+      <h4>{{restaurant.name}}</h4>
+      <p>{{restaurant.phone}}</p>
+      <p>{{restaurant.address}}</p>
+      <p>{{restaurant.type}}</p>
+      <p>Lunch time: {{restaurant.openTime1}} - {{restaurant.closeTime1}} </p>
+      <p>Dinner time: {{restaurant.openTime2}} - {{restaurant.closeTime2}} </p>
+    </div>
 
-
-<!-- <div class="mapa">
-    <agm-map [latitude]="restaurant.lat" [longitude]="restaurant.lng">
+    <div class="mapa col-6">
+      <agm-map [latitude]="restaurant.lat" [longitude]="restaurant.lng">
         <agm-marker [latitude]="restaurant.lat" [longitude]="restaurant.lng"></agm-marker>
       </agm-map>
-  </div> -->
-
-  <section class="container">
-    <div class="row">
-      <h3 class="center-align">Reserve</h3>
-      <br>
-      <article class="col s6 offset-s3">
-        <form>
-          <div class="input-field">
-            <i class="material-icons prefix">date_range</i>
-            <input type="date" [(ngModel)]="date" name="date" required id="datepicker">
-          </div>
-
-          <div class="input-field">
-            <i class="material-icons prefix">access_time</i>
-            <input type="time" [(ngModel)]="time" name="time" required id="timepicker">
-          </div>
-
-          <div class="input-field">
-            <i class="material-icons prefix">people</i>
-            <label for="pax">People</label>
-            <input type="number" [(ngModel)]="pax" name="pax" required>
-          </div>
-
-          <div class="input-field">
-            <i class="material-icons prefix">comment</i>
-            <textarea [(ngModel)]="comment" name="comment"></textarea>
-          </div>
-          <br>
-          <br>
-          <div class="center-align">
-            <button (click)="reserve(date, time, pax, comment)" class="waves-effect waves-light btn" type="submit">
-              <i class="material-icons right">send</i>Book</button>
-          </div>
-          
-          <div *ngIf="message" class="message">
-              {{message}}
-            </div>
-        </form>
-
-        <button (click)="getDishes()">View menu</button>
-
-
-        <div *ngIf="dishes">
-
-            <div *ngIf="isHiddenMenu">
-            <h3>YOUR MENU</h3>
-          <div *ngFor="let dish of dishes">
-            {{dish.title}}
-          </div>
-        </div>
-</div>
-<button (click)="getReviews()">View reviews</button>
-
-<div *ngIf="isHiddenReview">
-        <div *ngFor="let review of reviews">
-          <img [src]="review.image1" width=300>
-        </div>
-
-
-        <ul *ngFor="let review of reviews">
-          <li>Rating: {{review.rating}} out of 5</li>
-          <li>Comment: {{review.content}}</li>
-          <li>By {{review.name}}</li>
-        </ul>
-      </div>
-     
-
-
-        <div *ngIf="sessionService.user.isClient">
-          <form>
-            <h4>Write a review</h4>
-
-            <label>Rate: 0-5</label>
-            <input type="number" [(ngModel)]="rating" max=5 min=0 name="rating">
-
-
-            <textarea [(ngModel)]="content" placeholder="Review" name="content"></textarea>
-            <label>Your name</label>
-            <input type="text" [(ngModel)]="name" placeholder="Your name" name="name">
-            <div *ngIf="!isPicture">
-              <button (click)="saveReviewSimple(rating,content,name)"> Save </button>
-
-
-              <a class="space" (click)="toggleHidden()">Want to upload an image?</a>
-            </div>
-            <div *ngIf="isPicture">
-              <input type="file" name="file" ng2FileSelect [uploader]="uploader" />
-              <button (click)="saveReviewWithImage()"> Save </button>
-              <a class="space" (click)="toggleHidden()">Back to no picture!</a>
-            </div>
-          </form>
-        </div>
-      </article>
     </div>
-  </section>
+  </div>
+
+
+  <div class="row reserveMenu">
+
+    <form class="reserveForm col-6">
+      <h3 class="center-align">Reserve</h3>
+      <div class="input-field">
+        <i class="material-icons prefix">date_range</i>
+        <input type="date" [(ngModel)]="date" name="date" required id="datepicker">
+      </div>
+
+      <div class="input-field">
+        <i class="material-icons prefix">access_time</i>
+        <input type="time" [(ngModel)]="time" name="time" required id="timepicker">
+      </div>
+
+      <div class="input-field">
+        <i class="material-icons prefix">people</i>
+        <label for="pax">People</label>
+        <input type="number" [(ngModel)]="pax" name="pax" required>
+      </div>
+
+      <div class="input-field">
+        <i class="material-icons prefix">comment</i>
+        <textarea [(ngModel)]="comment" name="comment"></textarea>
+      </div>
+      <br>
+      <br>
+      <div class="center-align">
+        <button (click)="reserve(date, time, pax, comment)" class="waves-effect waves-light btn" type="submit">
+          <i class="material-icons right">send</i>Book</button>
+      </div>
+
+      <div *ngIf="message" class="message">
+        {{message}}
+      </div>
+    </form>
+
+    <div class="col-6">
+      <div class="row">
+        <div class="col-4 formulario" *ngIf="appetizers">
+          <h4>Appetizers</h4>
+          <div *ngFor="let app of appetizers">
+            <h5>{{app.title}}</h5>
+            <p>{{app.description}}</p>
+            <p>{{app.price}}€</p>
+          </div>
+        </div>
+
+        <div class="col-4 formulario" *ngIf="maincourses">
+          <h4>Main Courses</h4>
+          <div *ngFor="let main of maincourses">
+            <h5>{{main.title}}</h5>
+            <p>{{main.description}}</p>
+            <p>{{main.price}}€</p>
+          </div>
+        </div>
+
+        <div class="col-4 formulario" *ngIf="dessert">
+          <h4>Desserts</h4>
+          <div *ngFor="let dess of dessert">
+            <h5>{{dess.title}}</h5>
+            <p>{{dess.description}}</p>
+            <p>{{dess.price}}€</p>
+          </div>
+        </div>
+
+        <div class="col-4 formulario" *ngIf="softDrink">
+          <h4>Drinks</h4>
+          <div *ngFor="let soft of softDrink">
+            <h5>{{soft.title}}</h5>
+            <p>{{soft.description}}</p>
+            <p>{{soft.price}}€</p>
+          </div>
+        </div>
+
+        <div class="col-4 formulario" *ngIf="alcohol && age > 18">
+          <h4>Alcohol</h4>
+          <div *ngFor="let alc of alcohol">
+            <h5>{{alc.title}}</h5>
+            <p>{{alc.description}}</p>
+            <p>{{alc.price}}€</p>
+          </div>
+        </div>
+
+
+        <div class="col-4 formulario" *ngIf="other">
+          <h4>Other</h4>
+          <div *ngFor="let o of other">
+            <h5>{{o.title}}</h5>
+            <p>{{o.description}}</p>
+            <p>{{o.price}}€</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row reviewImages" *ngFor="let review of reviews">
+      <div *ngIf="review.image1">
+        <img [src]="review.image1" width=300 height="200">
+      </div>
+    </div>
+
+
+    <div class="formulario">
+      <form *ngIf="sessionService.user.isClient">
+        <h4>Write a review</h4>
+
+        <label>Rate: 0-5</label>
+        <input type="number" [(ngModel)]="rating" max=5 min=0 name="rating">
+
+
+        <textarea [(ngModel)]="content" placeholder="Review" name="content"></textarea>
+        <label>Your name</label>
+        <input type="text" [(ngModel)]="name" placeholder="Your name" name="name">
+        <div *ngIf="!isPicture">
+          <button (click)="saveReviewSimple(rating,content,name)"> Save </button>
+
+
+          <a class="space" (click)="toggleHidden()">Want to upload an image?</a>
+        </div>
+        <div *ngIf="isPicture">
+          <input type="file" name="file" ng2FileSelect [uploader]="uploader" />
+          <button (click)="saveReviewWithImage()"> Save </button>
+          <a class="space" (click)="toggleHidden()">Back to no picture!</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="reviews">
+      <ul *ngFor="let review of reviews">
+        <li>
+          <b>{{review.rating}} out of 5</b>
+        </li>
+        <li>Comment: {{review.content}}</li>
+        <li>User:
+          <i>{{review.name}}</i>
+        </li>
+      </ul>
+    </div>
+
+
+
+  </div>
+
 </div>

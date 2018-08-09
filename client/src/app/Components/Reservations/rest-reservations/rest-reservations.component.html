@@ -28,12 +28,12 @@
     <i class="far fa-check-circle icons"></i>
   <div class="mainCards" *ngFor="let reservation of confirmedReservation |filter:'date':searchDate|  filter:'confirmation':searchStatus">
     <h5>Name: {{reservation.user.name}}</h5>
+    <p class="status">{{reservation.confirmation}}</p>
     <p>Date: {{reservation.date}}</p>
     <p>Time: {{reservation.time}}</p>
     <p>People: {{reservation.pax}}</p>
     <p>Comments: {{reservation.comment}}</p>
-    <p class="confirmed">{{reservation.confirmation}}</p>
-
+    
     <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">MORE DETAILS</button>
   </div>
 </div>
@@ -43,11 +43,11 @@
     <i class="fas fa-spinner icons"></i>
   <div class="mainCards" *ngFor="let reservation of pendingReservation |filter:'date':searchDate|  filter:'confirmation':searchStatus">
     <h5>Name: {{reservation.user.name}}</h5>
+    <p class="status">{{reservation.confirmation}}</p>
     <p>Date: {{reservation.date}}</p>
     <p>Time: {{reservation.time}}</p>
     <p>People: {{reservation.pax}}</p>
     <p>Comments: {{reservation.comment}}</p>
-    <p class="pending">{{reservation.confirmation}}</p>
 
     <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">MORE DETAILS</button>
   </div>
@@ -59,11 +59,11 @@
   <div class="mainCards" *ngFor="let reservation of declinedReservation |filter:'date':searchDate|  filter:'confirmation':searchStatus">
     
     <h5>Name: {{reservation.user.name}}</h5>
+    <p class="status">{{reservation.confirmation}}</p>
     <p>Date: {{reservation.date}}</p>
     <p>Time: {{reservation.time}}</p>
     <p>People: {{reservation.pax}}</p>
     <p>Comments: {{reservation.comment}}</p>
-    <p class="declined">{{reservation.confirmation}}</p>
 
     <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">MORE DETAILS</button>
   </div>
@@ -75,11 +75,11 @@
     <i class="fas fa-ban icons"></i>
   <div class="mainCards" *ngFor="let reservation of cancelledReservation |filter:'date':searchDate|  filter:'confirmation':searchStatus">
     <h5>Name: {{reservation.user.name}}</h5>
+    <p class="status">{{reservation.confirmation}}</p>
     <p>Date: {{reservation.date}}</p>
     <p>Time: {{reservation.time}}</p>
     <p>People: {{reservation.pax}}</p>
     <p>Comments: {{reservation.comment}}</p>
-    <p class="cancelled">{{reservation.confirmation}}</p>
 
     <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">MORE DETAILS</button>
   </div>
@@ -92,10 +92,10 @@
   <div class="mainCards" *ngFor="let reservation of reservationList |filter:'date':searchDate|  filter:'confirmation':searchStatus">
           <h3>Passed</h3>
     <h5>Name: {{reservation.user.name}}</h5>
+    <p>{{reservation.confirmation}}</p>
     <p>Date: {{reservation.date}}</p>
     <p>Time: {{reservation.time}}</p>
     <p>People: {{reservation.pax}}</p>
-    <p>{{reservation.confirmation}}</p>
     <p>Comments: {{reservation.comment}}</p>
 
     <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">MORE DETAILS</button>

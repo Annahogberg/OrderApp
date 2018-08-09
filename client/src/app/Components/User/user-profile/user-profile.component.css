@@ -3,9 +3,19 @@
 }
 
 .reservasConfirmadas{
-  margin-left: 350px;
-
+  margin-left: 100px;
 }
+
+.reservationsCard{
+  border: 1px solid rgba(24, 34, 48, 0.3);
+  background-color: rgba(24, 34, 48, 0.8);
+  padding: 20px;
+  color: white;
+  margin-top: 80px;
+  margin-left: 100px;
+  border-radius: 15px;
+}
+
 
 agm-map {
   height: 300px;
@@ -60,9 +70,18 @@ margin: 30px auto 0; */
     margin-top: 10px;
   }
 
-  .reservasConfirmadas{
-    margin-left: 10px;
+  .reservationsCard{
+    margin-left: -15px;
+    width: 375px;
+    border-radius: 0px;
   }
+
+  .buttonMargin{
+    margin-bottom: 20px;
+
+  }
+
+
   .formulario{
     margin: 0 10px;
   }

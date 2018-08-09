@@ -1,5 +1,6 @@
 .formulario{
-	width: 350px;
+	width: 250px;
+	margin-right: 50px;
 	}
 
 .oneReservation{
@@ -18,6 +19,13 @@
 margin-bottom: 30px;
 }
 
+.orderMeal{
+	background: rgba(42, 44, 52, 0.2);
+	padding: 30px;
+	border: 1px solid rgba(42, 44, 52, 0.4);
+	border-radius: 15px;
+}
+
 agm-map {
 	height: 300px;
 }
@@ -32,4 +40,8 @@ agm-map {
 
 .reservationButtons{
 	margin-left: 20px;
+}
+
+.buttonAdd{
+	margin-bottom: 25px;
 }

@@ -10,7 +10,6 @@
   color: #9d9d9d;
 }
 
-
 .space {
   margin-left: 15px;
   font-size: 200;
@@ -18,4 +17,32 @@
 
 agm-map {
   height: 300px;
+}
+
+.mainInfo {
+  margin-top: 120px;
+}
+
+.formulario {
+  width: 250px;
+}
+
+Form {
+  width: 300px;
+}
+
+.reserveMenu {
+  margin-top: 70px;
+}
+
+.mapa {
+  right: 80px;
+}
+
+.reviewImages{
+margin-left: 15px;  
+}
+
+.reviews{
+  margin-top: 50px;
 }

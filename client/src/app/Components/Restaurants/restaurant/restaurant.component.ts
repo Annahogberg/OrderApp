@@ -50,6 +50,13 @@ export class RestaurantComponent implements OnInit {
 
   message; 
 
+  appetizers;
+  maincourses;
+  dessert;
+  softDrink;
+  alcohol;
+  other;
+
   toggleHidden(e) {
     this.isPicture = !this.isPicture;
   }
@@ -68,6 +75,21 @@ export class RestaurantComponent implements OnInit {
     this.aR.params.subscribe(params =>
       this.restaurantService.getRestaurant(params.id).subscribe(restaurant => {
         this.restaurant = restaurant;
+        let restaurantId = restaurant._id
+        this.carteService
+            .getDishesPublic(restaurantId)
+            .subscribe(dishes => {
+     
+              this.appetizers = dishes.filter( e => e.type == 'Appetizer');
+              this.maincourses = dishes.filter( e => e.type == 'Main Course');
+              this.dessert = dishes.filter( e => e.type == 'Dessert');
+              this.softDrink = dishes.filter( e => e.type == 'Soft Drink');
+              this.alcohol = dishes.filter(e => e.type == "Alcohol")
+              this.other = dishes.filter( e => e.type == 'Other');
+              this.reviewService
+              .getReviews(this.restaurant._id)
+              .subscribe(reviews => this.reviews = reviews);
+            });
       })
     );
     this.sessionService.isLogged().subscribe(user => (this.user = user));
@@ -103,7 +125,6 @@ export class RestaurantComponent implements OnInit {
     this.reviewService
       .getReviews(this.restaurant._id)
       .subscribe(reviews => (this.reviews = reviews));
-      this.isHiddenReview = !this.isHiddenReview;
   }
 
   saveReviewWithImage() {
@@ -136,11 +157,5 @@ export class RestaurantComponent implements OnInit {
     this.content = "";
     this.rating = "";
     this.name = "";
-  }
-
-  getDishes() {
-    this.carteService.getDishesPublic(this.restaurant._id)
-      .subscribe(dishes => (this.dishes = dishes));
-      this.isHiddenMenu = !this.isHiddenMenu;
   }
 }

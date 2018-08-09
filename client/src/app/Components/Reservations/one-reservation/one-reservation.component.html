@@ -44,6 +44,9 @@
               <button class="btn reservationButtons" (click)="declineReservation()">Decline</button>
             </span>
           </span>
+          <span *ngIf="reservation.confirmation == 'Cancelled' || reservation.confirmation == 'Declined'">
+              <button class="btn" (click)="deleteReservation()">Delete</button>
+            </span>
       </div>
 
         <div class="mapa col-6">
@@ -92,14 +95,14 @@
             </div>
           </div>
           
-          <div class="myOrder">
-              <h4>My Order</h4>
+          <div *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'" class="myOrder">
+              <h4>The Order</h4>
               <ul>
                 <li *ngFor="let order of reservation.order">{{order.dishId.title}} - {{order.quantity}}QTY</li>
               </ul>
             </div>
 
-      <div class="orderMeal">
+      <div *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'" class="myOrder" class="orderMeal">
         <h4>Order from menu</h4>
           <div class="row">
 
@@ -109,7 +112,7 @@
                     <form>
                       {{app.title}} {{app.description}} {{app.price}}€
                       <input type="number" #quantity>
-                      <button (click)="addOrderToReservation(reservation._id,app._id, quantity)">Add</button>
+                      <button class="btn buttonAdd" (click)="addOrderToReservation(reservation._id,app._id, quantity)">Add</button>
                     </form>
                   </div>
               </div>
@@ -120,7 +123,7 @@
                   <form>
                     {{main.title}} {{main.description}} {{main.price}}€
                     <input type="number" #quantity>
-                    <button (click)="addOrderToReservation(reservation._id,main._id, quantity)">Add</button>
+                    <button class="btn buttonAdd" (click)="addOrderToReservation(reservation._id,main._id, quantity)">Add</button>
                   </form>
                 </div>
             </div>
@@ -131,7 +134,7 @@
                     <form>
                       {{dess.title}} {{dess.description}} {{dess.price}}€
                       <input type="number" #quantity>
-                      <button (click)="addOrderToReservation(reservation._id,dess._id, quantity)">Add</button>
+                      <button class="btn buttonAdd" (click)="addOrderToReservation(reservation._id,dess._id, quantity)">Add</button>
                     </form>
                   </div>
             </div>
@@ -142,7 +145,7 @@
                     <form>
                       {{soft.title}} {{soft.description}} {{soft.price}}€
                       <input type="number" #quantity>
-                      <button (click)="addOrderToReservation(reservation._id,soft._id, quantity)">Add</button>
+                      <button class="btn buttonAdd" (click)="addOrderToReservation(reservation._id,soft._id, quantity)">Add</button>
                     </form>
                   </div>
             </div>
@@ -153,7 +156,7 @@
                   <form>
                     {{alc.title}} {{alc.description}} {{alc.price}}€
                     <input type="number" #quantity>
-                    <button (click)="orderService.addOrder(reservation._id,alc._id, quantity.value).subscribe()">Add</button>
+                    <button class="btn buttonAdd" (click)="orderService.addOrder(reservation._id,alc._id, quantity.value).subscribe()">Add</button>
                   </form>
                 </div>
             </div>
@@ -165,19 +168,10 @@
                   <form>
                     {{o.title}} {{o.description}} {{o.price}}€
                     <input type="number" #quantity>
-                    <button (click)="addOrderToReservation(reservation._id,o._id, quantity)">Add</button>
+                    <button class="btn buttonAdd" (click)="addOrderToReservation(reservation._id,o._id, quantity)">Add</button>
                   </form>
                 </div>
               </div>
-          </div>
-
-       
-        
-  
-      
-
-          <div *ngIf="reservation.confirmation == 'Cancelled' || reservation.confirmation == 'Declined'">
-            <button class="btn" (click)="deleteReservation()">Delete</button>
           </div>
 
 
