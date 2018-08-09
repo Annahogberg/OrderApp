@@ -1,20 +1,20 @@
 <div class="container info" *ngIf="user">
 
-<div class="row xrow">
+<div class="row">
     <div class="text" *ngIf="!isHidden">
+        <h4>Info</h4>
   <p>Name: {{user.name}}</p>
+  <p>Username: {{user.username}}</p>
   <p>Email: {{user.email}}</p>
   <p>Phone Number: {{user.phone}}</p>
-  <p>Total reservations: {{user.reservations}}</p>
-
-
-    <p *ngIf="user.isClient">Age: {{user.age}}</p>
-
-
+  <div *ngIf="user.isClient">
+  <p>Total reservations: {{user.Clientreservations}}</p>
+</div>
+  
   <div *ngIf="user.isRestaurant">
+      <p>Total reservations: {{user.Restreservations}}</p>
     <p>Address: {{user.address}}</p>
     <p>Type: {{user.type}}</p>
-    <a [routerLink]="['/carte/new']">Create Menu</a>
   </div>
       <button class="btn" type="submit" (click)="toggleHidden()">Edit profile</button>
     </div>
@@ -68,9 +68,9 @@
 
       
       <input class="form-control mr-sm-2 noDisplay" [(ngModel)]="searchStatus" type="text" aria-label="Search" name="city" required>
-      <div *ngFor="let reservation of reservationList | filter:'confirmation':searchStatus">
+      <div class="reservasConfirmadas" *ngFor="let reservation of reservationList | filter:'confirmation':searchStatus">
         <span *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'  ">
-          <h3>Confirmed Reservations</h3>
+          <h4>Confirmed Reservations</h4>
           <h5>{{reservation.restaurant.name}}</h5>
         <p>Date: {{reservation.date}}</p>
         <p>Time: {{reservation.time}}</p>
@@ -80,7 +80,6 @@
         <button class="btn" [routerLink]="['/reservations/reservation/', reservation._id]">MORE DETAILS</button>
         </span>
       </div>
-
 
       <div *ngIf="user.isRestaurant">
         <div class="mapa">

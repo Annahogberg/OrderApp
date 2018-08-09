@@ -53,7 +53,7 @@ router.post("/signup", (req, res, next) => {
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, theUser, failureDetails) => {
     // Check for errors
-    if (err) next(new Error("Something went wrong"));
+    if (err) next(new Error("NO POSSIBLE ENTER"));
     if (!theUser) next(failureDetails);
 
     // Return user and logged in

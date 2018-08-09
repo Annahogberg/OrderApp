@@ -48,6 +48,8 @@ export class RestaurantComponent implements OnInit {
 
   isHiddenMenu: boolean = true;
 
+  message; 
+
   toggleHidden(e) {
     this.isPicture = !this.isPicture;
   }
@@ -85,11 +87,18 @@ export class RestaurantComponent implements OnInit {
       user: this.user._id
     };
 
-    this.restaurantService.reserve(reservation).subscribe((reser: any) => {
-      this.router.navigate(["/profile"]);
+    this.restaurantService.reserve(reservation).subscribe(reservation => {
+      if(reservation['status']>=500) {
+        this.message = reservation._body
+      } 
+      else {
+        this.reservation = reservation;
+      }; 
     });
-  }
+    }
 
+
+  
   getReviews() {
     this.reviewService
       .getReviews(this.restaurant._id)

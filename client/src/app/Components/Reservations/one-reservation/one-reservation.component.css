@@ -1,0 +1,35 @@
+.formulario{
+	width: 350px;
+	}
+
+.oneReservation{
+	margin-top: 40px;
+}
+
+.resDetails p{
+	margin-left: 15px;
+}
+
+.myOrder{
+ margin: 50px 0px;
+}
+
+.orderMeal h4{
+margin-bottom: 30px;
+}
+
+agm-map {
+	height: 300px;
+}
+
+.resMap{
+	margin-top: 120px;
+}
+
+.mapa{
+	right: 80px;
+}
+
+.reservationButtons{
+	margin-left: 20px;
+}

@@ -40,24 +40,17 @@ router.post("/restaurant/reservation", (req, res, next) => {
         restaurant: restaurant
       };
 
-      if (
-        req.body.date == "" ||
-        req.body.time == "" ||
-        req.body.pax == "" ||
-        req.body.pax <= 0
-      ) {
-        return res.status(500).json({ message: "Can't be empty" });
+      if ( req.body.date == "" || req.body.time == "" || req.body.pax == "" || req.body.pax <= 0 ) {
+        next(new Error("Can't be empty"));
       }
 
       const now = new Date();
       const noDate = new Date(req.body.date);
 
       if (now > noDate || noDate.getFullYear() >= 2019) {
-        return res
-          .status(500)
-          .json({ message: "Not possible for those dates" });
-      }
-
+        next(new Error("Not possible for those dates")); 
+       } 
+  
       const time = req.body.time;
 
       const tooEarly = restaurant.openTime1;
@@ -65,10 +58,9 @@ router.post("/restaurant/reservation", (req, res, next) => {
       const beforeDinner = restaurant.openTime2;
       const tooLate = restaurant.closeTime2;
 
-      if ((time > afterLunch && time < beforeDinner) ||(time < tooEarly && time > tooLate)) {
-        return res.status(500).json({ message: "Restaurant is closed" });
-      }
-
+      if ((time > afterLunch && time < beforeDinner) || (time < tooEarly && time > tooLate)) {
+        next(new Error("Restaurant is closed"));
+       }
       const newReservation = new Reservation(reservationInfo);
       newReservation
       .save()
@@ -98,6 +90,11 @@ router.post("/restaurant/reservation", (req, res, next) => {
       .catch(err => { return res.status(500).json(err)});
     })
   })
+});
+
+
+router.use((err, req, res, next) => {
+  res.status(500).json(err.message);
 });
 
 module.exports = router;

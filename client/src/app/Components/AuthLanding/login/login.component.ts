@@ -15,15 +15,25 @@ export class LoginComponent implements OnInit {
   password: string;
 
 
+  message;
+
   constructor(private sessionService:SessionService, private router: Router) { }
 
   ngOnInit() {
   }
 
   login(username:string, password:string){
+    console.log("login....");
     this.sessionService.login(username,password).subscribe( user => {
-      this.router.navigate(['/profile']);
+      console.log(user['status'])
+      if(user['status']>=500) {
+        this.message = 'Invalid username/password'
+      } 
+      else {
+        this.router.navigate(['profile'])
+      }; 
     });
   }
 
 }
+

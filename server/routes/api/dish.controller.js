@@ -8,26 +8,10 @@ module.exports = router;
 
 router.get('/byrestaurantmenu/:id', (req,res, next) => {
   Dish.find({restaurant: req.params.id})
-  .then(dish => {console.log(dish); return res.json(dish)})
+  .then(dish => res.json(dish))
   .catch(err => next(err))
 })
 
-//GET DISHES - from restaurant
-
-// router.get('/:id', (req,res, next) => {
-//   Dish.findById({restaurant: req.params.id})
-//   .then(dish => {console.log ("hola"); return res.json(dish)})
-//   .catch(err => next(err))
-// })
-
-
-// router.get('/:id', (req,res) => {
-//   console.log('kfdjskfjñs')
-//   console.log(req.params.id)
-//   Dish.find({restaurant: req.params.id})
-//   .then(dish => res.json(dish))
-//   .catch(err => console.log(err))
-// })
 
 router.get('/details/:id', (req,res,next) => {
   Dish.findById(req.params.id)

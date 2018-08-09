@@ -10,8 +10,6 @@ export class OrderService {
   constructor(private http: Http) {}
 
   addOrder(reservationId, orderId, quantity){
-    console.log(orderId)
-    console.log(quantity)
       return this.http.post(`${environment.BASEURL}/api/reservations/reservation/${reservationId}/order/${orderId}/newOrder`, {quantity}).pipe(
         map(reservation => reservation.json()))
     }

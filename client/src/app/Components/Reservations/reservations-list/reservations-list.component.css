@@ -1,0 +1,61 @@
+.confirmed{
+  border: 1px solid green;
+  background: green;
+  width: 200px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.cancelled{
+  border: 1px solid red;
+  background: red;
+  color: white;
+  width: 200px;
+  border-radius: 5px;
+  text-align: center;
+
+
+}
+
+.declined{
+  border: 1px solid darkslategrey;
+  background: darkslategrey;
+  color:white;
+  width: 200px;
+  border-radius: 5px;
+  text-align: center;
+
+
+}
+
+.pending{
+  border: 1px solid yellow;
+  background: yellow;
+  width: 200px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+
+.reservationsCard{
+  margin: 60px 80px;
+}
+
+.icons{
+font-size: 80px;
+}
+
+.mainCards{
+  margin-left: 80px;
+}
+
+.searchbar{
+  margin-top: 30px;
+}
+
+
+@media screen and (max-width: 600px) {
+  .reservationsCard{
+    margin: 50px 20px;
+  }
+}

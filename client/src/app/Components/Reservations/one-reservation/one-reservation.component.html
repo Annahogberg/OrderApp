@@ -1,89 +1,186 @@
-
-
-<div *ngIf="reservation">
-  <p>Date: {{reservation.date}}</p>
-  <p>Time: {{reservation.time}}</p>
-  <p>Address: {{reservation.restaurant.address}}</p>
-  <p>Status: {{reservation.confirmation}}</p>
-  <p>Comments: {{reservation.comment}}</p>
+<div class="container oneReservation" *ngIf="reservation">
   
-  
-  <div *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'">
-    <button class="btn" type="submit" (click)="toggleHidden()">Change</button>
-    <span *ngIf="sessionService.user.isClient">
-  <button class="btn" (click)="cancelReservation()">Cancel</button>
-  </span>
-  <span *ngIf="sessionService.user.isRestaurant">
-  <button class="btn" (click)="confirmReservation()">Confirm</button>
-  <button class="btn" (click)="declineReservation()">Decline</button>
-  <button class="btn" (click)="cancelReservation()">NoShow</button>
-</span>
-
-
-<div *ngIf="isHidden">
-  <section class="container">
-    <div class="row">
-    <h3 class="center-align">Edit your Reservation</h3>
-    <br>
-      <article class="col s6 offset-s3">
-        <form *ngIf="reservation">
-          <div class="input-field">
+ 
+    <div class="row resMap" *ngIf="!isHidden">
+      <div class="col-6">
+          <div class="row resDetails">
             <i class="material-icons prefix">date_range</i>
-            <input type="date" [(ngModel)]="reservation.date" name="date" required id="datepicker">
+          <p>Date: {{reservation.date}}</p>
           </div>
-  
-            <div class="input-field">
+
+
+          <div class="row resDetails">
             <i class="material-icons prefix">access_time</i>
-            <input type="time" [(ngModel)]="reservation.time" name="time" required id="timepicker">
+            <p>Time: {{reservation.time}}</p>
           </div>
-  
-          <div class="input-field">
+
+          <div class="row resDetails">
+            <i class="material-icons prefix">place</i>
+            <p>Address: {{reservation.restaurant.address}}</p>
+          </div>
+
+          <div class="row resDetails">
             <i class="material-icons prefix">people</i>
-            <label for="pax">People</label>
-            <input type="number" [(ngModel)]="reservation.pax" name="pax" required>
+            <p>Number of people: {{reservation.pax}}</p>
           </div>
-  
-          <div class="input-field">
+
+          <div class="row resDetails">
+            <i class="material-icons prefix">check_circle_outline</i>
+            <p>Status: {{reservation.confirmation}}</p>
+          </div>
+
+          <div class="row resDetails">
             <i class="material-icons prefix">comment</i>
-           <textarea [(ngModel)]="reservation.comment" name="comment"></textarea>
+            <p>Comments: {{reservation.comment}}</p>
           </div>
-  
-  
-          <div class="center-align">
-            <a (click)="editReservation()"class="waves-effect waves-light btn" type="submit"><i class="material-icons right">send</i>Change</a>
+
+
+          <span *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'">
+            <button class="btn" type="submit" *ngIf="!isHidden" (click)="toggleHidden()">Change</button>
+            <button class="btn reservationButtons" *ngIf="!isHidden" (click)="cancelReservation()">Cancel</button>
+          
+            <span *ngIf="sessionService.user.isRestaurant">
+              <button class="btn reservationButtons" (click)="confirmReservation()">Confirm</button>
+              <button class="btn reservationButtons" (click)="declineReservation()">Decline</button>
+            </span>
+          </span>
+      </div>
+
+        <div class="mapa col-6">
+          <agm-map [latitude]="reservation.restaurant.lat" [longitude]="reservation.restaurant.lng">
+              <agm-marker [latitude]="reservation.restaurant.lat" [longitude]="reservation.restaurant.lng"></agm-marker>
+          </agm-map>
+        </div>
+
+    </div>
+        <div *ngIf="isHidden">
+            <div class="row">
+                <form class="formulario" *ngIf="reservation">
+                    <h3>Edit your Reservation</h3>
+                  <div class="input-field">
+                    <i class="material-icons prefix">date_range</i>
+                    <input type="date" [(ngModel)]="reservation.date" name="date" required id="datepicker">
+                  </div>
+
+                  <div class="input-field">
+                    <i class="material-icons prefix">access_time</i>
+                    <input type="time" [(ngModel)]="reservation.time" name="time" required id="timepicker">
+                  </div>
+
+                  <div class="input-field">
+                    <i class="material-icons prefix">people</i>
+                    <label for="pax">People</label>
+                    <input type="number" [(ngModel)]="reservation.pax" name="pax" required>
+                  </div>
+
+                  <div class="input-field">
+                    <i class="material-icons prefix">comment</i>
+                    <textarea [(ngModel)]="reservation.comment" name="comment"></textarea>
+                  </div>
+
+                  <div *ngIf="message" class="message">
+                      {{message}}
+                    </div>
+
+                  <div class="center-align">
+                    <button (click)="editReservation()" class="waves-effect waves-light btn" type="submit">Change</button>
+                    <button (click)="toggleHidden()" class="waves-effect waves-light btn" type="submit">Go back</button>
+                    
+                  </div>
+
+                </form>           
+            </div>
           </div>
+          
+          <div class="myOrder">
+              <h4>My Order</h4>
+              <ul>
+                <li *ngFor="let order of reservation.order">{{order.dishId.title}} - {{order.quantity}}QTY</li>
+              </ul>
+            </div>
+
+      <div class="orderMeal">
+        <h4>Order from menu</h4>
+          <div class="row">
+
+            <div class="formulario" *ngIf="appetizers">
+                <h4>Appetizers</h4>
+                  <div *ngFor="let app of appetizers">
+                    <form>
+                      {{app.title}} {{app.description}} {{app.price}}€
+                      <input type="number" #quantity>
+                      <button (click)="addOrderToReservation(reservation._id,app._id, quantity)">Add</button>
+                    </form>
+                  </div>
+              </div>
+
+            <div class="formulario" *ngIf="maincourses">
+              <h4>Main Courses</h4>
+                <div *ngFor="let main of maincourses">
+                  <form>
+                    {{main.title}} {{main.description}} {{main.price}}€
+                    <input type="number" #quantity>
+                    <button (click)="addOrderToReservation(reservation._id,main._id, quantity)">Add</button>
+                  </form>
+                </div>
+            </div>
+
+            <div class="formulario" *ngIf="dessert">
+                <h4>Desserts</h4>
+                  <div *ngFor="let dess of dessert">
+                    <form>
+                      {{dess.title}} {{dess.description}} {{dess.price}}€
+                      <input type="number" #quantity>
+                      <button (click)="addOrderToReservation(reservation._id,dess._id, quantity)">Add</button>
+                    </form>
+                  </div>
+            </div>
+
+            <div class="formulario" *ngIf="softDrink">
+                <h4>Drinks</h4>
+                  <div *ngFor="let soft of softDrink">
+                    <form>
+                      {{soft.title}} {{soft.description}} {{soft.price}}€
+                      <input type="number" #quantity>
+                      <button (click)="addOrderToReservation(reservation._id,soft._id, quantity)">Add</button>
+                    </form>
+                  </div>
+            </div>
+
+            <div class="formulario" *ngIf="alcohol && age > 18">
+                <h4>Alcohol</h4>
+                <div *ngFor="let alc of alcohol">
+                  <form>
+                    {{alc.title}} {{alc.description}} {{alc.price}}€
+                    <input type="number" #quantity>
+                    <button (click)="orderService.addOrder(reservation._id,alc._id, quantity.value).subscribe()">Add</button>
+                  </form>
+                </div>
+            </div>
+
   
-        </form>
+            <div class="formulario" *ngIf="other">
+              <h4>Other</h4>
+                <div *ngFor="let o of other">
+                  <form>
+                    {{o.title}} {{o.description}} {{o.price}}€
+                    <input type="number" #quantity>
+                    <button (click)="addOrderToReservation(reservation._id,o._id, quantity)">Add</button>
+                  </form>
+                </div>
+              </div>
+          </div>
+
+       
+        
   
-      </article>
-    </div>
-  </section>
-</div>
+      
+
+          <div *ngIf="reservation.confirmation == 'Cancelled' || reservation.confirmation == 'Declined'">
+            <button class="btn" (click)="deleteReservation()">Delete</button>
+          </div>
 
 
-  <h3>Order</h3>
-  <label>Appetizers</label>
-  <div *ngIf="dishes">
-  <div *ngIf="dishes.type == Appetizer">
-<div *ngFor="let dish of dishes">
-<form>
+  </div>
 
-  {{dish.title}}
-  {{dish.description}}
-  {{dish.price}}€
-  {{dish.type}}
-
-  <input type="number" #quantity>
-  <button (click)="orderService.addOrder(reservation._id,dish._id, quantity.value).subscribe()">Add</button>
-</form>
-</div>
-</div>
-</div>
-</div>
-
-<div *ngIf="reservation.confirmation == 'Cancelled' || reservation.confirmation == 'Declined'">
-    <button class="btn" (click)="deleteReservation()">Delete</button>
-    </div>
-
-</div>
 

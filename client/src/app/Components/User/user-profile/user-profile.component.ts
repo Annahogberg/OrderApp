@@ -34,18 +34,7 @@ export class UserProfileComponent implements OnInit {
   });
     });
   }
-
-
-//   this.sessionService.isLogged().subscribe(user => {this.user = user;
-//     this.reservationService.getUserReservation(this.user._id).subscribe(reservations => {
-//       console.log(reservations[0].date)
-//       let today = reservations[0].date
-//       this.searchToday = today;
-//       return this.reservationList = reservations;
-// });
-//   });
   
-
   ngOnInit() {
   
    

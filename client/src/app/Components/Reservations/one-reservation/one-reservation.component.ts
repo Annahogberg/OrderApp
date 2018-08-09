@@ -4,6 +4,7 @@ import { ReservationService } from "../../../../services/reservation.service";
 import { SessionService } from "../../../../services/session.service";
 import { CarteService } from "../../../../services/carte.service";
 import { OrderService } from "../../../../services/order.service";
+import { Observable} from "rxjs";
 
 @Component({
   selector: "app-one-reservation",
@@ -15,6 +16,21 @@ export class OneReservationComponent implements OnInit {
   user;
 
   dishes;
+  appetizers;
+  maincourses;
+  dessert;
+  softDrink;
+  alcohol;
+  other;
+
+  dishId: String;
+  quantity: Number;
+
+
+  id: string;
+  orders: any;
+
+  age;
 
   isHidden: boolean = false;
   isOrder: boolean = false;
@@ -23,9 +39,8 @@ export class OneReservationComponent implements OnInit {
     this.isHidden = !this.isHidden;
   }
 
-  toggleHiddenOrder() {
-    this.isOrder = !this.isOrder;
-  }
+  message;
+
 
   constructor(
     public reservationService: ReservationService,
@@ -40,35 +55,51 @@ export class OneReservationComponent implements OnInit {
         .getReservationDetails(params.id)
         .subscribe(reservation => {
 
+          this.reservation = reservation; 
 let restaurantId = reservation.restaurant._id
           this.carteService
             .getDishesPublic(restaurantId)
             .subscribe(dishes => {
-              console.log(dishes);
-              this.dishes = dishes;
+     
+              this.appetizers = dishes.filter( e => e.type == 'Appetizer');
+              this.maincourses = dishes.filter( e => e.type == 'Main Course');
+              this.dessert = dishes.filter( e => e.type == 'Dessert');
+              this.softDrink = dishes.filter( e => e.type == 'Soft Drink');
+              this.alcohol = dishes.filter(e => e.type == "Alcohol")
+              this.other = dishes.filter( e => e.type == 'Other');
+       
               return this.reservation = reservation;
             });
         });
     });
-    this.sessionService.isLogged().subscribe(user => (this.user = user));
+    this.sessionService.isLogged().subscribe(user => {this.age = user.age; return this.user = user});
   }
 
   ngOnInit() {}
-
-  // getDishes() {
-  //   this.carteService.getDishesPublic(this.reservation.restaurant._id)
-  //     .subscribe(dishes => (this.dishes = dishes));
-  //     // this.isHidden = !this.isHidden;
+  
+  // editReservation() {
+  //   this.reservationService
+  //     .editReservation(this.reservation)
+  //     .subscribe(reservation => {
+  //       this.reservation = reservation;
+  //       this.isHidden = !this.isHidden;
+  //     });
   // }
 
   editReservation() {
     this.reservationService
       .editReservation(this.reservation)
       .subscribe(reservation => {
-        this.reservation = reservation;
-        this.router.navigate(["/profile"]);
-      });
-  }
+
+  if(reservation['status']>=500) {
+    this.message = reservation._body
+  } 
+  else {
+    this.reservation = reservation;
+     this.isHidden = !this.isHidden;
+  }; 
+});
+}
 
   cancelReservation() {
     this.reservationService
@@ -99,5 +130,13 @@ let restaurantId = reservation.restaurant._id
       this.router.navigate(["reservations/reservations"]);
     })  }
   
+
+    addOrderToReservation(reservationId, id, quantity) {
+      console.log(reservationId, id, quantity.value);
+      this.orderService.addOrder(reservationId, id, quantity.value)
+        .subscribe(order => {
+          this.orders = order;
+        });
+    }
   }
 

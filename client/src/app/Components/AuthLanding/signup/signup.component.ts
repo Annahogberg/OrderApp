@@ -15,14 +15,22 @@ export class SignupComponent implements OnInit {
   isRestaurant: boolean;
   isClient: boolean;
 
+  message;
+
   constructor(private sessionService:SessionService, public router:Router) { }
 
   ngOnInit() {
   }
 
   signup(username, password, email, isRestaurant, isClient){
-    this.sessionService.signup(username,password, email, isRestaurant, isClient).subscribe( (user:any) =>{
-      this.router.navigate(['/']);
+    this.sessionService.signup(username,password, email, isRestaurant, isClient).subscribe( user =>{
+      if(user['status']>=500) {
+        this.message = "Retry, please"
+      } 
+      else {
+        this.router.navigate(['/login'])
+      }; 
     });
   }
+
 }

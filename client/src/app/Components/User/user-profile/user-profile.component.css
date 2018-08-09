@@ -2,6 +2,11 @@
   display:none;
 }
 
+.reservasConfirmadas{
+  margin-left: 350px;
+
+}
+
 agm-map {
   height: 300px;
   max-width: 80%;
@@ -10,6 +15,7 @@ agm-map {
 
 .mapa{
   width: 400px;
+  margin-left: 250px;
 }
 
 .text {
@@ -18,7 +24,7 @@ agm-map {
 }
 
 .formulario{
-width: 600px;
+width: 350px;
 }
 
 .info{
@@ -30,11 +36,21 @@ width: 600px;
 margin: 30px auto 0; */
 
 @media screen and (max-width: 600px) {
-  /* .xrow .info {
-    width: 300px;
-  } */
+
+  h4{
+    font-size: 18px;
+    margin: 15px 0 25px;
+  }
+  h5{
+    font-size: 17px;
+    margin-bottom: 15px;
+  }
+  p{
+    font-size: 14px;
+  }
   .mapa {
     width: 365px;
+    margin-left: 0px;
   }
   .text{
     margin-left: 10px;
@@ -43,4 +59,12 @@ margin: 30px auto 0; */
   button{
     margin-top: 10px;
   }
+
+  .reservasConfirmadas{
+    margin-left: 10px;
+  }
+  .formulario{
+    margin: 0 10px;
+  }
+
 }

@@ -16,11 +16,12 @@
 </header>
 
   <div class="hidden" *ngIf="sessionService.user && isHidden">
+    <li><a [routerLink]="['/profile']">Home</a></li>
     <span *ngIf="sessionService.user.isClient">
-      <li><a [routerLink]="['/profile']">Home</a></li>
       <li><a [routerLink]="['/reservations/reservations']">Reservations</a></li>
     </span>
     <span *ngIf="sessionService.user.isRestaurant">
+      <li><a [routerLink]="['/carte/new']">Create Menu</a></li>
       <li><a [routerLink]="['/reservations/restaurant-reservations']">Reservations</a></li>
     </span>
     <li><a [routerLink]="['/restaurants']">Restaurants</a></li>

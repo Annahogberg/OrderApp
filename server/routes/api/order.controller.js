@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Reservation = require("../../models/Reservation");
+const Dish = require("../../models/Dish");
 const _ = require("lodash");
 
 //CREATE NEW ORDER
@@ -10,7 +11,7 @@ router.post("/reservation/:reservationId/order/:id/newOrder", (req, res) => {
   quantity = Number(quantity);
 
   Reservation.findById(reservationId)
-    .populate("order.dishId")
+  .populate('order.dishId', { path: 'dishId', model: 'Dish' })
     .then(reservation => {
       let possibleOrder = reservation.order.filter(ord => {
         return ord.dishId._id.toString() === id;
@@ -26,7 +27,10 @@ router.post("/reservation/:reservationId/order/:id/newOrder", (req, res) => {
       const newOrder = new Reservation(reservation)
       newOrder.save()
       .then(reservation => {
-        Reservation.findById(reservation._id).then(reservation => {
+        Reservation.findById(reservation._id)
+        
+        .then(reservation => {
+ console.log(reservation)
           const lastIndex = reservation.order.length - 1;
           reservation.order[lastIndex].dishId = reservation;
 

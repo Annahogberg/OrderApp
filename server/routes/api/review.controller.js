@@ -9,7 +9,7 @@ const _ = require("lodash");
 //get comments
 router.get('/byrestaurant/:id', (req,res,next) => {
   Review.find({restaurant: req.params.id})
-  .then(reviews => {console.log(reviews); return res.json(reviews)})
+  .then(reviews => res.json(reviews))
   .catch(err => next(err))
 })
 

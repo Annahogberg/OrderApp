@@ -14,6 +14,9 @@ import { RestaurantService } from "../../../../services/restaurant.service";
 export class ReservationsListComponent implements OnInit {
   reservationList;
   cancelledReservation;
+  pendingReservation;
+  confirmedReservation;
+  declinedReservation;
 
   searchDate;
   searchStatus;
@@ -28,6 +31,11 @@ export class ReservationsListComponent implements OnInit {
       this.reservationService
         .getUserReservation(user._id)
         .subscribe(reservations => {
+          this.pendingReservation = reservations.filter( e => e.confirmation == 'Pending');
+          this.cancelledReservation = reservations.filter( e => e.confirmation == 'Cancelled');
+          this.confirmedReservation = reservations.filter( e => e.confirmation == 'Confirmed');
+          this.declinedReservation = reservations.filter( e => e.confirmation == 'Declined');
+
 
           return this.reservationList = reservations;
         });

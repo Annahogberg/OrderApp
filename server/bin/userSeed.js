@@ -39,6 +39,5 @@ User.collection.drop();
 
 User.create(users, (err, data) => {
   if (err) {throw (err)}
-  console.log("Users created")
   //mongoose.disconnect();
 })

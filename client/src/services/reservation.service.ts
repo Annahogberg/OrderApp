@@ -1,11 +1,20 @@
 import { Injectable } from "../../node_modules/@angular/core";
 import { Http } from "../../node_modules/@angular/http";
 import { environment } from "../environments/environment";
-import { map } from "rxjs/operators";
+import {map, catchError} from 'rxjs/operators';
+import { of } from 'rxjs';
+
 
 @Injectable()
 export class ReservationService {
   constructor(private http: Http) {}
+
+  errorHandler(e){
+    console.log('SessionServiceError')
+    console.log(e.message);
+    console.log(e);
+    return e;
+  }
 
   getUserReservation(id) {
     return this.http
@@ -27,7 +36,8 @@ export class ReservationService {
 
   editReservation(reservation) {
     return this.http.put(`${environment.BASEURL}/api/reservations/reservation/edit/${reservation._id}`,reservation)
-      .pipe(map(res => res.json()));
+      .pipe(map(res => res.json()),
+  catchError( e => of(this.errorHandler(e))));
   }
 
   cancelReservation(reservation) {

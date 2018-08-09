@@ -1,7 +1,8 @@
 import { Injectable } from "../../node_modules/@angular/core";
 import { Http } from "../../node_modules/@angular/http";
 import { environment } from '../environments/environment';
-import { map } from 'rxjs/operators';
+import {map, catchError} from 'rxjs/operators';
+import { of } from 'rxjs';
 
 interface reservationObject{
   date: string,
@@ -15,6 +16,13 @@ export class RestaurantService {
 
   reservation: reservationObject;
   options: any = { withCredentials: true };
+
+  errorHandler(e){
+    console.log('SessionServiceError')
+    console.log(e.message);
+    console.log(e);
+    return e;
+  }
 
 
   constructor(private http: Http) {}
@@ -35,7 +43,7 @@ export class RestaurantService {
   reserve(reservation){
     return this.http
     .post(`${environment.BASEURL}/api/restaurants/restaurant/reservation`,reservation, this.options)
-    .pipe(map(res => res.json()));
-  }
-
+    .pipe(map(res => res.json()),
+    catchError( e => of(this.errorHandler(e))));
+    }
 };
