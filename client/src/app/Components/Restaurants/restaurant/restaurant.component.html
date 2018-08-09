@@ -54,73 +54,73 @@
       </div>
     </form>
 
-    <div class="col-6">
-      <div class="row">
-        <div class="col-4 formulario" *ngIf="appetizers">
-          <h4>Appetizers</h4>
-          <div *ngFor="let app of appetizers">
-            <h5>{{app.title}}</h5>
-            <p>{{app.description}}</p>
-            <p>{{app.price}}€</p>
-          </div>
+<div class="col-6">
+    <div class="row">
+      <div class="col-4 formulario" *ngIf="appetizers">
+        <h4>Appetizers</h4>
+        <div *ngFor="let app of appetizers">
+          <h5>{{app.title}}</h5>
+          <p>{{app.description}}</p>
+          <p>{{app.price}}€</p>
         </div>
+      </div>
 
-        <div class="col-4 formulario" *ngIf="maincourses">
-          <h4>Main Courses</h4>
-          <div *ngFor="let main of maincourses">
-            <h5>{{main.title}}</h5>
-            <p>{{main.description}}</p>
-            <p>{{main.price}}€</p>
-          </div>
+      <div class="col-4 formulario" *ngIf="maincourses">
+        <h4>Main Courses</h4>
+        <div *ngFor="let main of maincourses">
+          <h5>{{main.title}}</h5>
+          <p>{{main.description}}</p>
+          <p>{{main.price}}€</p>
         </div>
+      </div>
 
-        <div class="col-4 formulario" *ngIf="dessert">
-          <h4>Desserts</h4>
-          <div *ngFor="let dess of dessert">
-            <h5>{{dess.title}}</h5>
-            <p>{{dess.description}}</p>
-            <p>{{dess.price}}€</p>
-          </div>
+      <div class="col-4 formulario" *ngIf="dessert">
+        <h4>Desserts</h4>
+        <div *ngFor="let dess of dessert">
+          <h5>{{dess.title}}</h5>
+          <p>{{dess.description}}</p>
+          <p>{{dess.price}}€</p>
         </div>
+      </div>
 
-        <div class="col-4 formulario" *ngIf="softDrink">
-          <h4>Drinks</h4>
-          <div *ngFor="let soft of softDrink">
-            <h5>{{soft.title}}</h5>
-            <p>{{soft.description}}</p>
-            <p>{{soft.price}}€</p>
-          </div>
+      <div class="col-4 formulario" *ngIf="softDrink">
+        <h4>Drinks</h4>
+        <div *ngFor="let soft of softDrink">
+          <h5>{{soft.title}}</h5>
+          <p>{{soft.description}}</p>
+          <p>{{soft.price}}€</p>
         </div>
+      </div>
 
-        <div class="col-4 formulario" *ngIf="alcohol && age > 18">
-          <h4>Alcohol</h4>
-          <div *ngFor="let alc of alcohol">
-            <h5>{{alc.title}}</h5>
-            <p>{{alc.description}}</p>
-            <p>{{alc.price}}€</p>
-          </div>
+      <div class="col-4 formulario" *ngIf="alcohol && age > 18">
+        <h4>Alcohol</h4>
+        <div *ngFor="let alc of alcohol">
+          <h5>{{alc.title}}</h5>
+          <p>{{alc.description}}</p>
+          <p>{{alc.price}}€</p>
         </div>
+      </div>
 
 
-        <div class="col-4 formulario" *ngIf="other">
-          <h4>Other</h4>
-          <div *ngFor="let o of other">
-            <h5>{{o.title}}</h5>
-            <p>{{o.description}}</p>
-            <p>{{o.price}}€</p>
-          </div>
+      <div class="col-4 formulario" *ngIf="other">
+        <h4>Other</h4>
+        <div *ngFor="let o of other">
+          <h5>{{o.title}}</h5>
+          <p>{{o.description}}</p>
+          <p>{{o.price}}€</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="row reviewImages" *ngFor="let review of reviews">
+  <div class="row reviewImages" *ngFor="let review of reviews">
       <div *ngIf="review.image1">
         <img [src]="review.image1" width=300 height="200">
       </div>
     </div>
 
-
-    <div class="formulario">
+ 
+   
       <form *ngIf="sessionService.user.isClient">
         <h4>Write a review</h4>
 
@@ -143,21 +143,16 @@
           <a class="space" (click)="toggleHidden()">Back to no picture!</a>
         </div>
       </form>
-    </div>
 
-    <div class="reviews">
-      <ul *ngFor="let review of reviews">
-        <li>
-          <b>{{review.rating}} out of 5</b>
-        </li>
-        <li>Comment: {{review.content}}</li>
-        <li>User:
-          <i>{{review.name}}</i>
-        </li>
-      </ul>
-    </div>
+      <div class="reviews">
+          <ul *ngFor="let review of reviews">
+              <li><b>Rating: {{review.rating}} out of 5</b></li>
+              <li>Comment: {{review.content}}</li>
+              <li>By <i>{{review.name}}</i></li>
+            </ul>
+            </div>
 
-
+  
 
   </div>
 
