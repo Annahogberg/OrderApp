@@ -20,7 +20,7 @@
 
   <div class="row reserveMenu">
 
-    <form class="reserveForm col-6">
+    <form class="reserveForm col-4">
       <h3 class="center-align">Reserve</h3>
       <div class="input-field">
         <i class="material-icons prefix">date_range</i>
@@ -113,14 +113,8 @@
     </div>
   </div>
 
-  <div class="row reviewImages" *ngFor="let review of reviews">
-      <div *ngIf="review.image1">
-        <img [src]="review.image1" width=300 height="200">
-      </div>
-    </div>
 
- 
-   
+
       <form *ngIf="sessionService.user.isClient">
         <h4>Write a review</h4>
 
@@ -152,7 +146,13 @@
             </ul>
             </div>
 
-  
+            <div class="reviewImages-container">
+              <div class="row reviewImages" *ngFor="let review of reviewImage">
+                  <div *ngIf="reviewImage">
+                    <img [src]="review.image1" width=300 height="200">
+                  </div>
+                </div>
+              </div>
 
   </div>
 

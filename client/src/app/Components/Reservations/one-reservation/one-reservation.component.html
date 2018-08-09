@@ -97,9 +97,13 @@
           
           <div *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'" class="myOrder">
               <h4>The Order</h4>
-              <ul>
-                <li *ngFor="let order of reservation.order">{{order.dishId.title}} - {{order.quantity}}QTY</li>
-              </ul>
+             <br>
+                <div *ngIf="orders">
+                <div class="row" *ngFor="let order of orders.order">
+                  <span class="col-2"><b>{{order.dishId.title}}</b></span><span class="col-2"><b>{{order.quantity}}QTY</b></span>x<span class="col-2"><b>{{order.dishId.price}}€</b></span></div>
+              </div>
+
+           
             </div>
 
       <div *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'" class="myOrder" class="orderMeal">

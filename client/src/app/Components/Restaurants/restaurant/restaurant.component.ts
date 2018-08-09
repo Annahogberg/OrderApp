@@ -57,6 +57,8 @@ export class RestaurantComponent implements OnInit {
   alcohol;
   other;
 
+  reviewImage;
+
   toggleHidden(e) {
     this.isPicture = !this.isPicture;
   }
@@ -88,7 +90,10 @@ export class RestaurantComponent implements OnInit {
               this.other = dishes.filter( e => e.type == 'Other');
               this.reviewService
               .getReviews(this.restaurant._id)
-              .subscribe(reviews => this.reviews = reviews);
+              .subscribe(reviews => {
+                this.reviews = reviews
+                this.reviewImage = reviews.filter( e => e.image1);
+              });
             });
       })
     );

@@ -27,8 +27,13 @@ agm-map {
   width: 250px;
 }
 
-Form {
-  width: 300px;
+form {
+  width: 400px;
+}
+
+.reserveForm{
+  width: 200px;
+  margin-right: 80px;
 }
 
 .reserveMenu {
@@ -40,7 +45,8 @@ Form {
 }
 
 .reviewImages{
-margin-left: 15px;  
+margin-left: 15px; 
+margin-top:20px; 
 }
 
 .reviews{

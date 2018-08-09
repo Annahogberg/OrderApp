@@ -1,6 +1,9 @@
-<h5> Edit Dish </h5>
+<div class="container editDish">
 
-<form *ngIf="dish">
+  <h5> Edit Dish </h5>
+  <div class="row">
+
+<form class="col-4" *ngIf="dish">
   <label>Title</label>
   <input type="text" [(ngModel)]="dish.title" name="title" autocomplete='title' required />
 
@@ -14,8 +17,14 @@
   <input type="text" [(ngModel)]="dish.type" name="type" autocomplete='type'/>
 
 
-  <button class="btn" (click)="editDish()"> Edit </button>
-  <button class="btn" (click)="deleteDish()"> Delete </button>
+  <button class="btn buttonDish" (click)="editDish()"> Edit </button>
+  <button class="btn buttonDish" (click)="deleteDish()"> Delete </button>
 
-  <a [routerLink]="['/carte/new']">Back</a>
+  <button class="btn buttonDish" [routerLink]="['/carte/new']">Back</button>
 </form>
+
+<div class="col-6 imageDish">
+  <img src="https://opsypesteyn.nl/wp-content/uploads/sites/4/2017/10/eten-icon.png" width=200>
+</div>
+</div>
+</div>

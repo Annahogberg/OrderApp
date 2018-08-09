@@ -26,6 +26,7 @@ export class OneReservationComponent implements OnInit {
   dishId: String;
   quantity: Number;
 
+total;
 
   id: string;
   orders: any;
@@ -126,6 +127,7 @@ let restaurantId = reservation.restaurant._id
       this.orderService.addOrder(reservationId, id, quantity.value)
         .subscribe(order => {
           this.orders = order;
+          console.log(order.order);
         });
     }
   }

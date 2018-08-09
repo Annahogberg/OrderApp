@@ -11,8 +11,9 @@ router.post("/reservation/:reservationId/order/:id/newOrder", (req, res) => {
   quantity = Number(quantity);
 
   Reservation.findById(reservationId)
-  .populate('order.dishId', { path: 'dishId', model: 'Dish' })
+  .populate('order.dishId')
     .then(reservation => {
+      console.log(reservation)
       let possibleOrder = reservation.order.filter(ord => {
         return ord.dishId._id.toString() === id;
       })[0];
@@ -27,15 +28,12 @@ router.post("/reservation/:reservationId/order/:id/newOrder", (req, res) => {
       const newOrder = new Reservation(reservation)
       newOrder.save()
       .then(reservation => {
-        Reservation.findById(reservation._id)
+        console.log(reservation.order);       
+
         
-        .then(reservation => {
- console.log(reservation)
-          const lastIndex = reservation.order.length - 1;
-          reservation.order[lastIndex].dishId = reservation;
 
           return res.status(200).json(reservation);
-        });
+        
       });
     })
     .catch(e => console.log(e));

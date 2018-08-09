@@ -1,7 +1,3 @@
-<button (click)="getDishes()">View menu</button>
-
-
-<div *ngIf="isHidden">
 <div *ngIf="dishes">
     <h3>YOUR MENU</h3>
   <div *ngFor="let dish of dishes">
@@ -9,4 +5,3 @@
   </div>
 </div>
 
-</div>
