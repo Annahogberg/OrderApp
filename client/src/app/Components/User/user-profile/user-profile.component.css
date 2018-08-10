@@ -42,8 +42,15 @@ width: 350px;
   line-height: 15px;
   margin: 40px auto 0;
 }
-/* 
-margin: 30px auto 0; */
+
+
+.editButtons{
+	margin-left: 20px;
+}
+
+.buttonPay{
+  margin-top: 10px;
+}
 
 @media screen and (max-width: 600px) {
 

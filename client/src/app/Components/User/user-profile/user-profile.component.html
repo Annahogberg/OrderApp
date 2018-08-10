@@ -60,7 +60,7 @@
         </div>
 
         <button class="btn" (click)="edit()"> Edit </button>
-        <button class="btn" type="submit" (click)="toggleHidden()">Go back</button>
+        <button class="btn editButtons" type="submit" (click)="toggleHidden()">Go back</button>
 
       </form>
     </div>
@@ -90,6 +90,9 @@
         <p>Status: {{reservation.confirmation}}</p>
         <p>Comments: {{reservation.comment}}</p>
         <button class="btn buttonMargin" [routerLink]="['/reservations/reservation/', reservation._id]">MORE DETAILS</button>
+        <div *ngIf="reservation.order?.length >0">
+        <button class="btn buttonPay" [routerLink]="['/reservations/payment/', reservation._id]">PAY</button>
+      </div>
       </div>
     </div>
 

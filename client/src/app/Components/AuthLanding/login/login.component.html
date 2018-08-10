@@ -1,4 +1,6 @@
-<section class="container" id="login">
+<section class="container middle">
+
+
  
   <h3 class="center-align">LOGIN</h3>
     <article class="col s6 offset-s3">
@@ -17,11 +19,12 @@
         
       
         <p class="center-align">
-          <button (click)="login(username, password)"class="waves-effect waves-light btn" type="submit"><i class="material-icons right">send</i>Login</button>
+          <button (click)="login(username, password)"class="waves-effect waves-light btn butAuth" type="submit"><i class="material-icons right">send</i>Login</button>
         </p>
         <div *ngIf="message" class="message">
             {{message}}
           </div>
+          <p class="center-align messAuth">Don't have an account yet? <a [routerLink]="['/signup']">Signup</a></p>
       </form>
 
     </article>

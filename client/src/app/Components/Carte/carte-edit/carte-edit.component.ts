@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CarteService } from "../../../../services/carte.service";
-import { ActivatedRoute } from "../../../../../node_modules/@angular/router";
+import { ActivatedRoute, Router } from "../../../../../node_modules/@angular/router";
 
 @Component({
   selector: "app-carte-edit",
@@ -10,7 +10,7 @@ import { ActivatedRoute } from "../../../../../node_modules/@angular/router";
 export class CarteEditComponent implements OnInit {
   dish;
 
-  constructor(public carteService: CarteService, private aR: ActivatedRoute) {
+  constructor(public carteService: CarteService, private aR: ActivatedRoute, private router: Router) {
     this.aR.params.subscribe(params =>{
      
       this.carteService.getDetails(params.id).subscribe(dish => {
@@ -26,6 +26,8 @@ export class CarteEditComponent implements OnInit {
 
     this.carteService.editDish(this.dish).subscribe(dish => {
       this.dish = dish;
+      this.router.navigate(["carte/new"]);
+
     });
   }
 

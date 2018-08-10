@@ -36,11 +36,12 @@
           </div>
   <br><br>
           <div class="center-align">
-            <button (click)="signup(username, password, email, isRestaurant, isClient)"class="waves-effect waves-light btn" type="submit"><i class="material-icons right">send</i>Sign up</button>
+            <button (click)="signup(username, password, email, isRestaurant, isClient)"class="waves-effect waves-light btn butAuth" type="submit"><i class="material-icons right">send</i>Sign up</button>
           </div>
           <div *ngIf="message" class="message">
               {{message}}
             </div>
+            <p class="center-align messAuth">Already have an account? <a [routerLink]="['/login']">Login</a></p>
   
         </form>
   

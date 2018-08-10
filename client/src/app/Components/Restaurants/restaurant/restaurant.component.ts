@@ -120,6 +120,7 @@ export class RestaurantComponent implements OnInit {
       } 
       else {
         this.reservation = reservation;
+        this.router.navigate(["reservations/reservations"]);
       }; 
     });
     }

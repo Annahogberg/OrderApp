@@ -44,11 +44,14 @@ import { RestReservationsComponent } from './Components/Reservations/rest-reserv
 
       //REVIEWS
 import { ReviewService } from '../services/review.service';
-import { CarteViewComponent } from './Components/Carte/carte-view/carte-view.component';
+
+//CARTE
 import { CarteEditComponent } from './Components/Carte/carte-edit/carte-edit.component';
 import { CarteNewComponent } from './Components/Carte/carte-new/carte-new.component';
 import { CarteService } from '../services/carte.service';
+
 import { OrderService } from '../services/order.service';
+import { PaymentComponent } from './Components/Reservations/payment/payment.component';
 
 
 
@@ -65,9 +68,9 @@ import { OrderService } from '../services/order.service';
     OneReservationComponent,
     FilterPipe,
     RestReservationsComponent,
-    CarteViewComponent,
     CarteEditComponent,
     CarteNewComponent,
+    PaymentComponent,
 
   ],
   imports: [

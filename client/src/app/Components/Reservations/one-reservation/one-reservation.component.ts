@@ -26,7 +26,7 @@ export class OneReservationComponent implements OnInit {
   dishId: String;
   quantity: Number;
 
-total;
+  total;
 
   id: string;
   orders: any;
@@ -36,9 +36,12 @@ total;
   isHidden: boolean = false;
   isOrder: boolean = false;
 
+  isWhenConfirmed: boolean = false
+
   toggleHidden() {
     this.isHidden = !this.isHidden;
   }
+
 
   message;
 
@@ -95,7 +98,13 @@ let restaurantId = reservation.restaurant._id
   cancelReservation() {
     this.reservationService
       .cancelReservation(this.reservation)
-      .subscribe(() => this.router.navigate(["/profile"]));
+      .subscribe(() => this.router.navigate(["reservations/reservations"]));
+  }
+
+  cancelResReservation() {
+    this.reservationService
+      .cancelReservation(this.reservation)
+      .subscribe(() => this.router.navigate(["reservations/restaurant-reservations"]));
   }
 
   confirmReservation() {
@@ -103,6 +112,7 @@ let restaurantId = reservation.restaurant._id
       .confirmReservation(this.reservation)
       .subscribe(reservation => {
         this.reservation = reservation;
+        this.isWhenConfirmed = !this.isWhenConfirmed;
         this.router.navigate(["reservations/restaurant-reservations"]);
       });
   }

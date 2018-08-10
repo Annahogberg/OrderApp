@@ -37,11 +37,15 @@
 
           <span *ngIf="reservation.confirmation != 'Cancelled' && reservation.confirmation != 'Declined'">
             <button class="btn" type="submit" *ngIf="!isHidden" (click)="toggleHidden()">Change</button>
+
+            <span *ngIf="sessionService.user.isClient">
             <button class="btn reservationButtons" *ngIf="!isHidden" (click)="cancelReservation()">Cancel</button>
-          
+          </span>
+            
             <span *ngIf="sessionService.user.isRestaurant">
-              <button class="btn reservationButtons" (click)="confirmReservation()">Confirm</button>
-              <button class="btn reservationButtons" (click)="declineReservation()">Decline</button>
+              <button class="btn reservationButtons" *ngIf="!isHidden" (click)="cancelResReservation()">Cancel</button>
+              <button class="btn reservationButtons" *ngIf="!isWhenConfirmed" (click)="confirmReservation()">Confirm</button>
+              <button class="btn reservationButtons" *ngIf="!isWhenConfirmed" (click)="declineReservation()">Decline</button>
             </span>
           </span>
           <span *ngIf="reservation.confirmation == 'Cancelled' || reservation.confirmation == 'Declined'">

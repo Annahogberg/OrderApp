@@ -23,9 +23,10 @@ import { ReservationsListComponent } from './Components/Reservations/reservation
 import { OneReservationComponent } from './Components/Reservations/one-reservation/one-reservation.component';
 import { RestReservationsComponent } from './Components/Reservations/rest-reservations/rest-reservations.component';
 
-import { CarteViewComponent } from './Components/Carte/carte-view/carte-view.component';
+
 import { CarteNewComponent } from './Components/Carte/carte-new/carte-new.component';
 import { CarteEditComponent } from './Components/Carte/carte-edit/carte-edit.component';
+import { PaymentComponent } from './Components/Reservations/payment/payment.component';
 
 
 export const routes: Routes = [
@@ -33,7 +34,6 @@ export const routes: Routes = [
   { path:'signup', component:SignupComponent, canActivate: [ NegateUserLoggedInGuard] },
   { path:'login', component:LoginComponent,  canActivate: [ NegateUserLoggedInGuard] },
   { path:'profile', component:UserProfileComponent, canActivate: [ isLoggedInGuardService] },
-  {path: 'carte', component: CarteViewComponent, canActivate: [ isLoggedInGuardService] },
   {path: 'carte/new', component: CarteNewComponent, canActivate: [ isLoggedInGuardService] },
   {path: 'carte/edit/:id', component: CarteEditComponent, canActivate: [ isLoggedInGuardService] },
   { path: 'restaurants', component: RestaurantListComponent, canActivate: [isLoggedInGuardService] },
@@ -41,6 +41,7 @@ export const routes: Routes = [
   { path: 'reservations/reservations', component: ReservationsListComponent, canActivate: [isLoggedInGuardService] },
   { path: 'reservations/restaurant-reservations', component: RestReservationsComponent, canActivate: [isLoggedInGuardService] },
   { path: 'reservations/reservation/:id', component: OneReservationComponent, canActivate: [isLoggedInGuardService] },
+  { path: 'reservations/payment/:id', component: PaymentComponent, canActivate: [isLoggedInGuardService] },
   
   { path: '**', redirectTo: '' }
 
