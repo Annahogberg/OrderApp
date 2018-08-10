@@ -10,8 +10,8 @@ import { RestaurantService } from '../../../../services/restaurant.service';
   styleUrls: ['./landing.component.css'],
 })
 export class LandingComponent implements OnInit {
-  lat: number = 40.4316724;
-  lng: number = -3.7123646;
+  lat: number = 40.4268144;
+  lng: number = -3.7037591;
 
   restaurantList;
 
